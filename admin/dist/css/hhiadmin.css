@@ -1,0 +1,29 @@
+/*modified*/
+
+.btn-primary{
+	background: transparent;
+	border: 1px solid #1a2455;
+	color:inherit;
+	transition: 0.3s;
+}
+
+
+.btn-primary:hover{
+	background:  #1a2455;
+	border:;
+}
+
+.btn-primary.focus, .btn-primary:focus {
+	background:  #1a2455
+}
+
+.box{
+	border-top:3px solid #1a2455;
+}
+
+
+
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+	background:  #1a2455;
+	border-color: #1a2455;
+}

@@ -1,0 +1,724 @@
+/*
+$very-dark-gray:#555;
+$very-light-gray:#e7e7e7;
+$dark-cyan:#1caa98;
+$very-dark-blue:#1b222a;
+*/
+
+.list-items{
+    list-style-type: none;
+}
+
+
+img.demo{
+    width: 200px;
+    padding: 3px;
+    /*box-shadow: 2px 4px 8px 2px rgba(0,0,0,0.2);
+    transition: 0.3s;
+    background: #ffffff;*/
+    margin-top: 15px;
+    margin-bottom: 15px
+}
+
+.check{
+    margin-right: 5px
+}
+
+
+body{
+    padding-top: 50px
+}
+
+
+nav{
+    
+    box-shadow: 0 4px 2px -2px gray;
+}
+
+
+.navbar{
+    padding: 0;
+    min-height: 80px;
+    
+}
+
+
+
+.nav.navbar-nav .nav-link{
+    padding: 0.85rem 1rem;
+    font-weight: bold
+}
+
+.nav.navbar-nav .active .nav-link{
+    color: ;
+    background: #31b413;
+    font-weight: bold
+}
+
+
+
+.navbar-brand{
+    padding:.65rem;
+}
+
+.em-text{
+    color:#1caa98 !important;
+}
+
+
+
+
+.col-lg-4 {
+    margin-bottom: 40px;
+   
+}
+
+
+.pillars{
+    background: white;
+    margin-right: 3px;
+    transition: 0.3s;
+    margin-right: 35px;height: 380px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.pillars:hover{
+    background: #12326b;
+    color: white
+}
+
+
+
+@media (max-width: 990px) {
+    .pillars{
+        margin-right: 0px; 
+        margin-bottom: 10px
+    }
+}
+
+
+
+/*animate*/
+
+.why-hunter,
+.demo,
+.about-text,
+.value-photo,
+.team-photo
+
+{
+    opacity: 0;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+}
+
+.why-hunter.animated.
+.demo.animated,
+.about-text.animated,
+.value-photo.animated,
+.team-photo.animated
+{
+    opacity: 1;
+}
+
+
+
+
+section{
+    padding:40px 0 40px 0
+}
+
+/*.jumbotron-about{
+    background:#1b222a url('../img/about-gray-back.jpg') no-repeat  right -380px;
+    color: white;
+    height: 500px;
+    overflow: hidden;
+    margin-bottom: 0px !important;
+
+}*/
+
+.parallax-about{
+        /* The image used */
+        background-image: url("../img/about-gray-back.jpg");
+        width: 100%;
+        /* Set a specific height */
+        min-height: 500px; 
+
+        /* Create the parallax scrolling effect */
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+}
+
+
+
+.bottom-left {
+      position: absolute;
+      bottom: 268px;
+      left: -116px;
+      /*background-color: rgba(255,255,255,0.5);*/
+      color: #ffffff;
+      padding-left: 20px;
+      padding-right: 20px;
+      width: 530px
+}
+
+
+/*changes*/
+.bg-light{
+background: #1a2455 !important;
+    
+}
+
+.btn-outline-secondary{
+    color: #6c757d;
+    border-color: #1a2455;
+}
+
+
+.btn-outline-secondary:hover{
+    background: #1a2455;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: rgb(255,255,255);
+}
+
+
+.carousel-inner img{
+    width: 100%;
+    height: 600px;
+}
+
+.why-hunter{
+    background: #eee;
+    color: black;
+    padding: 12px;
+    transition: 0.3s;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+
+.why-hunter:hover{
+    background: #1a2455;
+    color: white
+}
+
+
+
+@media (max-width: 990px) {
+    .jumbotron{
+        background:#1b222a url('../img/hiring.jpg') no-repeat  top center;
+        color: white;
+        height: 500px;
+        overflow: hidden;
+        margin-bottom: 0px !important;
+    }
+}
+
+
+.jumbotron h1{
+    margin-top: 60px
+}
+
+.jumbotron p{
+    margin-bottom: 40px;
+}
+
+.jumbotron button{
+    width: 40%;
+    height: 50px;
+    background: transparent;
+    border: 3px solid;
+    margin-right: 30px;
+}
+
+.jumbotron .a-button{
+    width: 40%;
+    height: 50px;
+    background: transparent;
+    padding-top: 10px;
+    border: 2px solid  #5cb85c;
+    margin-right: 30px;
+}
+
+
+.a-button:hover{
+    background: #5cb85c;
+    border: 2px solid #5cb85c;
+}
+
+
+
+section#feature{
+    background:;/*#0336FF;*/
+    color: white;
+    padding: 40px;
+    overflow: auto;
+}
+
+/*.active{
+    background: #e7e7e7e7
+}*/
+
+
+section.client-jobseeker{
+    background:#4444;
+    width:100%;
+   
+}
+
+
+.quick-link{
+    position: relative;
+    text-align: center;
+    color: white;
+    overflow: hidden;
+   margin-bottom: 5px;
+}
+
+.quick-link-image{
+    display: block;
+    width: 100%;
+    height: auto;
+    
+}
+.quick-link-textbackground-clients{
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%,-50%);
+    background: rgba(0, 0, 0, 0.5);
+    height: 100%;
+    width: 97.5%;
+    transition: 0.4s;
+}
+
+.quick-link-textbackground-clients:hover{
+   /* background: rgba(0, 0, 0, 0.5);*/
+   background: #31b413;
+}
+
+.quick-link-textbackground-jobseekers{
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%,-50%);
+    background: rgba(0, 0, 0, 0.5);
+    height: 100%;
+    width: 97.5%;
+    transition: 0.4s;
+}
+
+.quick-link-textbackground-jobseekers:hover{
+   /* background: rgba(0, 0, 0, 0.5);*/
+   background: #1a2455;
+}
+
+.quick-link-text{
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+section#title-bar{
+    background:#31b413;
+    color: white;
+    height:80px;
+    padding: 0;
+    margin: 0;
+    margin-top: 15px
+}
+
+
+section.mini-title-bar{
+    /*border-top: 5px solid black*/
+}
+
+section#title-bar h1{
+    margin: 1rem 0
+}
+
+footer{
+    background:rgba(0,0, 0, 0.70);
+    color:white;
+    padding: 30px 0 0  0
+}
+
+/*footer li {
+    float: left;
+    list-style: none;
+    padding: 0 10px 0 10px;
+}*/
+
+
+#middle-pillars{
+    background: #CFD8DC
+}
+
+.site-map-div a {
+    padding: 10px;
+    display: inline-block;
+    text-decoration: none;
+    transition: 0.3s
+  }
+
+.site-map-div a:hover{
+    color: white;
+    background: #31b413;
+
+}
+
+
+
+footer.social-media{
+    float: right
+}
+
+footer a {
+    color: white
+}
+
+footer a:hover{
+    text-decoration: none;
+    color: white;
+    /*border-bottom: 2px solid #1caa98*/
+}
+
+/*footer .div-right {
+    float: right
+}*/
+
+
+.social-links {
+    list-style: none;
+    float: right;
+}
+
+.social-links li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+
+.social-links li:last-child {
+    margin-right: 0;
+}
+
+ 
+.social-links li a:link,
+.social-links li a:visited {
+    text-decoration: none;
+    border: 0;
+    color: #888;
+    -webkit-transition: color 0.2s;
+    transition: color 0.2s;
+}
+
+.fa-facebook,
+.fa-linkedin,
+{
+    -webkit-transition: color 0.2s;
+    transition: color 0.2s;
+}
+
+/*.ion-social-facebook:hover {
+    color: #3b5998;
+}
+
+.ion-social-twitter:hover {
+    color: #00aced;
+}
+
+.ion-social-googleplus:hover {
+    color: #dd4b39;
+}
+
+.ion-social-instagram:hover {
+    color: #517fa4;
+}*/
+
+  .fa-facebook:hover{
+    color: #3b5998;
+  }
+  
+  .fa-linkedin:hover {
+    color: #00aced
+  }
+
+  .fa-lightbulb-o:hover{
+      color: #99c00d;
+  }
+  
+  .contact-button-link.lightbulb-o {
+    background: #99c00d;
+  }
+
+.ion-fonts{
+    font-size: 2rem;
+}
+
+
+
+/*social media on footer*/
+
+
+#about{
+    background: #eee
+}
+
+.about-text{
+    background: #ffffff;
+    margin-bottom: 15px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    
+}
+
+.about-text:hover{
+    background: #1a2455;
+    color: white;
+}
+
+.mission{
+    padding: 10px;
+    border-top:6px solid #1a2455;
+    background: white;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+   
+}
+
+.vision{
+    padding: 10px;
+    border-top:6px solid #1a2455;
+    background: white;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+   
+}
+
+.mission:hover{
+    background: #1a2455;
+    color: white
+
+}
+
+.vision:hover{
+    background: #1a2455;
+    color: white
+
+}
+
+.photo{
+    text-align: center
+}
+
+
+textarea{
+    resize: none;
+    height: 200px !important;
+}
+
+textarea:focus{
+    background: #fff
+}
+
+
+.core-values{
+    background:#4444;
+    margin-top: 0 !important;
+}
+
+.card-core-values{
+    padding:10px;
+    transition: 0.3s;
+    background: #ffffff;
+    margin-bottom: 10px
+}
+
+.card-core-values:hover{
+    background: #12326b;
+    color: white;
+    
+}
+
+
+
+
+.skills{
+    position: relative;
+    text-align: center;
+    color: white;
+    overflow: hidden;
+   margin-bottom: 5px;
+}
+
+.skill-image{
+    display: block;
+    width: 100%;
+    height: auto;
+    
+}
+
+
+
+.skill-textbackground{
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%,-50%);
+    
+    height: 100%;
+    width: 92.5%;
+    transition: 0.4s;
+}
+
+.skill-textbackground:hover{
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.skill-text{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+/*our-clients*/
+
+.our-clients{
+    background: white;
+}
+
+/*our team*/
+
+.the-team{
+    background:#4444;
+    margin-top: 0 !important;
+}
+
+.card-the-team{
+    padding:10px;
+    transition: 0.3s;
+    background: #ffffff;
+    margin-bottom: 10px
+}
+
+.card-the-team:hover{
+    background: #12326b;
+    color: white;
+    
+}
+
+
+
+/*section#contact{
+    
+}*/
+
+#contact textarea, input[type]:not([type="submit"]){
+    background: #eee;
+    border: none;
+    padding: 16px;
+    width: 100%;
+    border-radius: 0px;
+    color: #999;
+    font-size: 14px;
+    font-weight: bold
+}
+
+
+/*Service Page*/
+
+.services-section{
+    background:#4444;
+    margin-top: 0 !important;
+}
+
+
+
+.card-services{
+    padding:10px;
+    transition: 0.3s;
+    background: #ffffff;
+    margin-bottom: 10px
+}
+
+.card-services:hover{
+    background: #12326b;
+    color: white;
+    
+}
+
+/*For Clients*/
+section#title-bar-client-form{
+    background:transparent;
+    color: white;
+    height:80px;
+    padding: 0;
+    margin: 0;
+    margin-top: 15px
+}
+
+.section-client-form{
+    background:url(../img/architecture.jpg) no-repeat  top center;
+    margin-top: 0 !important;
+}
+
+.section-client-form textarea, input[type]:not([type="submit"]){
+    background: #eee;
+    border: none;
+    padding: 16px;
+    width: 100%;
+    border-radius: 0px;
+    color: #999;
+    font-size: 14px;
+    font-weight: bold
+}
+
+
+
+.input-text-color{
+    color: #333 !important
+}
+
+
+/*Jobseekers*/
+
+section#title-bar-jobseeker-form{
+    background:transparent;
+    color: white;
+    height:80px;
+    padding: 0;
+    margin: 0;
+    margin-top: 15px
+}
+
+.section-jobseeker-form{
+    background:url(../img/writing.jpg) no-repeat  top center;
+    margin-top: 0 !important;
+}
+
+.section-jobseeker-form textarea, input[type]:not([type="submit"]){
+    background: #eee;
+    border: none;
+    padding: 16px;
+    width: 100%;
+    border-radius: 0px;
+    color: #999;
+    font-size: 14px;
+    font-weight: bold
+}
+
