@@ -6,6 +6,8 @@
   //echo SITE_URL;
   define("SHARED_PATH",dirname(__FILE__).'\includes_admin');
  // echo SHARED_PATH;*/
+
+  
 ?>
 
 <!DOCTYPE html>
@@ -16,7 +18,7 @@
   <title>HHI | Admin</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <link rel="shortcut icon" href="../img/logo.jpg" />
+  <link rel="shortcut icon" href="<?php echo WWW_ROOT;?>/img/logo.jpg" />
   <!-- Bootstrap 3.3.7 -->
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
   <!-- Font Awesome -->
@@ -50,63 +52,10 @@
 
   </style>
 </head>
-<body class="hold-transition skin-blue sidebar-mini" id="client">
+<body class="hold-transition skin-blue sidebar-mini" id="usermanagement">
 <div class="wrapper">
 
-  <header class="main-header">
-
-    <!-- Logo -->
-    <a href="index2.html" class="logo">
-      <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>HHI</b></span>
-      <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Hunter's Hub</b></span>
-    </a>
-
-    <!-- Header Navbar: style can be found in header.less -->
-    <nav class="navbar navbar-static-top">
-      <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-        <span class="sr-only">Toggle navigation</span>
-      </a>
-      <!-- Navbar Right Menu -->
-      <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
-
-
-
-          <!-- User Account: style can be found in dropdown.less -->
-          <li class="dropdown user user-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-              <span class="hidden-xs">Alexander Pierce</span>
-            </a>
-            <ul class="dropdown-menu">
-              <!-- User image -->
-              <li class="user-header">
-                <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-
-                <p>
-                  Alexander Pierce - Web Developer
-                  <small>Member since Nov. 2012</small>
-                </p>
-              </li>
-              <!-- Menu Body -->
-
-              <!-- Menu Footer-->
-              <li class="user-footer">
- 
-                <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
-                </div>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-
-    </nav>
-  </header>
+<?php include('includes_admin/header.php');?>
   <!-- Left side column. contains the logo and sidebar -->
   <?php include('includes_admin/sidebar.php');?>
 
@@ -115,90 +64,96 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Client
+        User Management
         <small>List</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Client</li>
+        <li class="active">User Management</li>
       </ol>
     </section>
 
     <!-- Main content -->
     <section class="content">
+
+      <div class="row">
+        <?php /*
+            echo display_errors($errors);
+        */?>
+
+
+      </div>
+
       <div class="row">
         <div class="col-md-12">
           <div class="box">
-            <div class="box-header">
-              <h3 class="box-title">Data Table With Full Features</h3>
-            </div>
+
             <!-- /.box-header -->
             <div class="box-body">
-              <table id="" class="datatables table table-bordered table-striped table-hover">
-                <thead>
-                <tr>
-                  <th>Full Name</th>
-                  <th>Email</th>
-                  <th>Phone Number</th>
-                  <th>Subject</th>
-                  <th>Action</th>
-                </tr>
-                </thead>
-                <tbody>
-
-                <?php for($x = 0; $x<10; $x++):?>
-                <tr>
-                  <td>Trident</td>
-                  <td>Internet
-                    Explorer 4.0
-                  </td>
-                  <td>Win 95+</td>
-                  <td> 4</td>
-                  <td>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#jobseekerDetail">View Detail</button>
-                    <div class="modal fade" id="jobseekerDetail">
+              <div class="row">
+                <div class="col-md-3">
+                   <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#add-user" style="margin-bottom: 10px">Add user</button>
+                    <div class="modal fade" id="add-user">
                       <div class="modal-dialog">
                         <div class="modal-content">
                           <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">Full Details</h4>
+                            <h4 class="modal-title">User Details</h4>
                           </div>
                           <div class="modal-body">
 
                               <table class="table table-striped table-hover"> 
-                                <tr>
-                                  <td><b>Full Name</b></td>
-                                  <td>Update software</td>
-                                </tr>
-                                <tr>
-                                  <td><b>Gender</b></td>
-                                  <td></td>
-                                </tr>
-                                <tr>
-                                  <td><b>Phone Number</b></td>
-                                  <td></td>
-                                </tr>
-                                <tr>
-                                  <td><b>Email Address</b></td>
-                                  <td>Update software</td>
-                                </tr>
 
-                                <tr>
-                                  <td><b>Resume</b></td>
-                                  <td></td>
-                                </tr> 
+                              <?php 
 
-                                <tr>
-                                  <td><b>Subject</b></td>
-                                  <td></td>
-                                </tr>     
+                                /*
+                                  //admin array
+                                  $admin[];
 
-                                <tr>
-                                  <td><b>Message</b></td>
-                                  <td></td>
-                                </tr>                           
 
+                                  $result = add_admin($admin);
+                                  new_id = mysqli_insert_id($db);
+
+                                  if($result === true){
+                                    //no error
+                                  }else{
+                                    $errors = $result
+                                  }
+
+                                */
+                              ?>
+
+                                <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post" enctype="multipart/form-data">
+                                    <tr>
+                                      <td><b>First Name</b></td>
+                                      <td><input type="text" class="form-control" name="firstname"></td>
+                                    </tr>
+                                    <tr>
+                                      <td><b>Middle Name</b></td>
+                                      <td><input type="text" class="form-control" name="middlename"></td>
+                                    </tr>
+                                    <tr>
+                                      <td><b>Last Number</b></td>
+                                      <td><input type="text" class="form-control" name="lastname"></td>
+                                    </tr>
+                                    <tr>
+                                      <td><b>Username</b></td>
+                                      <td><input type="text" class="form-control" name="username"></td>
+                                    </tr>
+
+                                    <tr>
+                                      <td><b>Password</b></td>
+                                      <td><input type="password" class="form-control"  name="password"></td>
+                                    </tr> 
+
+                                    <tr>
+                                      <td><b>Confirm Password</b></td>
+                                      <td><input type="password" class="form-control"  name="confirm-password"></td>
+                                    </tr>     
+                                 
+
+                                </form>
                               </table>
                             
                           </div>
@@ -210,9 +165,46 @@
                       <!-- /.modal-dialog -->
                     </div>
                     <!-- /.modal -->
+
+                </div>
+              </div>
+              <table id="" class="datatables table table-bordered table-striped table-hover">
+                <thead>
+                <tr>
+                  <th>Full Name</th>
+                  <th>username</th>
+                  <th>Email</th>
+                  <th>Contant Number</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <?php 
+                $admin_list =get_all_admins();
+
+                while($admins = mysqli_fetch_assoc($admin_list)):?>
+                <tr>
+                  <td><?php echo $admins['firstname'].' '. $admins['middlename'].' '. $admins['lastname'];?></td>
+                  <td><?php echo $admins['username']?></td>
+                  <td><?php echo $admins['email']?></td>
+                  <td><?php echo $admins['contact']?></td>
+                  <td><?php echo $admins['admin_status']?></td>
+                  <td>
+                   <?php $admin = get_admin_by_id($admins['admin_id']);
+                   /*
+                    for update information
+                   if($result === true){
+                      //no error
+                    }else{
+                      $errors = $result;
+                    }
+                   */
+                   ?>
                   </td>
                 </tr>
-              <?php endfor;?>
+              <?php endwhile;?>
                
                 </tbody>
               </table>
@@ -266,6 +258,7 @@
 
 <script>
   $(function () {
+    //$("#usermanagement a:contains('User Management')").parent().addClass('active');
     //for tables regular datatable
     $('.datatables').DataTable({
 

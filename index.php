@@ -46,7 +46,7 @@
       <div class="carousel-item ">
         <img src="img/banner-three-opacity.jpg">
         <div class="carousel-caption">
-          <<h1 style="font-weight: bold;color: " class="text-center text-uppercase  animated fadeInLeft">Work with us</h1>
+          <h1 style="font-weight: bold;color: " class="text-center text-uppercase  animated fadeInLeft">Work with us</h1>
 
         </div>
       </div>

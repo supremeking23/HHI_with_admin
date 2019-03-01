@@ -4,6 +4,6 @@ $(function(){
 	$("#message a:contains('Message')").parent().addClass('active');
 	$("#jobseeker a:contains('Jobseeker')").parent().addClass('active');
 	$("#client a:contains('Client')").parent().addClass('active');
-
+	$("#usermanagement a:contains('User Management')").parent().addClass('active');
 });
 
