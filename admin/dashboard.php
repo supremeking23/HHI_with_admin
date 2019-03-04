@@ -6,6 +6,9 @@
   //echo SITE_URL;
   define("SHARED_PATH",dirname(__FILE__).'\includes_admin');
  // echo SHARED_PATH;*/
+  //print_r($_SESSION);
+  require_login();
+  
 ?>
 
 

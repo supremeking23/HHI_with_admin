@@ -205,6 +205,10 @@ background: #1a2455 !important;
     color: white
 }
 
+.partners-image{
+    width: 300px;
+    height: 100px;
+}
 
 
 @media (max-width: 990px) {
@@ -214,6 +218,14 @@ background: #1a2455 !important;
         height: 500px;
         overflow: hidden;
         margin-bottom: 0px !important;
+    }
+
+    .vision{
+        margin-top: 10px
+    }
+
+    .partners-image{
+        width: 50px;
     }
 }
 
@@ -353,6 +365,29 @@ footer{
     padding: 30px 0 0  0
 }
 
+ul.link-footer {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+ul.link-footer li a {
+    display: block;
+    text-align: center;/*background-color: #dddddd;*/
+}
+
+ul.link-footer li span{
+    visibility: hidden;
+}
+
+ul.link-footer li:hover {
+   transform: skew(-10deg);
+}
+
+ul.link-footer li:hover span{
+    visibility: visible;
+}
+
 /*footer li {
     float: left;
     list-style: none;
@@ -361,7 +396,7 @@ footer{
 
 
 #middle-pillars{
-    background: #CFD8DC
+    background: #CFD8DC;
 }
 
 .site-map-div a {
@@ -379,9 +414,9 @@ footer{
 
 
 
-footer.social-media{
+/*footer.social-media{
     float: right
-}
+}*/
 
 footer a {
     color: white
@@ -398,7 +433,7 @@ footer a:hover{
 }*/
 
 
-.social-links {
+/*.social-links {
     list-style: none;
     float: right;
 }
@@ -421,9 +456,9 @@ footer a:hover{
     color: #888;
     -webkit-transition: color 0.2s;
     transition: color 0.2s;
-}
+}*/
 
-.fa-facebook,
+/*.fa-facebook,
 .fa-linkedin,
 {
     -webkit-transition: color 0.2s;
@@ -444,7 +479,7 @@ footer a:hover{
 
 .ion-social-instagram:hover {
     color: #517fa4;
-}*/
+}
 
   .fa-facebook:hover{
     color: #3b5998;
@@ -465,6 +500,7 @@ footer a:hover{
 .ion-fonts{
     font-size: 2rem;
 }
+*/
 
 
 
@@ -711,7 +747,7 @@ section#title-bar-jobseeker-form{
     margin-top: 0 !important;
 }
 
-.section-jobseeker-form textarea, input[type]:not([type="submit"]){
+.section-jobseeker-form textarea,select option,input[type]:not([type="submit"]){
     background: #eee;
     border: none;
     padding: 16px;

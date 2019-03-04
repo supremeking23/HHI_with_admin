@@ -18,31 +18,47 @@
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
 
-
+          <?php 
+              $login_admin = get_admin_by_id($_SESSION['admin_id']);
+          ?>
 
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-              <span class="hidden-xs">Alexander Pierce</span>
+            <?php if(empty($login_admin['photo'])){ ?>
+              <img src="<?php echo url_for(h('admin/uploads/images/guest2.jpg'));?>" class="user-image" alt="User Image">
+             <?php }else{ ?>
+              <img src="<?php echo url_for(h("admin/uploads/images/{$login_admin['photo']}"));?>" class="user-image" alt="User Image">
+            <?php }?>
+              <span class="hidden-xs"><?php echo h($_SESSION['admin_name'])?></span>
             </a>
             <ul class="dropdown-menu">
+
+
               <!-- User image -->
               <li class="user-header">
-                <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+
+                <?php if(empty($login_admin['photo'])){ ?>
+                  <img src="<?php echo url_for(h('admin/uploads/images/guest2.jpg'));?>" class="img-circle" alt="User Image">
+                <?php }else{ ?>
+                  <img src="<?php echo url_for(h("admin/uploads/images/{$login_admin['photo']}"));?>" class="img-circle" alt="User Image">
+                <?php }?>
+                
 
                 <p>
-                  Alexander Pierce - Web Developer
-                  <small>Member since Nov. 2012</small>
+                  <?php echo h($_SESSION['admin_name'])?>
+                  <small></small>
                 </p>
               </li>
               <!-- Menu Body -->
 
               <!-- Menu Footer-->
               <li class="user-footer">
- 
+                <div class="pull-left">
+                  <a href="<?php echo url_for('admin/profile.php');?>" class="btn btn-default btn-flat">Profile</a>
+                </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="<?php echo url_for('admin/logout.php');?>" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
             </ul>

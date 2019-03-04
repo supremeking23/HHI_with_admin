@@ -57,30 +57,40 @@
     <section id="feature">
       <div class="container">
 
-      <div class="why-hunter">
-        <div class="row ">
-          <div class="col-lg-12">
-            <h1 class="text-center">Why Hunter's Hub</h1>
-            <p align="justify">The world is moving so fast; it’s sometimes easy to lose sight of the things that truly matter. That’s why at Hunter's Hub we created "The Hunter’s hub way – a strong set of company values that drives everything we do." Everything we do comes back to our values. They are real. They are important.</p>
+        <div class="why-hunter">
+          <div class="row ">
+            <div class="col-lg-12">
+              <h1 class="text-center">Why Hunter's Hub</h1>
+              <p align="justify">The world is moving so fast; it’s sometimes easy to lose sight of the things that truly matter. That’s why at Hunter's Hub we created "The Hunter’s hub way – a strong set of company values that drives everything we do." Everything we do comes back to our values. They are real. They are important.</p>
 
-            <ul class="list-items">
-              <li><i class="fa fa-check-square check" style="font-size: 30px;color: green"></i>Our corporate efforts include strong human resources that have focus and benefits that are rare in our industry. Hunter’s Hub values its employees that in turn know how to value our clients.</li>
-              <li><i class="fa fa-check-square check" style="font-size: 30px;color: green"></i> Our employees have developed vast skills under the Hunter's Hub's strong culture of employee respect and appreciation. Likewise, Hunter’s Hub employs and sources out only the best candidates that are fit for the job positions needing to be filled.</li>
-              <li><i class="fa fa-check-square check" style="font-size: 30px;color: green"></i>Our long range strategy at Hunter’s Hub is focused on our essential need to position ourselves to be an employer of choice for our industry and to not only meet, but exceed client expectations.</li>
-            </ul> 
+              <ul class="list-items">
+                <li><i class="fa fa-check-square check" style="font-size: 30px;color: green"></i>Our corporate efforts include strong human resources that have focus and benefits that are rare in our industry. Hunter’s Hub values its employees that in turn know how to value our clients.</li>
+                <li><i class="fa fa-check-square check" style="font-size: 30px;color: green"></i> Our employees have developed vast skills under the Hunter's Hub's strong culture of employee respect and appreciation. Likewise, Hunter’s Hub employs and sources out only the best candidates that are fit for the job positions needing to be filled.</li>
+                <li><i class="fa fa-check-square check" style="font-size: 30px;color: green"></i>Our long range strategy at Hunter’s Hub is focused on our essential need to position ourselves to be an employer of choice for our industry and to not only meet, but exceed client expectations.</li>
+              </ul> 
+            </div>
           </div>
+
         </div>
 
       </div>
+    </section>
 
-      </div>
+    <section class="mini-title-bar">
+            <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h1 class="text-center">Our Three Pillars</h1>
+                        </div>
+                    </div>
+                </div>
     </section>
 
     <section id="middle-pillars">
       <div class="container-fluid">
         <div class="row ">
           <div class="col-md-1"></div>
-          <div class="col-md-3   pillars text-center" style="margin-left: 10px">
+          <div class="col-md-3 pillars text-center" style="margin-left: 10px">
              <img src="img/team_2.png" class="demo">
              <h2>Total Commitment</h2>
              <p>to service  <b><i>INTEGRITY</i></b> and <b><i>QUALITY</i></b>.</p>

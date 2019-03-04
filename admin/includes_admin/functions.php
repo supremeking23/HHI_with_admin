@@ -54,14 +54,29 @@ function display_errors($errors=array()){
 	$output = "";
 
 	if(!empty($errors)){
-		$output .= "<div class=\"errors\">";
-		$output .= "Please fix the following errors:";
+		$output .= "<div class=\"errors modal modal-danger\" id=\"errormodal\">";
+		$output .="<div class=\"modal-dialog\">";
+		$output .="<div class=\"modal-content\">";
+        $output .="<div class=\"modal-header\">";
+        $output .="<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">";
+        $output .="<span aria-hidden=\"true\">&times;</span></button>";
+        $output .="<h4 class=\"modal-title\">Please fix the following errors:</h4>";
+        $output .="</div>"; //modal header
+        $output .="<div class=\"modal-body\">";
+        $output .="<p></p>";
+        $output .= "";
 		$output .="<ul>";
 		foreach($errors as $error){
 			$output .="<li>" .h($error) . "</li>";
 		}
-
 		$output .="</ul>";
+        $output .="</div>";      //modal body
+        $output .="<div class=\"modal-footer\">";
+        /*$output .="<button type=\"button\" class=\"btn btn-default pull-left\" data-dismiss=\"modal\">Close</button>";
+        $output .="<button type=\"button\" class=\"btn btn-primary\">Save changes</button>";*/
+      	$output .="</div>";
+		$output .="</div>";
+		$output .="</div>";
 		$output .="</div>";
 	}
 
@@ -82,10 +97,87 @@ function get_and_clear_session_message(){
 
 //message
 function display_session_message(){
+	$output = "";
 	$msg = get_and_clear_session_message();
 	if(!is_blank($msg)){
-		return '<div id="message">' .h($msg) . '</div>';
+
+		$output .= "<div class=\"alert alert-success alert-dismissible\">";
+		$output .= "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>";
+		$output .= h($msg);
+		$output .="</div>";
+		return $output;
+		/*return '<div id="alert alert-success alert-dismissible">
+		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		' .h($msg) . '</div>';*/
 	}
+}
+
+
+//for portal sending messages
+function send_success_modal(){
+	$output = "";
+	$msg = get_and_clear_session_message();
+	if(!is_blank($msg)){
+		$output .= "<div class=\"modal fade\" id=\"successmodal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"successmodal\" aria-hidden=\"true\">";
+		$output .="<div class=\"modal-dialog modal-dialog-centered\" role=\"document\">";
+		$output .="<div class=\"modal-content\">";
+        $output .="<div class=\"modal-header\">";
+        $output .="<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">";
+        $output .="<span aria-hidden=\"true\">&times;</span></button>";
+        $output .="<h4 class=\"modal-title\"></h4>";
+        $output .="</div>"; //modal header
+        $output .="<div class=\"modal-body\">";
+        $output .="<p>";
+        $output .= h($msg);
+        $output .= "</p>";
+        $output .="</div>";      //modal body
+        $output .="<div class=\"modal-footer\">";
+        /*$output .="<button type=\"button\" class=\"btn btn-default pull-left\" data-dismiss=\"modal\">Close</button>";
+        $output .="<button type=\"button\" class=\"btn btn-primary\">Save changes</button>";*/
+      	$output .="</div>";
+		$output .="</div>";
+		$output .="</div>";
+		$output .="</div>";
+		return $output;
+	}
+}
+
+
+
+//for portal sending messages
+function send_danger_modal($errors=array()){
+	$output = "";
+
+	if(!empty($errors)){
+		$output .= "<div class=\"modal fade modal_failed\" id=\"errormodal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"errormodal\" aria-hidden=\"true\">";
+		$output .="<div class=\"modal-dialog modal-dialog-centered\" role=\"document\">";
+		$output .="<div class=\"modal-content\">";
+        $output .="<div class=\"modal-header\">";
+        $output .="<h4 class=\"modal-title\">Please fix the following errors:</h4>";
+        $output .="<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">";
+        $output .="<span aria-hidden=\"true\">&times;</span></button>";
+        
+        $output .="</div>"; //modal header
+        $output .="<div class=\"modal-body\">";
+        $output .="<p></p>";
+        $output .= "";
+		$output .="<ul>";
+		foreach($errors as $error){
+			$output .="<li>" .h($error) . "</li>";
+		}
+		$output .="</ul>";
+        $output .="</div>";      //modal body
+        $output .="<div class=\"modal-footer\">";
+        /*$output .="<button type=\"button\" class=\"btn btn-default pull-left\" data-dismiss=\"modal\">Close</button>";
+        $output .="<button type=\"button\" class=\"btn btn-primary\">Save changes</button>";*/
+      	$output .="</div>";
+		$output .="</div>";
+		$output .="</div>";
+		$output .="</div>";
+	}
+
+
+	return $output;
 }
 
 

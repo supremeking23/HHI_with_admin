@@ -1,12 +1,40 @@
+<?php require_once('admin/initialize.php');?>
 <!doctype html>
 <html lang="en">
 
-  <?php 
-  include('includes/header.php');?>
-  <body id="contact">
-   <?php include('includes/navigation.php');?>
+<?php 
 
+    if(is_post_request()){
+        $inquiry = [];
+        $inquiry['inquiries_compo_id'] = $_POST['inquiries_compo_id'] ?? '';
+        $inquiry['name'] = $_POST['name'] ?? '';
+        $inquiry['email'] = $_POST['email'] ?? '';
+        $inquiry['message'] = $_POST['message'] ?? '';
+        $now = date('Y-m-d H:i:s');
+        $inquiry['date_send'] = $now;
 
+        $result = send_inquiry($inquiry);
+        if($result === true){
+          $_SESSION['message'] = "Message has been sent";
+        }else{
+          $errors = $result;
+        }
+    }else{
+        $inquiry = [];
+        $inquiry['name'] = '';
+        $inqiry['email'] =  '';
+        $inquiry['message'] = '';
+        $inquiry['date_send'] = '';
+    }
+?>
+
+<?php 
+include('includes/header.php');?>
+<body id="contact">
+<?php include('includes/navigation.php');?>
+
+      <?php echo send_danger_modal($errors); 
+      echo send_success_modal();?>
 
 
     <section id="title-bar">
@@ -23,18 +51,19 @@
         <div class="container contact-form">
             <div class="row">
                 <div class="col-lg-8">
-                    <form>
+                    <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST">
                         <div class="form-group">
                             <label>Name</label>
-                            <input type="text" class="form-control input-text-color" placeholder="Enter Name">
+                            <input type="hidden" name="inquiries_compo_id" id="inquiries_compo_id">
+                            <input type="text" class="form-control input-text-color" id="name" name="name" placeholder="Enter Name">
                         </div>
                         <div class="form-group">
                             <label>Email</label>
-                            <input type="email" class="form-control input-text-color" placeholder="Enter Email">
+                            <input type="text" id="email" name="email" class="form-control input-text-color" placeholder="Enter Email">
                         </div>
                         <div class="form-group">
                             <label>Message</label>
-                            <textarea class="form-control input-text-color" placeholder="Enter Message"></textarea>
+                            <textarea class="form-control input-text-color" id="message" name="message" placeholder="Enter Message"></textarea>
                             
                         </div>
 
@@ -84,5 +113,11 @@
     <script src="js/bootstrap.min.js" ></script>
     <script src="js/jquery.waypoints.min.js" ></script>
     <script src="js/scripts.js"></script>
+    <script src="admin/dist/js/adminjs.js"></script>
+    <script>
+        var inquiries_compo_id = document.getElementById("inquiries_compo_id");
+        inquiries_compo_id = "<?= 'INQ'.date("ymdhis") . abs(rand('0','9'));  ?>";
+        $('#inquiries_compo_id').val(inquiries_compo_id);
+    </script>
   </body>
 </html>

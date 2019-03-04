@@ -34,15 +34,19 @@
         </div>
     </section> -->
 
+
     <section id="about_content">
+
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 about-text" style="" >
-                        <p class="" style="padding: 20px;text-align: justify;">Hunter’s Hub Incorporated is a Sourcing and Headhunting company that was founded earlier on in the year 2018. The company prides itself in its ability to source and recruit only the best and brightest of each industry. Hunter’s Hub caters to numerous clients in a multitude of industries, and has a wide- range of candidate selections to suit any of our clients’ needs. Likewise, the company specialises in sourcing out highly skilled and multi- talented IT professionals because the company mostly caters to clients being widely known to be in the IT industry. <br />
-                            <br />
-                            Hunter’s Hub sets itself apart from the rest of the company in the industry due to the various prominent selections of services that are custom- fit for our clients and the numerous kinds of professionals we are able to provide. Our services are highly based off of our clients’ needs and requirements, and we are able to dispense any kind of personnel that they need— whether professional or non- professional. We look for only the best, and provide only the best. 
-                            
-                             </p>
+
+                  <h2 style="font-weight: bold" class="text-center">About the Company</h2>
+                  <p class="" style="padding: 20px;text-align: justify;">Hunter’s Hub Incorporated is a Sourcing and Headhunting company that was founded earlier on in the year 2018. The company prides itself in its ability to source and recruit only the best and brightest of each industry. Hunter’s Hub caters to numerous clients in a multitude of industries, and has a wide- range of candidate selections to suit any of our clients’ needs. Likewise, the company specialises in sourcing out highly skilled and multi- talented IT professionals because the company mostly caters to clients being widely known to be in the IT industry. <br />
+                      <br />
+                      Hunter’s Hub sets itself apart from the rest of the company in the industry due to the various prominent selections of services that are custom- fit for our clients and the numerous kinds of professionals we are able to provide. Our services are highly based off of our clients’ needs and requirements, and we are able to dispense any kind of personnel that they need— whether professional or non- professional. We look for only the best, and provide only the best. 
+                      
+                       </p>
                 </div>
                 
             </div>
@@ -302,28 +306,28 @@
             <div class="owl-stage">
               <div class="owl-item">
                 <center>
-                <a href="http://wesupportinc.com/" target="_blank"><img src="img/wesupport.png" alt="WeSupport Incorporated" title="WeSupport Incorporated" class="img img-responsive partners-image" style="width: 300px; height: 100px"></a><br><br>
+                <a href="http://wesupportinc.com/" target="_blank"><img src="img/wesupport.png" alt="WeSupport Incorporated" title="WeSupport Incorporated" class="img img-responsive partners-image" ></a><br><br>
                 <h4>WeSupport Incorporated</h4>
                 </center>
               </div>
 
               <div class="owl-item">
                 <center>
-                <a href="http://www.tranzend.com.ph/main/" target="_blank"><img src="img/tranzend_2.png" alt="Tranzend Solutions" title="Tranzend Solutions" class="img img-responsive partners-image" style="width: 300px; height: 100px"></a><br><br>
+                <a href="http://www.tranzend.com.ph/main/" target="_blank"><img src="img/tranzend_2.png" alt="Tranzend Solutions" title="Tranzend Solutions" class="img img-responsive partners-image" ></a><br><br>
                 <h4>Tranzend Solutions</h4>
                 </center>
               </div>
 
               <div class="owl-item">
                 <center>
-                <a href="http://provisor.com.ph/" target="_blank"><img src="img/provisor.png" alt="Provisor Solutions Incorporated" class="img img-responsive partners-image" title="Provisor Solutions Incorporated" style="width: 300px; height: 100px"></a><br><br>
+                <a href="http://provisor.com.ph/" target="_blank"><img src="img/provisor.png" alt="Provisor Solutions Incorporated" class="img img-responsive partners-image" title="Provisor Solutions Incorporated" ></a><br><br>
                 <h4>Provisor Solutions Incorporated</h4>
                 </center>
               </div>
 
               <div class="owl-item">
                 <center>
-                <a href="http://www.ekkremis.com/" target="_blank"><img src="img/ekkremis.png" alt="Ekkremis Solutions Incorporated" title="Ekkremis Solutions Incorporated" class="img img-responsive partners-image" style="width: 300px; height: 100px"></a><br><br>
+                <a href="http://www.ekkremis.com/" target="_blank"><img src="img/ekkremis.png" alt="Ekkremis Solutions Incorporated" title="Ekkremis Solutions Incorporated" class="img img-responsive partners-image" ></a><br><br>
                 <h4>Ekkremis Solutions Incorporated</h4>
                 </center>
               </div>
@@ -396,16 +400,16 @@
     <script src="js/scripts.js"></script>
     <script>
         $(document).ready(function($){
-      var owl = $(".owl-carousel");
-      owl.owlCarousel({
-        items: 3,
-        loop: true,
-        margin: 10,
-        autoplay:true,
-        autoplayTimeout:5000,
-        autoplayHoverPause:true
-      });
-  });
+          var owl = $(".owl-carousel");
+          owl.owlCarousel({
+            items: 3,
+            loop: true,
+            margin: 10,
+            autoplay:true,
+            autoplayTimeout:5000,
+            autoplayHoverPause:true
+          });
+        });
     </script>
   </body>
 </html>

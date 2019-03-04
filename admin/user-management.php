@@ -6,7 +6,41 @@
   //echo SITE_URL;
   define("SHARED_PATH",dirname(__FILE__).'\includes_admin');
  // echo SHARED_PATH;*/
+  require_login();
+  $admin_status;
 
+  if(is_post_request()){
+    $admin = [];
+    $admin['admin_compo_id'] =   $_POST['admin_compo_id'] ?? '';
+    $admin['firstname'] = $_POST['firstname'] ?? '';
+    $admin['middlename'] = $_POST['middlename'] ?? '';
+    $admin['lastname'] = $_POST['lastname'] ?? '';
+    $admin['contact'] = $_POST['contact'] ?? '';
+    $admin['email'] = $_POST['email'] ?? '';
+    $admin['username'] = $_POST['username'] ?? '';  
+    $admin['password'] = $_POST['password'] ?? '';
+    $admin['confirm_password'] = $_POST['confirm_password'] ?? '';
+    $admin['admin_type'] = "ADMIN";
+    $admin['admin_status'] = 1;
+
+    $result = add_admin($admin);
+    if($result ===true){
+      $_SESSION['message'] = "Admin Created";
+    }else{
+      $errors = $result;
+    }
+  }else{
+    $admin = [];
+    $admin['firstname'] = '';
+    $admin['middlename'] = '';
+    $admin['lastname'] = '';
+    $admin['contact'] = '';
+    $admin['email'] = '';
+    $admin['username'] = '';
+    $admin['password'] = '';
+    $admin['confirm_password'] = '';
+  }
+ 
   
 ?>
 
@@ -68,7 +102,7 @@
         <small>List</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#"><i class="fa fa-users"></i> HHI</a></li>
         <li class="active">User Management</li>
       </ol>
     </section>
@@ -77,9 +111,10 @@
     <section class="content">
 
       <div class="row">
-        <?php /*
+        <?php 
             echo display_errors($errors);
-        */?>
+            echo display_session_message();
+        ?>
 
 
       </div>
@@ -125,34 +160,54 @@
                               ?>
 
                                 <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post" enctype="multipart/form-data">
+
+                                    <tr>
+                                      <td><b>Admin ID</b></td>
+                                      <td><input type="text" class="form-control" name="admin_compo_id" id="admin_compo_id" readonly=""></td>
+                                    </tr>
                                     <tr>
                                       <td><b>First Name</b></td>
-                                      <td><input type="text" class="form-control" name="firstname"></td>
+                                      <td><input type="text" class="form-control" name="firstname" id="firstname"></td>
                                     </tr>
                                     <tr>
                                       <td><b>Middle Name</b></td>
-                                      <td><input type="text" class="form-control" name="middlename"></td>
+                                      <td><input type="text" class="form-control" name="middlename" id="middlename"></td>
                                     </tr>
                                     <tr>
                                       <td><b>Last Number</b></td>
-                                      <td><input type="text" class="form-control" name="lastname"></td>
+                                      <td><input type="text" class="form-control" name="lastname" id="lastname"></td>
+                                    </tr>
+
+                                    <tr>
+                                      <td><b>Contact</b></td>
+                                      <td><input type="text" class="form-control" name="contact" id="contact"></td>
+                                    </tr>
+
+                                    <tr>
+                                      <td><b>Email</b></td>
+                                      <td><input type="text" class="form-control" name="email" id="email"></td>
                                     </tr>
                                     <tr>
                                       <td><b>Username</b></td>
-                                      <td><input type="text" class="form-control" name="username"></td>
+                                      <td><input type="text" class="form-control" name="username" id="password"></td>
                                     </tr>
 
                                     <tr>
                                       <td><b>Password</b></td>
-                                      <td><input type="password" class="form-control"  name="password"></td>
+                                      <td><input type="password" class="form-control"  name="password" id="password"></td>
                                     </tr> 
+
 
                                     <tr>
                                       <td><b>Confirm Password</b></td>
-                                      <td><input type="password" class="form-control"  name="confirm-password"></td>
-                                    </tr>     
-                                 
+                                      <td><input type="password" class="form-control"  name="confirm_password" id="confirm_password"></td>
+                                    </tr>   
 
+                                    <tr>
+                                      <td></td>
+                                      <td><input type="submit" name="submit" value="Save" class="btn btn-success "></td>
+                                    </tr>  
+                                
                                 </form>
                               </table>
                             
@@ -168,21 +223,24 @@
 
                 </div>
               </div>
+
+              <br />
+              
               <table id="" class="datatables table table-bordered table-striped table-hover">
                 <thead>
                 <tr>
                   <th>Full Name</th>
-                  <th>username</th>
+                  <th>Username</th>
                   <th>Email</th>
                   <th>Contant Number</th>
                   <th>Status</th>
-                  <th>Action</th>
+                  <th></th>
                 </tr>
                 </thead>
                 <tbody>
 
                 <?php 
-                $admin_list =get_all_admins();
+                $admin_list =get_all_admin_except_current_admin($_SESSION['admin_id']);
 
                 while($admins = mysqli_fetch_assoc($admin_list)):?>
                 <tr>
@@ -190,7 +248,15 @@
                   <td><?php echo $admins['username']?></td>
                   <td><?php echo $admins['email']?></td>
                   <td><?php echo $admins['contact']?></td>
-                  <td><?php echo $admins['admin_status']?></td>
+                  <td><?php if($admins['admin_status'] == 1){
+                              $admin_status = "Active";
+                              $label_type = "label-success";
+                              }else{
+                              $admin_status = "Not Active";
+                              $label_type = "label-danger";
+                              }?>
+                      <span class="label <?php echo $label_type?>"><?php echo $admin_status;?></span>  
+                 </td>
                   <td>
                    <?php $admin = get_admin_by_id($admins['admin_id']);
                    /*
@@ -202,6 +268,7 @@
                     }
                    */
                    ?>
+                   <a href="<?php echo url_for('admin/user-detail.php?admin_id='. h(u($admins['admin_compo_id'])));?>" class="btn btn-primary">View Details</a>
                   </td>
                 </tr>
               <?php endwhile;?>
@@ -270,7 +337,11 @@
       'info'        : true,
       //'autoWidth'   : false,      
     });
-  })
+
+    var admin_compo_id = document.getElementById("admin_compo_id");
+    admin_compo_id = "<?= 'HHIADMIN'.date("ymdhis") . abs(rand('0','9'));  ?>";
+    $('#admin_compo_id').val(admin_compo_id);
+  });
 </script>
 </body>
 </html>

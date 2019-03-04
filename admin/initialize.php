@@ -1,4 +1,8 @@
 <?php 
+  ob_start(); // output buffering is turned on
+
+  session_start(); // turn on sessions
+
 //echo dirname(__FILE__);
   //constant
   define("SITE_URL",dirname(__FILE__));
@@ -20,7 +24,11 @@
   require_once('includes_admin/functions.php');
   require_once('includes_admin/database.php');
   require_once('includes_admin/query_functions.php');
+  require_once('includes_admin/validation_functions.php');
+  require_once('includes_admin/auth_functions.php');
 
+
+  date_default_timezone_set('Asia/Taipei');
   $db = db_connect(); 
   $errors = [];
 ?>
