@@ -6,7 +6,7 @@
 
     if(is_post_request()){
         $jobseeker = [];
-        $jobseeker['inquiries_compo_id'] = $_POST['inquiries_compo_id'] ?? '';
+        $jobseeker['jobseeker_compo_id'] = $_POST['jobseeker_compo_id'] ?? '';
         $jobseeker['firstname'] = $_POST['firstname'] ?? '';
         $jobseeker['middlename'] = $_POST['middlename'] ?? '';
         $jobseeker['lastname'] = $_POST['lastname'] ?? '';
@@ -15,30 +15,36 @@
         $jobseeker['email'] = $_POST['email'] ?? '';
         $jobseeker['subject'] = $_POST['subject'] ?? '';
         $jobseeker['message'] = $_POST['message'] ?? '';
+        $jobseeker['data_status'] = 1;
        
 
 
         $now = date('Y-m-d H:i:s');
-        $inquiry['date_send'] = $now;
+        $jobseeker['date_send'] = $now;
 
-        /*
-            $resume_file = $_FILES['resume_file']['name'];
-            $resume_file_tmp =$_FILES['resume_file']['tmp_name'];
-            move_uploaded_file($resume_file_tmp, "../uploads/jobseeker_files/$resume_file");
-        */
+        
+        $resume_file = $_FILES['resume_file']['name'];
+        $resume_file_tmp =$_FILES['resume_file']['tmp_name'];
+        move_uploaded_file($resume_file_tmp, "admin/uploads/jobseeker_files/$resume_file");
 
-        /*$result = send_inquiry($inquiry);
+        $jobseeker['file'] = $resume_file;
+        
+        $result = send_jobseeker_files($jobseeker);
         if($result === true){
-          $_SESSION['message'] = "Message has been sent";
+          $_SESSION['message'] = "Data has been sent";
         }else{
           $errors = $result;
-        }*/
+        }
     }else{
-        $inquiry = [];
-        $inquiry['name'] = '';
-        $inqiry['email'] =  '';
-        $inquiry['message'] = '';
-        $inquiry['date_send'] = '';
+        $jobseeker = [];
+        $jobseeker['firstname'] =  '';
+        $jobseeker['middlename'] =  '';
+        $jobseeker['lastname'] = '';
+        $jobseeker['gender'] =   '';
+        $jobseeker['contact'] =  '';
+        $jobseeker['email'] =  '';
+        $jobseeker['subject'] =  '';
+        $jobseeker['message'] =  '';
     }
 ?>
 
@@ -47,7 +53,8 @@
   <body id="jobseeker">
    <?php include('includes/navigation.php');?>
 
-
+<?php echo send_danger_modal($errors); 
+      echo send_success_modal();?>
 
     <section class="section-jobseeker-form">
 
@@ -104,7 +111,7 @@
                             <label style="color:#FFF">
                                 Attach Resume Here
                             </label>
-                            <input type="file" name="resume_file" id="resume_file">
+                            <input type="file" name="resume_file" id="resume_file" required="">
                         </div>
                         
                         <div class="form-group">
@@ -137,7 +144,7 @@
     <script src="js/bootstrap.min.js" ></script>
     <script src="js/jquery.waypoints.min.js" ></script>
     <script src="js/scripts.js"></script>
-    
+    <script src="admin/dist/js/adminjs.js"></script>
 
     <script>
 
@@ -146,6 +153,6 @@
             jobseeker_compo_id = "<?= 'JOBSEEKER'.date("ymdhis") . abs(rand('0','9'));  ?>";
             $('#jobseeker_compo_id').val(jobseeker_compo_id);
         });
-            </script>
+    </script>
   </body>
 </html>

@@ -304,14 +304,190 @@
 
 
 
-
+//
 
 
 
   ///JOBSEEKER
-  function send_jobseeker_files(){
+   //validate jobseeker file
+   function validate_jobseeker_files($jobseeker){
+	 	$errors = [];
+
+		if(is_blank($jobseeker['firstname'])){
+			$errors[] = "Firstname cannot be blank";
+		}
+
+		if(is_blank($jobseeker['middlename'])){
+			$errors[] = "Middlename cannot be blank";
+		}
+
+		if(is_blank($jobseeker['lastname'])){
+			$errors[] = "Lastname cannot be blank";
+		}
+		if(is_blank($jobseeker['gender'])){
+			$errors[] = "Gender cannot be blank";
+		}
+		if(is_blank($jobseeker['contact'])){
+			$errors[] = "Contact number cannot be blank";
+		}
+
+
+		if(is_blank($jobseeker['email'])){
+			$errors[] = "Email cannot be blank";
+		}
+		if(is_blank($jobseeker['subject'])){
+			$errors[] = "Subject cannot be blank";
+		}
+
+		if(is_blank($jobseeker['message'])){
+			$errors[] = "Message cannot be blank";
+		}	
+
+	    return $errors;
+   }
+
+
+  function send_jobseeker_files($jobseeker){
   	global $db;
+
+	$errors = validate_jobseeker_files($jobseeker);
+	if(!empty($errors)){
+		return $errors;
+	}  	
+
+  	$sql = "INSERT INTO tbl_jobseekers(jobseeker_compo_id,firstname,middlename,lastname,gender,contact,email,subject,message,file,date_send,data_status) ";
+  	$sql .= "VALUES('".db_escape($db,$jobseeker['jobseeker_compo_id'])."', '".db_escape($db,$jobseeker['firstname'])."', '".db_escape($db,$jobseeker['middlename'])."', '".db_escape($db,$jobseeker['lastname'])."','".db_escape($db,$jobseeker['gender'])."','".db_escape($db,$jobseeker['contact'])."','".db_escape($db,$jobseeker['email'])."','".db_escape($db,$jobseeker['subject'])."','".db_escape($db,$jobseeker['message'])."','".db_escape($db,$jobseeker['file'])."','".db_escape($db,$jobseeker['date_send'])."','".db_escape($db,$jobseeker['data_status'])."') ";
+  	//$sql .= "";
+
+	$result = mysqli_query($db,$sql);
+	// for insert statement, $result is true/false
+	if($result){
+		//redirect
+		return true;
+	}else{
+		//insert failed
+		echo mysqli_error($db);
+		db_disconnect($db);
+		exit; 
+	}
   }
+
+
+  //all jobseeker files that has a data_status of 1
+  function get_all_jobseeker_files(){
+	global $db;
+	$sql = "SELECT * FROM tbl_jobseekers ";
+	$sql .= "ORDER BY jobseeker_id DESC";
+	$result = mysqli_query($db,$sql);
+	confirm_result_set($result);
+	return $result;
+  }
+
+
+  function get_jobseeker_by_jobseeker_compo_id($jobseeker_compo_id){
+		global $db;
+		$sql = "SELECT * FROM tbl_jobseekers ";
+		$sql .= "WHERE jobseeker_compo_id = '".db_escape($db,$jobseeker_compo_id)."' ";
+		$sql .= "LIMIT 1";
+		$result = mysqli_query($db,$sql);
+		//error checking
+		confirm_result_set($result);
+		
+		$jobseeker_single = mysqli_fetch_assoc($result);
+		mysqli_free_result($result);
+		//return an assoc array not a result set
+		return $jobseeker_single;	
+  }	
+
+
+
+
+  //clients 
+
+     //validate jobseeker file
+   function validate_client_files($client){
+	 	$errors = [];
+
+		if(is_blank($client['firstname'])){
+			$errors[] = "Firstname cannot be blank";
+		}
+
+		if(is_blank($client['middlename'])){
+			$errors[] = "Middlename cannot be blank";
+		}
+
+		if(is_blank($client['lastname'])){
+			$errors[] = "Lastname cannot be blank";
+		}
+		
+		if(is_blank($client['contact'])){
+			$errors[] = "Contact number cannot be blank";
+		}
+
+
+		if(is_blank($client['email'])){
+			$errors[] = "Email cannot be blank";
+		}
+		
+
+		if(is_blank($client['message'])){
+			$errors[] = "Message cannot be blank";
+		}	
+
+	    return $errors;
+   }
+
+  function send_client_files($client){
+	  	global $db;
+
+		$errors = validate_client_files($client);
+		if(!empty($errors)){
+			return $errors;
+		}  	
+
+	  	$sql = "INSERT INTO tbl_clients(client_compo_id,firstname,middlename,lastname,company,position_in_company,company_size,industry,email,contact,zip_code,message,man_power_file,qualification_description_file,date_send,data_status) ";
+	  	$sql .= "VALUES('".db_escape($db,$client['client_compo_id'])."', '".db_escape($db,$client['firstname'])."', '".db_escape($db,$client['middlename'])."', '".db_escape($db,$client['lastname'])."','".db_escape($db,$client['company'])."','".db_escape($db,$client['position_in_company'])."','".db_escape($db,$client['company_size'])."','".db_escape($db,$client['industry'])."','".db_escape($db,$client['email'])."','".db_escape($db,$client['contact'])."','".db_escape($db,$client['zip_code'])."','".db_escape($db,$client['message'])."','".db_escape($db,$client['man_power_file'])."','".db_escape($db,$client['qualification_description_file'])."','".db_escape($db,$client['date_send'])."','".db_escape($db,$client['data_status'])."') ";
+	  	//$sql .= "";
+
+		$result = mysqli_query($db,$sql);
+		// for insert statement, $result is true/false
+		if($result){
+			//redirect
+			return true;
+		}else{
+			//insert failed
+			echo mysqli_error($db);
+			db_disconnect($db);
+			exit; 
+		}
+  } 
+
+
+ //all jobseeker files that has a data_status of 1
+  function get_all_client_files(){
+	global $db;
+	$sql = "SELECT * FROM tbl_clients ";
+	$sql .= "ORDER BY client_id DESC";
+	$result = mysqli_query($db,$sql);
+	confirm_result_set($result);
+	return $result;
+  }
+
+
+  function get_client_by_client_compo_id($client_compo_id){
+		global $db;
+		$sql = "SELECT * FROM tbl_clients ";
+		$sql .= "WHERE client_compo_id = '".db_escape($db,$client_compo_id)."' ";
+		$sql .= "LIMIT 1";
+		$result = mysqli_query($db,$sql);
+		//error checking
+		confirm_result_set($result);
+		
+		$client_single = mysqli_fetch_assoc($result);
+		mysqli_free_result($result);
+		//return an assoc array not a result set
+		return $client_single;	
+  }	
 
 
 

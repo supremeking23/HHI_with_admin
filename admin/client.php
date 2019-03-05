@@ -6,6 +6,7 @@
   //echo SITE_URL;
   define("SHARED_PATH",dirname(__FILE__).'\includes_admin');
  // echo SHARED_PATH;*/
+  require_login();
 ?>
 
 <!DOCTYPE html>
@@ -53,60 +54,7 @@
 <body class="hold-transition skin-blue sidebar-mini" id="client">
 <div class="wrapper">
 
-  <header class="main-header">
-
-    <!-- Logo -->
-    <a href="index2.html" class="logo">
-      <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>HHI</b></span>
-      <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Hunter's Hub</b></span>
-    </a>
-
-    <!-- Header Navbar: style can be found in header.less -->
-    <nav class="navbar navbar-static-top">
-      <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-        <span class="sr-only">Toggle navigation</span>
-      </a>
-      <!-- Navbar Right Menu -->
-      <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
-
-
-
-          <!-- User Account: style can be found in dropdown.less -->
-          <li class="dropdown user user-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-              <span class="hidden-xs">Alexander Pierce</span>
-            </a>
-            <ul class="dropdown-menu">
-              <!-- User image -->
-              <li class="user-header">
-                <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-
-                <p>
-                  Alexander Pierce - Web Developer
-                  <small>Member since Nov. 2012</small>
-                </p>
-              </li>
-              <!-- Menu Body -->
-
-              <!-- Menu Footer-->
-              <li class="user-footer">
- 
-                <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
-                </div>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-
-    </nav>
-  </header>
+<?php include('includes_admin/header.php');?>
   <!-- Left side column. contains the logo and sidebar -->
   <?php include('includes_admin/sidebar.php');?>
 
@@ -130,7 +78,7 @@
         <div class="col-md-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Data Table With Full Features</h3>
+              <h3 class="box-title"></h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -140,79 +88,25 @@
                   <th>Full Name</th>
                   <th>Email</th>
                   <th>Phone Number</th>
-                  <th>Subject</th>
+                  <th>Position in the Company</th>
                   <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
 
-                <?php for($x = 0; $x<10; $x++):?>
+                <?php 
+                $client_list = get_all_client_files();
+                while($clients = mysqli_fetch_assoc($client_list)):?>
                 <tr>
-                  <td>Trident</td>
-                  <td>Internet
-                    Explorer 4.0
-                  </td>
-                  <td>Win 95+</td>
-                  <td> 4</td>
+                  <td><?php echo $clients['firstname'].' '. $clients['middlename'].' '. $clients['lastname'];?></td>
+                  <td><?php echo $clients['email'];?></td>
+                  <td><?php echo $clients['contact'];?></td>
+                  <td><?php echo $clients['position_in_company'];?></td>
                   <td>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#jobseekerDetail">View Detail</button>
-                    <div class="modal fade" id="jobseekerDetail">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">Full Details</h4>
-                          </div>
-                          <div class="modal-body">
-
-                              <table class="table table-striped table-hover"> 
-                                <tr>
-                                  <td><b>Full Name</b></td>
-                                  <td>Update software</td>
-                                </tr>
-                                <tr>
-                                  <td><b>Gender</b></td>
-                                  <td></td>
-                                </tr>
-                                <tr>
-                                  <td><b>Phone Number</b></td>
-                                  <td></td>
-                                </tr>
-                                <tr>
-                                  <td><b>Email Address</b></td>
-                                  <td>Update software</td>
-                                </tr>
-
-                                <tr>
-                                  <td><b>Resume</b></td>
-                                  <td></td>
-                                </tr> 
-
-                                <tr>
-                                  <td><b>Subject</b></td>
-                                  <td></td>
-                                </tr>     
-
-                                <tr>
-                                  <td><b>Message</b></td>
-                                  <td></td>
-                                </tr>                           
-
-                              </table>
-                            
-                          </div>
-                          <div class="modal-footer">
-                          </div>
-                        </div>
-                        <!-- /.modal-content -->
-                      </div>
-                      <!-- /.modal-dialog -->
-                    </div>
-                    <!-- /.modal -->
+                    <a href="<?php echo url_for('admin/client-detail.php?client_id='. h(u($clients['client_compo_id'])));?>" class="btn btn-primary">View Details</a>
                   </td>
                 </tr>
-              <?php endfor;?>
+              <?php endwhile;?>
                
                 </tbody>
               </table>

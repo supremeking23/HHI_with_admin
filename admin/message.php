@@ -6,6 +6,7 @@
   //echo SITE_URL;
   define("SHARED_PATH",dirname(__FILE__).'\includes_admin');
  // echo SHARED_PATH;*/
+  require_login();
 ?>
 
 <!DOCTYPE html>

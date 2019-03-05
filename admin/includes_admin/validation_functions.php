@@ -96,6 +96,32 @@
     return preg_match($email_regex, $value) === 1;
   }
 
+
+
+  /**
+   * @param $number
+   *
+   * @return bool
+   */
+  function validatePhoneNumber($number) {
+      $formats = [
+          '###-###-####', '####-###-###',
+          '(###) ###-###', '####-####-####',
+          '##-###-####-####', '####-####', '###-###-###',
+          '#####-###-###', '##########', '#########',
+          '# ### #####', '#-### #####'
+      ];
+
+      return in_array(
+          trim(preg_replace('/[0-9]/', '#', $number)),
+          $formats
+      );
+  }
+
+
+
+  
+
   // has_unique_username('johnqpublic')
   // * Validates uniqueness of admins.username
   // * For new records, provide only the username.

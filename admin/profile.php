@@ -2,7 +2,7 @@
   require_once('initialize.php');
 
 
-
+  require_login();
   $admin_compo_id = $_SESSION['admin_compo_id'];
 
   if(is_post_request()){
