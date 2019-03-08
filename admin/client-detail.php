@@ -128,20 +128,22 @@
             </div>
             <div class="box-body no-padding">
               <ul class="nav nav-pills nav-stacked">
-                <li><a href="<?php echo h('client.php')?>"><i class="fa fa-users"></i> Back to Client List
+                <li><a href="<?php echo h('client.php')?>"><span class="fa fa-arrow-circle-left"></span> Back to  List
                   </a></li>
                 
               </ul>
             </div>
          
           </div>
+
+
         </div>
 
 
         <div class="col-md-9">
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Client Detail</h3>
+              <h3 class="box-title"><?php echo $client['firstname'].' '. $client['middlename'].' '. $client['lastname'];?></h3>
 
 
             </div>

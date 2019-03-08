@@ -110,7 +110,11 @@
             <div class="box-body box-profile">
 
             <a role="button" data-toggle="modal" data-target="#updateProfile" data-tooltip="tooltip" data-title="click to edit profile picture">
-              <img class="profile-user-img img-responsive img-circle" src="uploads/images/guest2.jpg" alt="User profile picture">
+              <?php if(empty($admin['photo'])){ ?>
+                <img class="profile-user-img img-responsive img-circle" src="uploads/images/guest2.jpg" alt="User profile picture">
+              <?php }else{ ?>
+                <img class="profile-user-img img-responsive img-circle" src="uploads/images/<?php echo $admin['photo']?>" alt="User profile picture">
+              <?php }?>
             </a>
 
             <div class="modal fade" id="updateProfile">
@@ -122,8 +126,9 @@
                     <h4 class="modal-title">Update Profile Picture</h4>
                   </div>
 
-                  <form action="<?php echo $_SERVER['PHP_SELF'];?>?admin_id=<?php echo h(u($admin_compo_id));?>" method="post" enctype="multipart/form-data">
+                  <form action="<?php echo url_for('admin/includes_admin/upload_functions.php');?>" method="post" enctype="multipart/form-data">
                     <div class="modal-body">
+                       <input type="hidden" name="admin_compo_id" value="<?php echo $admin_compo_id;?>">
                       <input type="file" id="photo" name="photo" class="form-control" onchange="document.getElementById('admin_Image').src = window.URL.createObjectURL(this.files[0])" required="" >
 
                       <div id="image_viewer" style="margin-top: 5px"> 
@@ -131,7 +136,7 @@
 
                     </div>
                     <div class="modal-footer"> 
-                      <input type="submit" name="submit" value="Update" class="btn btn-primary">
+                      <input type="submit" name="update_user_profile" value="Update" class="btn btn-primary">
                     </div>
                   </form>
                 </div>

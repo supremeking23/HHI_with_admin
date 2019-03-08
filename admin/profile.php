@@ -106,7 +106,11 @@
             <div class="box-body box-profile">
 
             <a role="button" data-toggle="modal" data-target="#updateProfile" data-tooltip="tooltip" data-title="click to edit profile picture">
-              <img class="profile-user-img img-responsive img-circle" src="uploads/images/guest2.jpg" alt="User profile picture">
+              <?php if(empty($login_admin['photo'])){ ?>
+                <img class="profile-user-img img-responsive img-circle" src="uploads/images/guest2.jpg" alt="User profile picture">
+              <?php }else{ ?>
+                <img class="profile-user-img img-responsive img-circle" src="uploads/images/<?php echo $login_admin['photo']?>" alt="User profile picture">
+              <?php }?>
             </a>
 
             <div class="modal fade" id="updateProfile">
@@ -144,7 +148,7 @@
 
              
 
-              <a href="<?php echo url_for('admin/user-management.php');?>" class="btn btn-default btn-block bg-green color-palette"><b>Back to user list</b></a>
+              
             </div>
             <!-- /.box-body -->
           </div>

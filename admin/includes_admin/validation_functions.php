@@ -98,6 +98,31 @@
 
 
 
+  /// for file upload for jobseekers only
+  function file_upload_resume($value){
+    $allowed_exts = array('pdf','docx');
+    $ext = strtolower(substr($value, strpos($value, '.') + 1));
+    $errors = array();
+
+    if(in_array($ext, $allowed_exts) === false){
+        return $value;
+    }
+  }
+
+  /// for file upload for client only
+  function file_upload_man_power_file($value){
+    $allowed_exts = array('csv','xlsm','xlsx','xls');
+    $ext = strtolower(substr($value, strpos($value, '.') + 1));
+    $errors = array();
+
+    if(in_array($ext, $allowed_exts) === false){
+        return $value;
+    }
+  }
+
+
+
+
   /**
    * @param $number
    *

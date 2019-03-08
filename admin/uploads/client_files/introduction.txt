@@ -1,0 +1,9 @@
+inventory management is the process of ordering,storing and using of companys inventory such as raw materials and finished products. Inventory management helps business owners to know when it's time to replenish products, or buy more materials to manufacture them. In order to have an optimaze order of quantity in the companys inventory, business owner or business strategies uses the EOQ or Economic Order Quantity.
+
+
+Economic Order Quantity or EOQ is the ideal order quantity a company should purchase for its inventory. Economic Order Quantity is one of the oldest formula in inventory management. It was first developed by Sir Ford W. Harris in 1913. Since it was introduction, EOQ has been one of the most important and most durable formulas in inventory management. The variables in order to get the EOQ are Annual requirement of units of inventory,Cost per order, Annual holding cost per unit of inventory.
+
+
+
+
+

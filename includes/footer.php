@@ -5,11 +5,6 @@
         <div class="row ">
                 <div class="col-md-4">
                         <div class="">
-                          <style type="text/css">
-                          
-                          </style>
-                         <!-- site-map-div --> 
-                        <div class="">
                           <h2 style="border-bottom: 2px solid white;" class="text-center">Hunter's Hub Inc</h2>
                                 <!--<a href="index.php" class="">Home</a>
                                 <a href="about.php" class="">About</a>
@@ -32,7 +27,6 @@
 
 
 
-                        </div>
                 </div>
 
                 <div class="col-md-4">
@@ -62,8 +56,8 @@
                     </ul>
                   </div> -->
                           <ul class="link-footer">
-                            <li><a href="files/Manpower Request Form.xlsm" title="Manpower Request Form" download><span class="fa fa-download"></span>&nbsp;Man Power Request Form</a></li>
-                            <li><a href="files/JD and Q.docx" title="Qualifications and Job Description Form" download><span class="fa fa-download"></span>&nbsp; Qualifications and Job Description Form</li>
+                            <li><a href="files/Man-Power-Request-Form.xlsm" title="Man Power Request Form" download><span class="fa fa-download"></span>&nbsp;Man Power Request Form</a></li>
+                            
                         </ul>
                 </div>
 

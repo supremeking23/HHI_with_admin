@@ -11,6 +11,7 @@ $(function(){
 
 	$('#errormodal').modal('show');
 	$('#successmodal').modal('show');
+	//$('.errors').modal('show');
 	$('[data-tooltip="tooltip"]').tooltip();
 });
 

@@ -86,6 +86,52 @@ function display_errors($errors=array()){
 
 
 
+function get_and_clear_error_message_modal(){
+	if(isset($_SESSION['error_message']) && $_SESSION['error_message'] !=''){
+		$msg = $_SESSION['error_message'];
+		unset($_SESSION['error_message']);
+		return $msg;
+	}
+}
+
+
+//message
+function display_error_message(){
+	$output = "";
+	$msg = get_and_clear_error_message_modal();
+	if(!empty($msg)){
+
+		$output .= "<div class=\"errors modal modal-danger\" id=\"errormodal\">";
+		$output .="<div class=\"modal-dialog\">";
+		$output .="<div class=\"modal-content\">";
+        $output .="<div class=\"modal-header\">";
+        $output .="<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">";
+        $output .="<span aria-hidden=\"true\">&times;</span></button>";
+        $output .="<h4 class=\"modal-title\">Please fix the following errors:</h4>";
+        $output .="</div>"; //modal header
+        $output .="<div class=\"modal-body\">";
+        $output .="<p></p>";
+        $output .= "";
+		$output .="<ul>";
+		foreach($msg as $error){
+			$output .="<li>" .h($error) . "</li>";
+		}
+		$output .="</ul>";
+        $output .="</div>";      //modal body
+        $output .="<div class=\"modal-footer\">";
+        /*$output .="<button type=\"button\" class=\"btn btn-default pull-left\" data-dismiss=\"modal\">Close</button>";
+        $output .="<button type=\"button\" class=\"btn btn-primary\">Save changes</button>";*/
+      	$output .="</div>";
+		$output .="</div>";
+		$output .="</div>";
+		$output .="</div>";
+
+		return $output;
+	}
+}
+
+
+
 function get_and_clear_session_message(){
 	if(isset($_SESSION['message']) && $_SESSION['message'] !=''){
 		$msg = $_SESSION['message'];
@@ -149,7 +195,7 @@ function send_danger_modal($errors=array()){
 	$output = "";
 
 	if(!empty($errors)){
-		$output .= "<div class=\"modal fade modal_failed\" id=\"errormodal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"errormodal\" aria-hidden=\"true\">";
+		$output .= "<div class=\"modal fade modal_failed alert-danger\" id=\"errormodal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"errormodal\" aria-hidden=\"true\">";
 		$output .="<div class=\"modal-dialog modal-dialog-centered\" role=\"document\">";
 		$output .="<div class=\"modal-content\">";
         $output .="<div class=\"modal-header\">";

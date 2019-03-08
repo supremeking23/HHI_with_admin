@@ -341,6 +341,13 @@
 
 		if(is_blank($jobseeker['message'])){
 			$errors[] = "Message cannot be blank";
+		}
+
+
+		if(is_blank($jobseeker['file'])){
+			$errors[] = "File cannot be blank";
+		}else if(file_upload_resume($jobseeker['file'])){
+			$errors[] = "Upload only pdf or word file";
 		}	
 
 	    return $errors;
@@ -432,6 +439,13 @@
 
 		if(is_blank($client['message'])){
 			$errors[] = "Message cannot be blank";
+		}
+
+
+		if(is_blank($client['man_power_file'])){
+			$errors[] = "File cannot be blank";
+		}else if(file_upload_man_power_file($client['man_power_file'])){
+			$errors[] = "Upload only excel file";
 		}	
 
 	    return $errors;
@@ -487,6 +501,101 @@
 		mysqli_free_result($result);
 		//return an assoc array not a result set
 		return $client_single;	
+  }
+
+
+
+
+
+
+  //events -calendar
+
+   function validate_event($client){
+	 	$errors = [];
+
+		if(is_blank($client['event_name'])){
+			$errors[] = "Event name cannot be blank";
+		}
+
+		if(is_blank($client['event_description'])){
+			$errors[] = "Event Description cannot be blank";
+		}
+
+		if(is_blank($client['event_datestart'])){
+			$errors[] = "Date Start cannot be blank";
+		}
+		
+		if(is_blank($client['event_timestart'])){
+			$errors[] = "Time start cannot be blank";
+		}
+
+
+		if(is_blank($client['event_timeend'])){
+			$errors[] = "Time end cannot be blank";
+		}
+		
+
+		/*if(is_blank($client['message'])){
+			$errors[] = "Message cannot be blank";
+		}	*/
+
+	    return $errors;
+   }
+
+
+  function insert_event($event){
+  		global $db;
+
+		$errors = validate_event($event);
+		if(!empty($errors)){
+			return $errors;
+		} 	
+
+  		$sql = "INSERT INTO tbl_events(event_compo_id,event_name,event_description,event_datestart,event_dateend,event_timestart,event_timeend) ";
+  		$sql .= "VALUES (";
+  		$sql .= "'".db_escape($db, $event['event_compo_id'])."', ";
+  		$sql .= "'".db_escape($db, $event['event_name'])."', ";
+  		$sql .= "'".db_escape($db, $event['event_description'])."', ";
+  		$sql .= "'".db_escape($db, $event['event_datestart'])."', ";
+  		$sql .= "'".db_escape($db, $event['event_dateend'])."', ";
+  		$sql .= "'".db_escape($db, $event['event_timestart'])."', ";
+  		$sql .= "'".db_escape($db, $event['event_timeend'])."' ";
+  		$sql .= ")";
+  		$result = mysqli_query($db,$sql);
+
+	    // For INSERT statements, $result is true/false
+	    if($result) {
+	      return true;
+	    } else {
+	      // INSERT failed
+	      echo mysqli_error($db);
+	      db_disconnect($db);
+	      exit;
+	    }
+  }
+
+  function load_calendar(){
+	global $db;
+	$sql = "SELECT * FROM tbl_events ";
+	$sql .= "ORDER BY event_id DESC";
+	$result = mysqli_query($db,$sql);
+	confirm_result_set($result);
+	return $result;
+  }
+
+
+  function get_event_for_this_day(){
+  	$now = date('Y-m-d');
+
+	global $db;
+	$sql = "SELECT * FROM tbl_events ";
+	$sql .= "WHERE event_datestart = '".db_escape($db,$now)."' ";
+	//$sql .= "LIMIT 1";
+	$result = mysqli_query($db,$sql);
+	confirm_result_set($result);
+	//return an assoc array not a result set
+	return $result;
+
   }	
 
 

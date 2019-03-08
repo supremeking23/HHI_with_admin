@@ -25,13 +25,12 @@
         
         $resume_file = $_FILES['resume_file']['name'];
         $resume_file_tmp =$_FILES['resume_file']['tmp_name'];
-        move_uploaded_file($resume_file_tmp, "admin/uploads/jobseeker_files/$resume_file");
-
         $jobseeker['file'] = $resume_file;
         
         $result = send_jobseeker_files($jobseeker);
         if($result === true){
           $_SESSION['message'] = "Data has been sent";
+          move_uploaded_file($resume_file_tmp, "admin/uploads/jobseeker_files/$resume_file");
         }else{
           $errors = $result;
         }
@@ -111,7 +110,7 @@
                             <label style="color:#FFF">
                                 Attach Resume Here
                             </label>
-                            <input type="file" name="resume_file" id="resume_file" required="">
+                            <input type="file" name="resume_file" id="resume_file" >
                         </div>
                         
                         <div class="form-group">

@@ -27,18 +27,18 @@
         
         $man_power_file = $_FILES['man_power_file']['name'];
         $man_power_file_tmp =$_FILES['man_power_file']['tmp_name'];
-        move_uploaded_file($man_power_file_tmp, "admin/uploads/client_files/$man_power_file");
         $client['man_power_file'] = $man_power_file;
 
-        $qualification_description_file = $_FILES['qualification_description_file']['name'];
+        /*$qualification_description_file = $_FILES['qualification_description_file']['name'];
         $qualification_description_file_tmp =$_FILES['qualification_description_file']['tmp_name'];
         move_uploaded_file($qualification_description_file_tmp, "admin/uploads/client_files/$qualification_description_file");
 
-        $client['qualification_description_file'] = $qualification_description_file;
+        $client['qualification_description_file'] = $qualification_description_file;*/
         
         $result = send_client_files($client);
         if($result === true){
           $_SESSION['message'] = "Data has been sent";
+          move_uploaded_file($man_power_file_tmp, "admin/uploads/client_files/$man_power_file");
         }else{
           $errors = $result;
         }
@@ -141,15 +141,10 @@
                             <label style="color:#FFF">
                                 Attach Man Power Request Form Here
                             </label>
-                            <input type="file" name="man_power_file" id="man_power_file" required="">
+                            <input type="file" name="man_power_file" id="man_power_file" >
                         </div>
 
-                        <div class="form-group" style="background:#999;padding:10px">
-                            <label style="color:#FFF">
-                                Attach Qualifications and Description Here
-                            </label>
-                            <input type="file" name="qualification_description_file" id="qualification_description_file" required="">
-                        </div>
+
 
                         <!--<div class="form-group" style="background:#999;padding:10px">
                         

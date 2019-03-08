@@ -128,8 +128,9 @@
             </div>
             <div class="box-body no-padding">
               <ul class="nav nav-pills nav-stacked">
-                <li><a href="<?php echo h('inquiries.php')?>"><i class="fa fa-question-circle"></i> Back to Inquiry List
+                <li><a href="<?php echo h('inquiries.php')?>" > <span class="fa fa-arrow-circle-left"></span>Back to Inquiry List</span>
                   </a></li>
+                  
                 
               </ul>
             </div>
@@ -141,7 +142,7 @@
         <div class="col-md-9">
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Inquiry Detail</h3>
+              <h3 class="box-title"><?php echo h($inquiry['name']);?></h3>
 
 
             </div>
@@ -217,8 +218,8 @@
             <!-- /.box-footer -->
             <div class="box-footer">
               <div class="pull-right">
-                <button type="button" class="btn btn-default"><i class="fa fa-trash-o"></i> Delete</button>
-                <button type="button" class="btn btn-default"><i class="fa fa-print"></i> Print</button>
+                <a href="" class="btn btn-default"><i class="fa fa-trash-o"></i> Delete</a>
+                <a href="" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
               </div>
               
             </div>

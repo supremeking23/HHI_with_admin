@@ -89,9 +89,9 @@
 <body class="hold-transition skin-blue sidebar-mini" id="usermanagement">
 <div class="wrapper">
 
-<?php include('includes_admin/header.php');?>
+<?php include(SHARED_PATH.'/header.php');?>
   <!-- Left side column. contains the logo and sidebar -->
-  <?php include('includes_admin/sidebar.php');?>
+  <?php include(SHARED_PATH.'/sidebar.php');?>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -111,11 +111,13 @@
     <section class="content">
 
       <div class="row">
-        <?php 
+       
+        <div class="col-md-12">
+          <?php 
             echo display_errors($errors);
             echo display_session_message();
-        ?>
-
+          ?>
+        </div>
 
       </div>
 

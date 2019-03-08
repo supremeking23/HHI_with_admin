@@ -58,7 +58,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Read Inquiry
+        Jobseeker Detail
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-question-circle"></i> HHI</a></li>
@@ -128,7 +128,7 @@
             </div>
             <div class="box-body no-padding">
               <ul class="nav nav-pills nav-stacked">
-                <li><a href="<?php echo h('jobseeker.php')?>"><i class="fa fa-users"></i> Back to Jobseeker List
+                <li><a href="<?php echo h('jobseeker.php')?>"><span class="fa fa-arrow-circle-left"></span>Back to List
                   </a></li>
                 
               </ul>
@@ -141,7 +141,7 @@
         <div class="col-md-9">
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Jobseeker Detail</h3>
+              <h3 class="box-title"><?php echo $jobseeker['firstname'].' '. $jobseeker['middlename'].' '. $jobseeker['lastname'];?></h3>
 
 
             </div>
