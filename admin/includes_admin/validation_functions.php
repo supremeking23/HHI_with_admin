@@ -121,6 +121,22 @@
   }
 
 
+  // check to see if time start is less than the time end/// logic error
+  function time_start_time_end($start,$end){
+    if(($start < $end)){
+      return true;
+    }
+  }
+
+
+  // check to see if date start is less than the date end/// logic error
+  function date_start_date_end($start,$end){
+    // if pag !mababa ang 
+    if(($start < $end) AND is_blank($end)){
+      return true;
+    }
+  }
+
 
 
   /**

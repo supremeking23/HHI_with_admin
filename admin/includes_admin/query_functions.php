@@ -1,4 +1,42 @@
 <?php 
+
+	function insert_log($log){
+	  	global $db;
+		$sql = "INSERT INTO tbl_logs(log_compo_id,log_date,log_user,log_usertype,log_action,log_userid) ";
+		$sql .= "VALUES (";
+		$sql .= "'".db_escape($db, $log['log_compo_id'])."', ";
+		$sql .= "'".db_escape($db, $log['log_date'])."',";
+		$sql .= "'".db_escape($db, $log['log_user'])."',";
+		$sql .= "'".db_escape($db, $log['log_usertype'])."',";
+		$sql .= "'".db_escape($db, $log['log_action'])."',";
+		$sql .= "'".db_escape($db, $log['log_userid'])."'";
+		$sql .= ")";
+		$result = mysqli_query($db,$sql);
+
+		// For INSERT statements, $result is true/false
+		if($result) {
+		  return true;
+		} else {
+		  // INSERT failed
+		  echo mysqli_error($db);
+		  db_disconnect($db);
+		  exit;
+		}
+	}
+
+
+	function view_logs_by_user_id($user_id){
+		global $db;
+		$sql = "SELECT * FROM tbl_logs ";
+		$sql .= "WHERE log_userid = '".$user_id."' ";
+		$sql .= "ORDER BY log_id DESC";
+		$result = mysqli_query($db,$sql);
+		//error checking
+		confirm_result_set($result);
+	
+		return $result;		
+	}
+
 	//crud operation
 	function get_all_admins(){
 		global $db;
@@ -239,6 +277,8 @@
 
 		if(is_blank($inquiry['email'])){
 			$errors[] = "Email cannot be blank";
+		}else if(!has_valid_email_format($inquiry['email'])){
+			$errors[] = "Invalid email address";
 		}
 
 		if(is_blank($inquiry['message'])){
@@ -334,14 +374,10 @@
 
 		if(is_blank($jobseeker['email'])){
 			$errors[] = "Email cannot be blank";
+		}else if(!has_valid_email_format($jobseeker['email'])){
+			$errors[] = "Invalid email format";
 		}
-		if(is_blank($jobseeker['subject'])){
-			$errors[] = "Subject cannot be blank";
-		}
-
-		if(is_blank($jobseeker['message'])){
-			$errors[] = "Message cannot be blank";
-		}
+		
 
 
 		if(is_blank($jobseeker['file'])){
@@ -434,6 +470,8 @@
 
 		if(is_blank($client['email'])){
 			$errors[] = "Email cannot be blank";
+		}else if(!has_valid_email_format($client['email'])){
+			$errors[] = "Invalid email format";
 		}
 		
 
@@ -459,8 +497,8 @@
 			return $errors;
 		}  	
 
-	  	$sql = "INSERT INTO tbl_clients(client_compo_id,firstname,middlename,lastname,company,position_in_company,company_size,industry,email,contact,zip_code,message,man_power_file,qualification_description_file,date_send,data_status) ";
-	  	$sql .= "VALUES('".db_escape($db,$client['client_compo_id'])."', '".db_escape($db,$client['firstname'])."', '".db_escape($db,$client['middlename'])."', '".db_escape($db,$client['lastname'])."','".db_escape($db,$client['company'])."','".db_escape($db,$client['position_in_company'])."','".db_escape($db,$client['company_size'])."','".db_escape($db,$client['industry'])."','".db_escape($db,$client['email'])."','".db_escape($db,$client['contact'])."','".db_escape($db,$client['zip_code'])."','".db_escape($db,$client['message'])."','".db_escape($db,$client['man_power_file'])."','".db_escape($db,$client['qualification_description_file'])."','".db_escape($db,$client['date_send'])."','".db_escape($db,$client['data_status'])."') ";
+	  	$sql = "INSERT INTO tbl_clients(client_compo_id,firstname,middlename,lastname,company,position_in_company,company_size,industry,email,contact,zip_code,message,man_power_file,date_send,data_status) ";
+	  	$sql .= "VALUES('".db_escape($db,$client['client_compo_id'])."', '".db_escape($db,$client['firstname'])."', '".db_escape($db,$client['middlename'])."', '".db_escape($db,$client['lastname'])."','".db_escape($db,$client['company'])."','".db_escape($db,$client['position_in_company'])."','".db_escape($db,$client['company_size'])."','".db_escape($db,$client['industry'])."','".db_escape($db,$client['email'])."','".db_escape($db,$client['contact'])."','".db_escape($db,$client['zip_code'])."','".db_escape($db,$client['message'])."','".db_escape($db,$client['man_power_file'])."','".db_escape($db,$client['date_send'])."','".db_escape($db,$client['data_status'])."') ";
 	  	//$sql .= "";
 
 		$result = mysqli_query($db,$sql);
@@ -510,29 +548,44 @@
 
   //events -calendar
 
-   function validate_event($client){
+   function validate_event($event){
 	 	$errors = [];
 
-		if(is_blank($client['event_name'])){
+		if(is_blank($event['event_name'])){
 			$errors[] = "Event name cannot be blank";
 		}
 
-		if(is_blank($client['event_description'])){
+		/*if(is_blank($event['event_description'])){
 			$errors[] = "Event Description cannot be blank";
-		}
+		}*/
 
-		if(is_blank($client['event_datestart'])){
+		if(is_blank($event['event_datestart'])){
 			$errors[] = "Date Start cannot be blank";
 		}
+
+
+		/*if(!date_start_date_end($event['event_datestart'], $event['event_dateend'])){
+			$errors[] = "Beginning date should not be less than the end date";
+		}*/
 		
-		if(is_blank($client['event_timestart'])){
+		if(is_blank($event['event_timestart'])){
 			$errors[] = "Time start cannot be blank";
 		}
 
 
-		if(is_blank($client['event_timeend'])){
+		if(is_blank($event['event_timeend'])){
 			$errors[] = "Time end cannot be blank";
 		}
+
+		/*if($event['event_timestart'] > $event['event_timeend']){
+			$errors[] = "Beginning time should not be less than the end time";
+		}*/
+
+		if(!time_start_time_end($event['event_timestart'], $event['event_timeend'])){
+			$errors[] = "Beginning time should not be less than the end time";
+		}
+
+		
 		
 
 		/*if(is_blank($client['message'])){
@@ -551,7 +604,7 @@
 			return $errors;
 		} 	
 
-  		$sql = "INSERT INTO tbl_events(event_compo_id,event_name,event_description,event_datestart,event_dateend,event_timestart,event_timeend) ";
+  		$sql = "INSERT INTO tbl_events(event_compo_id,event_name,event_description,event_datestart,event_dateend,event_timestart,event_timeend,event_type,event_status,created_by,date_created) ";
   		$sql .= "VALUES (";
   		$sql .= "'".db_escape($db, $event['event_compo_id'])."', ";
   		$sql .= "'".db_escape($db, $event['event_name'])."', ";
@@ -559,7 +612,11 @@
   		$sql .= "'".db_escape($db, $event['event_datestart'])."', ";
   		$sql .= "'".db_escape($db, $event['event_dateend'])."', ";
   		$sql .= "'".db_escape($db, $event['event_timestart'])."', ";
-  		$sql .= "'".db_escape($db, $event['event_timeend'])."' ";
+  		$sql .= "'".db_escape($db, $event['event_timeend'])."', ";
+  		$sql .= "'".db_escape($db, $event['event_type'])."', ";
+  		$sql .= "'".db_escape($db, $event['event_status'])."', ";
+  		$sql .= "'".db_escape($db, $event['created_by'])."', ";
+  		$sql .= "'".db_escape($db, $event['date_created'])."' ";
   		$sql .= ")";
   		$result = mysqli_query($db,$sql);
 
@@ -596,8 +653,192 @@
 	//return an assoc array not a result set
 	return $result;
 
-  }	
+  }
 
+
+
+  function count_event_for_this_day(){
+  	$now = date('Y-m-d');
+
+	global $db;
+	$sql = "SELECT COUNT(*) as 'count_event_today' FROM tbl_events ";
+	$sql .= "WHERE event_datestart = '".db_escape($db,$now)."' ";
+	//$sql .= "LIMIT 1";
+	$result = mysqli_query($db,$sql);
+	confirm_result_set($result);
+	
+	$count_event = mysqli_fetch_assoc($result);
+	mysqli_free_result($result);
+	//return an assoc array not a result set
+	return $count_event;	
+  }
+
+
+  function delete_event($event){
+		global $db;
+		$sql = "DELETE FROM tbl_events WHERE event_id = '".db_escape($db,$event['event_id'])."' ";
+		$sql .= "LIMIT 1";
+		$result = mysqli_query($db, $sql);
+
+		if($result){
+			return true;
+		}else{
+			echo mysqli_error($db);
+			db_disconnect($db);
+			exit; 
+		}
+  
+  }
+
+
+
+
+  ///message
+  function insert_message_detail($message){
+  	global $db;
+	$sql = "INSERT INTO tbl_messages(message_compo_id,sender_id,subject,message_body,date_send,message_status) ";
+	$sql .= "VALUES (";
+	$sql .= "'".db_escape($db, $message['message_compo_id'])."', ";
+	$sql .= "'".db_escape($db, $message['sender_id'])."', ";
+	$sql .= "'".db_escape($db, $message['subject'])."', ";
+	$sql .= "'".db_escape($db, $message['message_body'])."', ";
+	$sql .= "'".db_escape($db, $message['date_send'])."', ";
+	$sql .= "'".db_escape($db, $message['message_status'])."'";
+	
+	$sql .= ")";
+	$result = mysqli_query($db,$sql);
+
+	// For INSERT statements, $result is true/false
+	if($result) {
+	  return true;
+	} else {
+	  // INSERT failed
+	  echo mysqli_error($db);
+	  db_disconnect($db);
+	  exit;
+	}
+  }
+
+  //not use
+  function search_message_detail_by_id($id){
+	global $db;
+	$sql = "SELECT * FROM tbl_messages ";
+	$sql .= "WHERE message_id = '".db_escape($db,$id)."' ";
+	$sql .= "LIMIT 1";
+	$result = mysqli_query($db,$sql);
+	//error checking
+	confirm_result_set($result);
+	
+	$message_single = mysqli_fetch_assoc($result);
+	mysqli_free_result($result);
+	//return an assoc array not a result set
+	return $message_single;
+  }
+
+
+  function insert_message_file($attachment){
+  	global $db;
+	$sql = "INSERT INTO tbl_message_files(message_compo_id,attachment) ";
+	$sql .= "VALUES (";
+	$sql .= "'".db_escape($db, $attachment['message_compo_id'])."', ";
+	$sql .= "'".db_escape($db, $attachment['attachment'])."'";
+	
+	$sql .= ")";
+	$result = mysqli_query($db,$sql);
+
+	// For INSERT statements, $result is true/false
+	if($result) {
+	  return true;
+	} else {
+	  // INSERT failed
+	  echo mysqli_error($db);
+	  db_disconnect($db);
+	  exit;
+	}
+  }
+
+
+  function insert_message_recipient($recipient){
+  	global $db;
+	$sql = "INSERT INTO tbl_message_recipients(message_compo_id,recipient_id,recipient_message_status) ";
+	$sql .= "VALUES (";
+	$sql .= "'".db_escape($db, $recipient['message_compo_id'])."', ";
+	$sql .= "'".db_escape($db, $recipient['recipient'])."',";
+	$sql .= "'".db_escape($db, $recipient['recipient_message_status'])."'";
+	$sql .= ")";
+	$result = mysqli_query($db,$sql);
+
+	// For INSERT statements, $result is true/false
+	if($result) {
+	  return true;
+	} else {
+	  // INSERT failed
+	  echo mysqli_error($db);
+	  db_disconnect($db);
+	  exit;
+	}
+  }
+
+
+  function count_inbox_for_current_login($current_login){
+  	
+
+	global $db;
+	$sql = "SELECT COUNT(*) as 'count_inbox' FROM tbl_message_recipients ";
+	$sql .= "WHERE  recipient_id = '".db_escape($db,$current_login)."'";
+	//$sql .= "LIMIT 1";
+	$result = mysqli_query($db,$sql);
+	confirm_result_set($result);
+	
+	$count_inbox = mysqli_fetch_assoc($result);
+	mysqli_free_result($result);
+	//return an assoc array not a result set
+	return $count_inbox;	
+  }
+
+
+  function get_inbox_for_current_user($current_user){
+	global $db;
+	$sql = "SELECT a.sender_id, a.subject, a.message_body,a.date_send,b.recipient_id,b.recipient_message_status,a.message_compo_id FROM tbl_messages a JOIN tbl_message_recipients b ON a.message_compo_id = b.message_compo_id ";
+	$sql .= "WHERE b.recipient_id = '".db_escape($db,$current_user)."' ";
+	$sql .="ORDER BY a.message_id DESC";
+	//$sql .= "LIMIT 1";
+	$result = mysqli_query($db,$sql);
+	confirm_result_set($result);
+	//return an assoc array not a result set
+	return $result;
+  }
+
+
+  function get_attachment_by_message_compo_id($message_compo_id){
+  	global $db;
+  	$sql = "SELECT attachment FROM tbl_message_files WHERE message_compo_id = '".$message_compo_id."'";
+  	$result = mysqli_query($db,$sql);
+	confirm_result_set($result);
+	//return an assoc array not a result set
+	return $result;
+  }
+
+
+  function get_message_by_message_compo_id($message_compo_id){
+
+	global $db;
+	$sql = "SELECT * FROM tbl_messages ";
+	$sql .= "WHERE message_compo_id =  '".db_escape($db,$message_compo_id)."'";
+	//$sql .= "LIMIT 1";
+	$result = mysqli_query($db,$sql);
+	confirm_result_set($result);
+	
+	$message = mysqli_fetch_assoc($result);
+	mysqli_free_result($result);
+	//return an assoc array not a result set
+	return $message;
+  }
+
+
+  /*function find_sender_by_sender_id($sender_id){
+
+  }*/
 
 
 ?>

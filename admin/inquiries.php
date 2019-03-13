@@ -171,16 +171,7 @@
   $(function () {
     //$("#usermanagement a:contains('User Management')").parent().addClass('active');
     //for tables regular datatable
-    $('.datatables').DataTable({
 
-      "lengthMenu": [[ 20,30,50, 70, -1], [ 20,30,50,70, "All"]],
-      'paging'      : true,
-      //'lengthChange': false,
-      //'searching'   : false,
-      'ordering'    : false,
-      'info'        : true,
-      //'autoWidth'   : false,      
-    });
 
     var admin_compo_id = document.getElementById("admin_compo_id");
     admin_compo_id = "<?= 'HHIADMIN'.date("ymdhis") . abs(rand('0','9'));  ?>";

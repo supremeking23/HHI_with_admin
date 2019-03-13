@@ -28,6 +28,15 @@
         if(password_verify($password, $admin['hash_password'])) {
         // password matches
         log_in_admin($admin);
+        $log = [];
+        $log['log_compo_id'] = 'LOG'.date("ymdhis") . abs(rand('0','9'));
+        $now = date('Y-m-d H:i:s');
+        $log['log_date'] = $now;
+        $log['log_userid'] = $admin['admin_compo_id'];
+        $log['log_user'] = $admin['username'];
+        $log['log_usertype'] = $admin['admin_type'];
+        $log['log_action'] = "Login Successful";
+        insert_log($log);
         redirect_to(url_for('admin/dashboard.php'));
         } else {
           // username found, but password does not match

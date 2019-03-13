@@ -25,6 +25,15 @@
 
     $result = update_admin($admin);
     if($result === true){
+        $log = [];
+        $log['log_compo_id'] = 'LOG'.date("ymdhis") . abs(rand('0','9'));
+        $now = date('Y-m-d H:i:s');
+        $log['log_date'] = $now;
+        $log['log_userid'] = $_SESSION['admin_compo_id'];
+        $log['log_user'] = $admin['username'];
+        $log['log_usertype'] = $admin['admin_type'];
+        $log['log_action'] = "Update Information for user ". $admin['admin_compo_id'];
+        insert_log($log);
       $_SESSION['message'] = 'Admin updated.';
       redirect_to(url_for('admin/user-detail.php?admin_id='. h(u($admin['admin_compo_id']))));
     }else{
@@ -152,7 +161,12 @@
 
              
 
-              <a href="<?php echo url_for('admin/user-management.php');?>" class="btn btn-default btn-block bg-green color-palette"><b>Back to user list</b></a>
+             <!-- <a href="<?php echo url_for('admin/user-management.php');?>" class="btn btn-default btn-block bg-green color-palette"><b>Back to user list</b></a> -->
+              <ul class="nav nav-pills nav-stacked">
+                <li><a href="<?php echo url_for('admin/user-management.php');?>"><span class="fa fa-arrow-circle-left"></span>Back to List
+                  </a></li>
+                
+              </ul>
             </div>
             <!-- /.box-body -->
           </div>
@@ -190,7 +204,33 @@
               </div>
               <!-- /.tab-pane -->
               <div class="tab-pane" id="admin_logs">
+                <table id="" class="datatables table table-bordered table-striped table-hover">
+                  <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Action</th>
+                   
+                  </tr>
+                  </thead>
+                  <tbody>
 
+                  <?php 
+                  $log_list = view_logs_by_user_id($admin_compo_id);
+
+                  while($logs = mysqli_fetch_assoc($log_list)):?>
+                  <tr>
+                    <td><?php 
+                      $date =date_create($logs['log_date']);
+                      echo  $formated_date= date_format($date,"F d, Y h:i:sa");
+                    ?></td>
+                    <td><?php echo $logs['log_action']?></td>
+                    
+ 
+                  </tr>
+                  <?php endwhile;?>
+                 
+                  </tbody>
+                </table>
               </div>
               <!-- /.tab-pane -->
 
@@ -311,6 +351,9 @@
 
 <!-- jQuery 3 -->
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
+<!-- DataTables -->
+<script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- FastClick -->

@@ -218,8 +218,8 @@
             <!-- /.box-footer -->
             <div class="box-footer">
               <div class="pull-right">
-                <a href="" class="btn btn-default"><i class="fa fa-trash-o"></i> Delete</a>
-                <a href="" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
+                <!--<a href="" class="btn btn-default"><i class="fa fa-trash-o"></i> Delete</a>
+                <a href="" class="btn btn-default"><i class="fa fa-print"></i> Print</a> -->
               </div>
               
             </div>

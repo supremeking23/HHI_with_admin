@@ -26,6 +26,9 @@
         $inquiry['message'] = '';
         $inquiry['date_send'] = '';
     }
+
+//heck to make sure sure that a valid email address is submitted 
+
 ?>
 
 <?php 

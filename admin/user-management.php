@@ -25,6 +25,15 @@
 
     $result = add_admin($admin);
     if($result ===true){
+        $log = [];
+        $log['log_compo_id'] = 'LOG'.date("ymdhis") . abs(rand('0','9'));
+        $now = date('Y-m-d H:i:s');
+        $log['log_date'] = $now;
+        $log['log_userid'] = $_SESSION['admin_compo_id'];
+        $log['log_user'] = $admin['username'];
+        $log['log_usertype'] = $admin['admin_type'];
+        $log['log_action'] = "Add new user ". $admin['admin_compo_id'];
+        insert_log($log);
       $_SESSION['message'] = "Admin Created";
     }else{
       $errors = $result;
@@ -231,6 +240,7 @@
               <table id="" class="datatables table table-bordered table-striped table-hover">
                 <thead>
                 <tr>
+                  <th>User ID</th>
                   <th>Full Name</th>
                   <th>Username</th>
                   <th>Email</th>
@@ -246,10 +256,11 @@
 
                 while($admins = mysqli_fetch_assoc($admin_list)):?>
                 <tr>
-                  <td><?php echo $admins['firstname'].' '. $admins['middlename'].' '. $admins['lastname'];?></td>
-                  <td><?php echo $admins['username']?></td>
-                  <td><?php echo $admins['email']?></td>
-                  <td><?php echo $admins['contact']?></td>
+                  <td><?php echo h($admins['admin_compo_id'])?></td>
+                  <td><?php echo h($admins['firstname'].' '. $admins['middlename'].' '. $admins['lastname']);?></td>
+                  <td><?php echo h($admins['username']);;?></td>
+                  <td><?php echo h($admins['email']);?></td>
+                  <td><?php echo h($admins['contact']);?></td>
                   <td><?php if($admins['admin_status'] == 1){
                               $admin_status = "Active";
                               $label_type = "label-success";
@@ -329,16 +340,7 @@
   $(function () {
     //$("#usermanagement a:contains('User Management')").parent().addClass('active');
     //for tables regular datatable
-    $('.datatables').DataTable({
 
-      "lengthMenu": [[ 20,30,50, 70, -1], [ 20,30,50,70, "All"]],
-      'paging'      : true,
-      //'lengthChange': false,
-      //'searching'   : false,
-      'ordering'    : false,
-      'info'        : true,
-      //'autoWidth'   : false,      
-    });
 
     var admin_compo_id = document.getElementById("admin_compo_id");
     admin_compo_id = "<?= 'HHIADMIN'.date("ymdhis") . abs(rand('0','9'));  ?>";

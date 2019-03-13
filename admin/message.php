@@ -7,6 +7,12 @@
   define("SHARED_PATH",dirname(__FILE__).'\includes_admin');
  // echo SHARED_PATH;*/
   require_login();
+  /*if(is_post_request()){
+
+  }else{
+    
+  }*/
+
 ?>
 
 <!DOCTYPE html>
@@ -73,30 +79,9 @@
       
      <div class="row">
         <div class="col-md-3">
-          <a href="compose.html" class="btn btn-primary btn-block margin-bottom">Compose</a>
+          <a href="<?php echo url_for('admin/compose-message.php')?>" class="btn btn-primary btn-block margin-bottom">Compose</a>
 
-          <div class="box box-solid">
-            <div class="box-header with-border">
-              <h3 class="box-title">Folders</h3>
-
-              <div class="box-tools">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-              </div>
-            </div>
-            <div class="box-body no-padding">
-              <ul class="nav nav-pills nav-stacked">
-                <li class="active"><a href="#"><i class="fa fa-inbox"></i> Inbox
-                  <span class="label label-primary pull-right">12</span></a></li>
-                <li><a href="#"><i class="fa fa-envelope-o"></i> Sent</a></li>
-                <li><a href="#"><i class="fa fa-file-text-o"></i> Drafts</a></li>
-                <li><a href="#"><i class="fa fa-filter"></i> Junk <span class="label label-warning pull-right">65</span></a>
-                </li>
-                <li><a href="#"><i class="fa fa-trash-o"></i> Trash</a></li>
-              </ul>
-            </div>
-            <!-- /.box-body -->
-          </div>
+          <?php include(SHARED_PATH.'/message_folder.php');?>
           <!-- /. box -->
 
         </div>
@@ -106,12 +91,21 @@
             <div class="box-header with-border">
               <h3 class="box-title">Inbox</h3>
 
-              <div class="box-tools pull-right">
-                <div class="has-feedback">
-                  <input type="text" class="form-control input-sm" placeholder="Search Mail">
-                  <span class="glyphicon glyphicon-search form-control-feedback"></span>
+              <!--<div class="box-tools pull-right" style="">
+                <div class="row">
+                  <form class="" style="position: relative;right: 10px">
+                    <div class="input-group">
+                      <input type="text" class="form-control" placeholder="Search">
+                      <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit">
+                          <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </form>
                 </div>
-              </div>
+                <br />
+              </div> -->
               <!-- /.box-tools -->
             </div>
             <!-- /.box-header -->
@@ -122,17 +116,11 @@
                 </button>
                 <div class="btn-group">
                   <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
-                  <button type="button" class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>
-                  <button type="button" class="btn btn-default btn-sm"><i class="fa fa-share"></i></button>
+               
                 </div>
                 <!-- /.btn-group -->
-                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
-                <div class="pull-right">
-                  1-50/200
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
-                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
-                  </div>
+                <button type="button" class="btn btn-default btn-sm" id="refresh"><i class="fa fa-refresh"></i></button>
+
                   <!-- /.btn-group -->
                 </div>
                 <!-- /.pull-right -->
@@ -140,142 +128,53 @@
               <div class="table-responsive mailbox-messages">
                 <table class="table table-hover table-striped">
                   <tbody>
-                  <tr>
-                    <td><input type="checkbox"></td>
-                    <td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
-                    <td class="mailbox-name"><a href="read-mail.php">Alexander Pierce</a></td>
-                    <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                    </td>
-                    <td class="mailbox-attachment"></td>
-                    <td class="mailbox-date">5 mins ago</td>
-                  </tr>
-                  <tr>
-                    <td><input type="checkbox"></td>
-                    <td class="mailbox-star"><a href="#"><i class="fa fa-star-o text-yellow"></i></a></td>
-                    <td class="mailbox-name"><a href="read-mail.php">Alexander Pierce</a></td>
-                    <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                    </td>
-                    <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                    <td class="mailbox-date">28 mins ago</td>
-                  </tr>
-                  <tr>
-                    <td><input type="checkbox"></td>
-                    <td class="mailbox-star"><a href="#"><i class="fa fa-star-o text-yellow"></i></a></td>
-                    <td class="mailbox-name"><a href="read-mail.php">Alexander Pierce</a></td>
-                    <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                    </td>
-                    <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                    <td class="mailbox-date">11 hours ago</td>
-                  </tr>
-                  <tr>
-                    <td><input type="checkbox"></td>
-                    <td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
-                    <td class="mailbox-name"><a href="read-mail.php">Alexander Pierce</a></td>
-                    <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                    </td>
-                    <td class="mailbox-attachment"></td>
-                    <td class="mailbox-date">15 hours ago</td>
-                  </tr>
-                  <tr>
-                    <td><input type="checkbox"></td>
-                    <td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
-                    <td class="mailbox-name"><a href="read-mail.php">Alexander Pierce</a></td>
-                    <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                    </td>
-                    <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                    <td class="mailbox-date">Yesterday</td>
-                  </tr>
+                    <?php $inbox_list = get_inbox_for_current_user($_SESSION['admin_compo_id']);
+
+                    ?>
+
+                  <?php $num_row = mysqli_num_rows($inbox_list);
+                      //echo $num_row;
+                  $item_per_page = 3;
+                  $totalpages = ceil($num_row/$item_per_page);
+                  if(isset($_GET['page']) && !empty($_GET['page'])){
+                    $page = $_GET['page'];
+                    if($page > $totalpages){
+                      redirect_to('message.php?page=1');
+                    }
+                  }else{
+                    $page = 1;
+                  }
+
+                  $offset = ($page -1) * $item_per_page;
+                  /*"SELECT a.sender_id, a.subject, a.message_body,a.date_send,b.recipient_id,b.recipient_message_status,a.message_compo_id FROM tbl_messages a JOIN tbl_message_recipients b ON a.message_compo_id = b.message_compo_id WHERE b.recipient_id = '"$_SESSION['admin_compo_id']"' ORDER BY a.message_id DESC*/
+                  //$sql = "SELECT * FROM tbl_messages WHERE  ORDER BY message_id DESC LIMIT $item_per_page OFFSET $offset ";
+                  $sql = "SELECT a.sender_id, a.subject, a.message_body,a.date_send,b.recipient_id,b.recipient_message_status,a.message_compo_id FROM tbl_messages a JOIN tbl_message_recipients b ON a.message_compo_id = b.message_compo_id WHERE b.recipient_id = '".$_SESSION['admin_compo_id']."' ORDER BY a.message_id DESC LIMIT $item_per_page OFFSET $offset";
+                  $result = mysqli_query($db,$sql);
+                  $row_count = mysqli_num_rows($result);
+                  while($inbox= mysqli_fetch_assoc($result)):
+                  ?>
+
                   <tr>
                     <td><input type="checkbox"></td>
                     <td class="mailbox-star"><a href="#"><i class="fa fa-star-o text-yellow"></i></a></td>
-                    <td class="mailbox-name"><a href="read-mail.php">Alexander Pierce</a></td>
-                    <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
+                    <?php $sender = get_admin_by_admin_compo_id($inbox['sender_id']);?>
+                    <td class="mailbox-name"><a href="read-mail.php?message_id=<?php echo u($inbox['message_compo_id']);?>"><?php echo h($sender['firstname'].' '.$sender['middlename'].' '. $sender['lastname'])?></a></td>
+                    <td class="mailbox-subject"><b><?php echo h($inbox['subject'])?></b> <?php echo limit_text($inbox['message_body'],10)?>
                     </td>
-                    <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                    <td class="mailbox-date">2 days ago</td>
+
+                    <td class="mailbox-date"><?php 
+                      $date =date_create($inbox['date_send']);
+                      echo  $formated_date= date_format($date,"F d, Y h:i:sa");
+                    ?></td>
                   </tr>
-                  <tr>
-                    <td><input type="checkbox"></td>
-                    <td class="mailbox-star"><a href="#"><i class="fa fa-star-o text-yellow"></i></a></td>
-                    <td class="mailbox-name"><a href="read-mail.php">Alexander Pierce</a></td>
-                    <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                    </td>
-                    <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                    <td class="mailbox-date">2 days ago</td>
-                  </tr>
-                  <tr>
-                    <td><input type="checkbox"></td>
-                    <td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
-                    <td class="mailbox-name"><a href="read-mail.php">Alexander Pierce</a></td>
-                    <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                    </td>
-                    <td class="mailbox-attachment"></td>
-                    <td class="mailbox-date">2 days ago</td>
-                  </tr>
-                  <tr>
-                    <td><input type="checkbox"></td>
-                    <td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
-                    <td class="mailbox-name"><a href="read-mail.php">Alexander Pierce</a></td>
-                    <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                    </td>
-                    <td class="mailbox-attachment"></td>
-                    <td class="mailbox-date">2 days ago</td>
-                  </tr>
-                  <tr>
-                    <td><input type="checkbox"></td>
-                    <td class="mailbox-star"><a href="#"><i class="fa fa-star-o text-yellow"></i></a></td>
-                    <td class="mailbox-name"><a href="read-mail.php">Alexander Pierce</a></td>
-                    <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                    </td>
-                    <td class="mailbox-attachment"></td>
-                    <td class="mailbox-date">2 days ago</td>
-                  </tr>
-                  <tr>
-                    <td><input type="checkbox"></td>
-                    <td class="mailbox-star"><a href="#"><i class="fa fa-star-o text-yellow"></i></a></td>
-                    <td class="mailbox-name"><a href="read-mail.php">Alexander Pierce</a></td>
-                    <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                    </td>
-                    <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                    <td class="mailbox-date">4 days ago</td>
-                  </tr>
-                  <tr>
-                    <td><input type="checkbox"></td>
-                    <td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
-                    <td class="mailbox-name"><a href="read-mail.php">Alexander Pierce</a></td>
-                    <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                    </td>
-                    <td class="mailbox-attachment"></td>
-                    <td class="mailbox-date">12 days ago</td>
-                  </tr>
-                  <tr>
-                    <td><input type="checkbox"></td>
-                    <td class="mailbox-star"><a href="#"><i class="fa fa-star-o text-yellow"></i></a></td>
-                    <td class="mailbox-name"><a href="read-mail.php">Alexander Pierce</a></td>
-                    <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                    </td>
-                    <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                    <td class="mailbox-date">12 days ago</td>
-                  </tr>
-                  <tr>
-                    <td><input type="checkbox"></td>
-                    <td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
-                    <td class="mailbox-name"><a href="read-mail.php">Alexander Pierce</a></td>
-                    <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                    </td>
-                    <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                    <td class="mailbox-date">14 days ago</td>
-                  </tr>
-                  <tr>
-                    <td><input type="checkbox"></td>
-                    <td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
-                    <td class="mailbox-name"><a href="read-mail.php">Alexander Pierce</a></td>
-                    <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                    </td>
-                    <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                    <td class="mailbox-date">15 days ago</td>
-                  </tr>
+                <?php endwhile;?>
                   </tbody>
+                </table>
+
+
+                <table class="table table-hover table-striped">
+ 
+                  <tr></tr>
                 </table>
                 <!-- /.table -->
               </div>
@@ -284,22 +183,38 @@
             <!-- /.box-body -->
             <div class="box-footer no-padding">
               <div class="mailbox-controls">
-                <!-- Check all button -->
-                <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i>
-                </button>
-                <div class="btn-group">
-                  <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
-                  <button type="button" class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>
-                  <button type="button" class="btn btn-default btn-sm"><i class="fa fa-share"></i></button>
-                </div>
-                <!-- /.btn-group -->
-                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
+
+
                 <div class="pull-right">
-                  1-50/200
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
-                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
-                  </div>
+
+                <div class="pull-right">
+                  <ul class="pagination">
+                    <?php 
+                    for($i=1;$i<$totalpages;$i++){
+                      if($i == $page){ ?>
+                        
+                        <li class="active"><a href="#"><?php echo $i;?></a></li>
+                    <?php }else{ ?>
+                        <li><a href="message.php?page=<?php echo $i;?>"><?php echo $i;?></a></li>
+                        
+                    <?php   }
+                    }
+                    ?>
+                    
+                   
+                  </ul> 
+                </div>
+                         
+                  <?php 
+                    /*for($i=1;$i<$totalpages;$i++){
+                      if($i == $page){
+                        echo "<a class=\"active\">".$i."</a>";
+                      }else{
+                        echo "<a href=\"message.php?page=".$i."\">".$i."</a>";
+                      }
+                    }*/
+                  ?>
+              
                   <!-- /.btn-group -->
                 </div>
                 <!-- /.pull-right -->
@@ -395,6 +310,12 @@
         $this.toggleClass("fa-star");
         $this.toggleClass("fa-star-o");
       }
+    });
+
+
+    $('#refresh').on('click',function(){
+        location.reload();
+        //alert('ivan');
     });
   });
 </script>

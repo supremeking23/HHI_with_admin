@@ -141,6 +141,15 @@ function get_and_clear_session_message(){
 }
 
 
+function limit_text($text, $limit) {
+      if (str_word_count($text, 0) > $limit) {
+          $words = str_word_count($text, 2);
+          $pos = array_keys($words);
+          $text = substr($text, 0, $pos[$limit]) . '...';
+      }
+      return $text;
+ }
+
 //message
 function display_session_message(){
 	$output = "";

@@ -128,7 +128,7 @@
              
                 <img src="img/client-parallax-bg.jpg" class="quick-link-image" alt="Clients" title="Clients" style="width:100%">
                 <div class="quick-link-textbackground-clients">
-                  <div class="quick-link-text"><h4 class="text-center"><b>For Clients</b></h4> </div>
+                  <div class="quick-link-text"><h4 class="text-center"><b>Application for Clients</b></h4> </div>
                 </div>
               
             </a>
@@ -139,7 +139,7 @@
              
                 <img src="img/jobseeker-parallax-bg.jpg" class="quick-link-image" alt="Jobseekers" title="Jobseekers" style="width:100%">
                 <div class="quick-link-textbackground-jobseekers">
-                  <div class="quick-link-text"><h4 class="text-center"><b>For Jobseekers</b></h4> </div>
+                  <div class="quick-link-text"><h4 class="text-center"><b>Application for Jobseekers</b></h4> </div>
                 </div>
               
             </a>

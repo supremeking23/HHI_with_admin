@@ -171,13 +171,22 @@
               <h3>Attached Files</h3>
               <ul class="mailbox-attachments clearfix">
                 <li>
-                  <span class="mailbox-attachment-icon"><i class="fa fa-file-word-o"></i></span>
+                  <?php 
+                    $ext =  strtolower(substr($jobseeker['file'] , strpos($jobseeker['file'] , '.') + 1));
+                    $ext_class = '';
+                    if($ext == 'docx'){
+                      $ext_class = "fa-file-word-o";
+                    }else if($ext == 'pdf'){
+                      $ext_class = "fa-file-pdf-o";
+                    }
+                  ?>
+                  <span class="mailbox-attachment-icon"><i class="fa <?php echo $ext_class;?>"></i></span>
 
                   <div class="mailbox-attachment-info">
-                    <a href="#" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> <?php echo h($jobseeker['file'])?></a>
+                    <a data-tooltip="tooltip" data-title="Click here to download file" href="<?php echo url_for('admin/uploads/jobseeker_files/'.$jobseeker['file'])?>" class="mailbox-attachment-name"><i class="fa fa-paperclip" download></i> <?php echo h($jobseeker['file'])?></a>
                         <span class="mailbox-attachment-size">
                           
-                          <a href="<?php echo url_for('admin/uploads/jobseeker_files/'.$jobseeker['file'])?>" class="btn btn-default btn-xs pull-right" download><i class="fa fa-cloud-download"></i></a>
+                          <!--<a href="<?php echo url_for('admin/uploads/jobseeker_files/'.$jobseeker['file'])?>" class="btn btn-default btn-xs pull-right" download><i class="fa fa-cloud-download"></i></a> -->
                         </span>
                   </div>
                 </li>
@@ -188,8 +197,8 @@
             <!-- /.box-footer -->
             <div class="box-footer">
               <div class="pull-right">
-                <button type="button" class="btn btn-default"><i class="fa fa-trash-o"></i> Delete</button>
-                <button type="button" class="btn btn-default"><i class="fa fa-print"></i> Print</button>
+                <!--<button type="button" class="btn btn-default"><i class="fa fa-trash-o"></i> Delete</button>
+                <button type="button" class="btn btn-default"><i class="fa fa-print"></i> Print</button> -->
               </div>
               
             </div>

@@ -58,7 +58,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Read Inquiry
+        Client Detail
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-question-circle"></i> HHI</a></li>
@@ -172,26 +172,16 @@
               <hr>
               <h3>Attached Files</h3>
               <ul class="mailbox-attachments clearfix">
-                <li>
-                  <span class="mailbox-attachment-icon"><i class="fa fa-file-word-o"></i></span>
 
-                  <div class="mailbox-attachment-info">
-                    <a href="#" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> <?php echo h($client['qualification_description_file'])?></a>
-                        <span class="mailbox-attachment-size">
-                          
-                          <a href="<?php echo url_for('admin/uploads/client_files/'.$client['qualification_description_file'])?>" class="btn btn-default btn-xs pull-right" download><i class="fa fa-cloud-download"></i></a>
-                        </span>
-                  </div>
-                </li>
 
                 <li>
                   <span class="mailbox-attachment-icon"><i class="fa fa-file-excel-o"></i></span>
 
                   <div class="mailbox-attachment-info">
-                    <a href="#" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> <?php echo h($client['man_power_file'])?></a>
+                    <a data-tooltip="tooltip" data-title="Click here to download file" href="<?php echo url_for('admin/uploads/client_files/'.$client['man_power_file'])?>" class="mailbox-attachment-name" download><i class="fa fa-paperclip" ></i> <?php echo h($client['man_power_file'])?></a>
                         <span class="mailbox-attachment-size">
                           
-                          <a href="<?php echo url_for('admin/uploads/client_files/'.$client['man_power_file'])?>" class="btn btn-default btn-xs pull-right" download><i class="fa fa-cloud-download"></i></a>
+                         <!-- <a data-tooltip="tooltip" data-title="Click here to download file" href="<?php echo url_for('admin/uploads/client_files/'.$client['man_power_file'])?>" class="btn btn-default btn-xs pull-right" download><i class="fa fa-cloud-download"></i></a> -->
                         </span>
                   </div>
                 </li>
@@ -202,8 +192,8 @@
             <!-- /.box-footer -->
             <div class="box-footer">
               <div class="pull-right">
-                <button type="button" class="btn btn-default"><i class="fa fa-trash-o"></i> Delete</button>
-                <button type="button" class="btn btn-default"><i class="fa fa-print"></i> Print</button>
+               <!-- <button type="button" class="btn btn-default"><i class="fa fa-trash-o"></i> Delete</button>
+                <button type="button" class="btn btn-default"><i class="fa fa-print"></i> Print</button> -->
               </div>
               
             </div>

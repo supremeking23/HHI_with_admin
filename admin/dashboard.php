@@ -119,7 +119,7 @@
 
 
                                     <tr>
-                                      <td><b>Event Name</b></td>
+                                      <td><b>Event Name<span class="text-danger">*</span></b></td>
                                       <td><input type="text" class="form-control" name="event_name" id="">
                                           <input type="hidden" name="event_compo_id" id="event_compo_id" value="">
                                       </td>
@@ -131,16 +131,32 @@
                                     </tr>
 
                                     <tr>
-                                      <td><b>Date:</b></td>
-                                      <td><input type="date" class="form-control" name="event_datestart" id="event_datestart"></td>
+                                      <td><b>Date: </b></td>
+                                      <td>
+                                        <label>From: <span class="text-danger">*</span></label>
+                                        <input type="date" class="form-control" name="event_datestart" id="event_datestart">
+                                        <br />
+                                        <label>To: </label>
+                                        <input type="date" class="form-control" name="event_dateend" id="event_dateend">
+                                      </td>
                                     </tr>
 
                                     <tr>
                                       <td><b>Time:</b></td>
                                       <td>
-                                        <label>From</label><input type="time" class="form-control" name="event_timestart" id="event_timestart">
+                                        <label>From <span class="text-danger">*</span></label><input type="time" class="form-control" name="event_timestart" id="event_timestart">
                                         <br />
-                                        <label>To:</label><input type="time" class="form-control" name="event_timeend" id="event_timeend">
+                                        <label>To: <span class="text-danger">*</span></label><input type="time" class="form-control" name="event_timeend" id="event_timeend">
+                                      </td>
+                                    </tr>
+
+                                    <tr>
+                                      <td><b>Event Type:</b></td>
+                                      <td>
+                                       <select name="event_type" id="event_type" class="form-control">
+                                         <option value="urgent">Urgent</option>
+                                         <option value="normal">Normal</option>
+                                       </select>
                                       </td>
                                     </tr>
 
@@ -177,6 +193,13 @@
               <h3 class="lead">Today's Event</h3>
             </div>
             <div class="box-body">
+
+              <?php  $count_event_today = count_event_for_this_day();
+                     //echo $count_event_today['count_event_today'];
+                     if($count_event_today['count_event_today'] == 0){ ?>
+                      <p class="label label-danger"><?php echo "No Event for this day";?></p>
+              <?php  }
+              ?>
               <ul class="nav nav-pills nav-stacked">
                 <?php 
                   $event_list = get_event_for_this_day();
@@ -193,7 +216,7 @@
                             <h4 class="modal-title">Event Detail</h4>
                           </div>
                           <div class="modal-body">
-                            <p><?php //echo h($events['event_name']);?>&hellip;</p>
+                            
                             <table width="100%" class="table table-striped table-bordered table-hover ">
                                   <tbody>
                                     <tr>
@@ -204,6 +227,12 @@
                                       <td><b>Event Description:</b></td>
                                       <td><?php echo h($events['event_description'])?></td>
                                     </tr>
+                                    <tr>
+                                      <td><b>Created By:</b></td>
+                                      <?php $user = get_admin_by_admin_compo_id($events['created_by']);?>
+                                      <td><?php echo h($user['firstname'] .' '. $user['lastname']);?></td>
+                                    </tr>
+
                                                                                                                                             
                                   </tbody>
                                          
@@ -252,7 +281,22 @@
                                 <td><b>Event Description:</b></td>
                                 <td><p class="event_description"></p></td>
                               </tr>
-                                                                                                                                      
+                              <tr>
+                                <td><b>Created By:</b></td>
+                                <td><p class="user"></p></td>
+                              </tr>
+                             
+                              <tr>
+                               <form action="<?php echo url_for('admin/includes_admin/calendar_functions.php');?>" method="post" enctype="multipart/form-data">
+                                <td><input type="submit" name="delete_event" id="delete_event" class="btn btn-danger" value="Delete"></td>
+                                <td><input type="hidden" name="event_id" class="event_id">
+                                  <input type="hidden"  class="event_compo_id" name="event_compo_id" value="">
+                                </td> 
+                               </form>
+                                
+
+                              </tr>
+
                             </tbody>
                                    
                       </table> 
@@ -365,7 +409,11 @@
 
         $('.event_name').html(event.title);
         $('.event_description').html(event.event_description);
-        $('#show-event').modal({show:true});        
+        $('.user').html(event.user);
+        $('#show-event').modal({show:true}); 
+        $('.event_id').val(event.id);
+        $('.date_created_format').val(event.date_created_format);
+        $('.event_compo_id').val(event.event_compo_id);       
       },
 
       /*editable  : true,
@@ -397,9 +445,39 @@
       }*/
     })
 
-    
 
-  })
+  var dtToday = new Date();
+
+  var month = dtToday.getMonth() + 1;
+  var day = dtToday.getDate();
+  var year = dtToday.getFullYear();
+  if(month < 10)
+      month = '0' + month.toString();
+  if(day < 10)
+      day = '0' + day.toString();
+  
+  var minDate= year + '-' + month + '-' + day;
+
+
+  console.log("todays date: " + dtToday);
+  console.log("todays month: " + month);
+  console.log("todays day: " + day);
+  console.log("todays year: " + year);
+  console.log("min date: " + minDate);
+  
+  $('#event_datestart').attr('min', minDate);
+  $('#event_dateend').attr('min', minDate);
+
+
+
+  $('#event_datestart').on('change',function(){
+    var date1 = $('#event_datestart').val();
+    //var date2 = new Date(document.getElementById("date2").value);
+    console.log(date1.getDate());
+    //var add_date = date1
+  });
+
+  });
 </script>
 </body>
 </html>

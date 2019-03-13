@@ -49,6 +49,7 @@
   <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="dist/css/skins/skin-hhi.css">
@@ -186,7 +187,33 @@
               </div>
               <!-- /.tab-pane -->
               <div class="tab-pane" id="admin_logs">
+                <table id="" class="datatables table table-bordered table-striped table-hover">
+                  <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Action</th>
+                  </tr>
+                  </thead>
+                  <tbody>
 
+                  <?php 
+                  $log_list = view_logs_by_user_id($_SESSION['admin_compo_id']);
+
+                  while($logs = mysqli_fetch_assoc($log_list)):?>
+                  <tr>
+                    <td><?php //echo $logs['log_date'];?>
+                    <?php 
+                      $date =date_create($logs['log_date']);
+                      echo  $formated_date= date_format($date,"F d, Y h:i:sa");
+                    ?>
+                    </td>
+                    <td><?php echo $logs['log_action'];?></td>
+                    
+                  </tr>
+                  <?php endwhile;?>
+                 
+                  </tbody>
+                </table>
               </div>
               <!-- /.tab-pane -->
 
@@ -291,10 +318,7 @@
   <!-- /.content-wrapper -->
   <footer class="main-footer">
     <div class="pull-right hidden-xs">
-      <b>Version</b> 2.4.0
-    </div>
-    <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
-    reserved.
+     
   </footer>
 
 
@@ -311,6 +335,9 @@
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- FastClick -->
 <script src="bower_components/fastclick/lib/fastclick.js"></script>
+<!-- DataTables -->
+<script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->

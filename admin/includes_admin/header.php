@@ -68,7 +68,7 @@
 
     </nav>
   </header>
-      <script src="https://static.landbot.io/landbot-widget/landbot-widget-1.0.0.js"></script>
+     <!-- <script src="https://static.landbot.io/landbot-widget/landbot-widget-1.0.0.js"></script>
     <script>
       var myLandbotLivechat = new LandbotLivechat({
         index: 'https://landbot.io/u/H-134254-JSSGZNTSBBPTDVR5/index.html',
@@ -79,4 +79,4 @@
       setTimeout(() => {
         myLandbotLivechat.sendProactive("Hello there!");
       }, 1000);
-    </script>
+    </script>  -->

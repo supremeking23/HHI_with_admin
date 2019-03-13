@@ -26,15 +26,48 @@
 
 	$results = load_calendar();
 
-	foreach($results as $events){
+	/*foreach($results as $events){
 	 $data[] = array(
 	  'id'   => $events["event_id"],
 	  'title'   => h($events["event_name"]),
 	  'event_description' => h($events["event_description"]),
 	  'start'   => $events["event_datestart"],
-	  //'end'   => $events["end_event"]
+	  'end'   => $events["event_dateend"]
 	 );
+	}*/
+
+	$event_list = [];
+	foreach($results as $events){
+		$datas = [];
+		$datas['id'] = $events["event_id"];
+		$datas['title'] = h($events["event_name"]);
+		$datas['event_description'] = h($events["event_description"]);
+		$datas['start'] = $events["event_datestart"];
+		$datas['end'] = $events["event_dateend"];
+		$datas['event_compo_id'] = $events["event_compo_id"];
+
+		$user_id = $events["created_by"];
+		$user = get_admin_by_admin_compo_id($user_id);
+
+		
+        $date =date_create($events['date_created']);
+        $formated_date= date_format($date,"F d, Y h:i:sa");
+        
+        $datas['date_created_format'] = $date;           
+
+		$datas['user'] = $user['firstname'] .' '. $user['lastname'];
+
+		if($events['event_type'] == 'urgent'){
+			 $status_color = "#FF1B00";
+		}else{
+			$status_color = "#3c8dbc";
+		}
+
+        $datas['backgroundColor'] = $status_color;
+        $datas['borderColor'] = $status_color;
+
+		array_push($event_list, $datas);
 	}
 
-	echo json_encode($data);
+	echo json_encode($event_list);
 ?>

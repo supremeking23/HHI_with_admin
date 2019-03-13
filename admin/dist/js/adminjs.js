@@ -13,5 +13,21 @@ $(function(){
 	$('#successmodal').modal('show');
 	//$('.errors').modal('show');
 	$('[data-tooltip="tooltip"]').tooltip();
+
 });
+
+
+  $(function () {
+    //for tables regular datatable
+    $('.datatables').DataTable({
+
+      "lengthMenu": [[ 20,30,50, 70, -1], [ 20,30,50,70, "All"]],
+      'paging'      : true,
+      //'lengthChange': false,
+      //'searching'   : false,
+      'ordering'    : false,
+      'info'        : true,
+      //'autoWidth'   : false,      
+    });
+  })
 
