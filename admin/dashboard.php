@@ -42,6 +42,7 @@
   <link rel="stylesheet" href="dist/css/skins/skin-hhi.css">
   <link rel="stylesheet" type="text/css" href="dist/css/hhiadmin.css">
 
+<link rel="stylesheet" href="bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
 
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -101,7 +102,9 @@
             <div class="box-body">
               <div class="row">
                 <div class="col-md-3">
+                  
                   <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#add-event" style="margin-bottom: 10px">Add event</button>
+                  
                     <div class="modal fade" id="add-event">
                       <div class="modal-dialog">
                         <div class="modal-content">
@@ -160,11 +163,12 @@
                                       </td>
                                     </tr>
 
+                                    
                                     <tr>
                                       <td></td>
                                       <td><button type="button" class="btn btn-danger" class="close" data-dismiss="modal" aria-label="Close">Cancel</button> &nbsp;<input type="submit" name="submit_event" class="btn btn-success" value="Submit"></td>
                                     </tr>
-
+                                  
                                 </form>
                               </table>
                             
@@ -257,11 +261,95 @@
       </div>
 
 
+      <div class="row" id="event-table">
+        <div class="col-md-12">
+          <div class="box">
+            <div class="box-header"></div>
+            <div class="box-body">
+              <table id="" class="datatables table table-bordered table-striped table-hover">
+                <thead>
+                <tr>
+                  <th>Event ID</th>
+                  <th width="20%">Event Name</th>
+                  <th>Event Description</th>
+                  <th width="20%">Event Date</th>
+            
+                  <th>Event Status</th>
+                  <th>Event Type</th>
+                  <?php if($_SESSION['admin_type'] == 'SUPERADMIN'):?>
+                  <th width=""></th>
+                  <th></th>
+                <?php endif;?>
+                </tr>
+                </thead>
+                <tbody>
+
+                <?php 
+                $event_list =load_calendar();
+
+                while($events = mysqli_fetch_assoc($event_list)):?>
+                <tr>
+                  <td><?php echo $events['event_compo_id']?></td>
+                  <td><?php echo $events['event_name']?></td>
+                  <td><?php echo $events['event_description']?></td>
+                   <td><?php echo $events['event_datestart']?> 
+                        <?php if($events['event_dateend'] != '0000-00-00'){
+                          echo ' - ' . $events['event_dateend'];
+                        }?>
+                 </td>
+                   <td>
+                    <?php 
+                      if($events['event_status'] == 1){ ?>
+                        <span class="label label-success">Active</span>
+                      <?php }else{ ?>
+                       <span class="label label-danger">Not Active</span> 
+                      <?php } ?>
+                    </td>
+                    <td><?php 
+                      if($events['event_type'] == 'urgent'){ ?>
+                        <span class="label label-danger">Urgent</span>
+                      <?php }else{ ?>
+                       <span class="label label-success">Normal</span> 
+                      <?php } ?></td>
+                   <?php if($_SESSION['admin_type'] == 'SUPERADMIN'):?>
+                   <td>
+                    <form action="<?php echo url_for('admin/includes_admin/calendar_functions.php');?>" method="post" enctype="multipart/form-data">
+                      <input type="submit" name="delete_event" id="delete" value="Delete" class="btn btn-danger">
+                      <input type="hidden"  class="event_compo_id" name="event_compo_id" value="<?php echo h($events['event_compo_id']);?>">
+                      <input type="hidden" name="event_id" class="event_id" value="<?php echo h($events['event_id'])?>">
+                    </form>
+
+                   
+                  </td>
+                 <?php endif;?>
+
+                 <td> 
+              
+              <!--<button type="button" class="btn btn-success" data-toggle="modal" data-target="#updateEventDetail<?php echo $events['event_id']?>">
+                Update
+              </button> -->
+
+
+                <a href="<?php echo url_for('admin/update-event.php?event_id='. h(u($events['event_compo_id'])));?>" class="btn btn-success">View Details</a>
+
+
+                 </td>
+                </tr>
+              <?php endwhile;?>
+               
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
       <div class="row">
         <div class="col-md-12">
 
 
-          <div class="modal fade" id="show-event">
+          <!--<div class="modal fade" id="show-event">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
@@ -305,10 +393,10 @@
                 <div class="modal-footer">
                 </div>
               </div>
-              <!-- /.modal-content -->
+              
             </div>
-            <!-- /.modal-dialog -->
-          </div>
+            
+          </div> -->
         </div>
       </div>
 
@@ -338,6 +426,9 @@
 <!-- jQuery 3 -->
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
+<!-- DataTables -->
+<script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- FastClick -->
 <script src="bower_components/fastclick/lib/fastclick.js"></script>
@@ -360,6 +451,7 @@
 <!-- fullCalendar -->
 <script src="bower_components/moment/moment.js"></script>
 <script src="bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
+
 
 <script src="dist/js/adminjs.js"></script>
 
@@ -405,16 +497,18 @@
 
       },*/
 
-      eventClick:function(event, jsEvent, view){
+      /*eventClick:function(event, jsEvent, view){
 
         $('.event_name').html(event.title);
         $('.event_description').html(event.event_description);
         $('.user').html(event.user);
-        $('#show-event').modal({show:true}); 
+        
         $('.event_id').val(event.id);
-        $('.date_created_format').val(event.date_created_format);
-        $('.event_compo_id').val(event.event_compo_id);       
-      },
+        //$('.date_created_format').val(event.date_created_format);
+        $('.event_compo_id').val(event.event_compo_id);
+        //alert('ivanm');  
+        //$('#show-event').modal({show:true});      
+      },*/
 
       /*editable  : true,
       droppable : true, // this allows things to be dropped onto the calendar !!!

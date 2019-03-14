@@ -52,7 +52,7 @@
             </div>
 
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-12">
                     <div class="mission ">
                             <h2 style="font-weight: bold" class="text-center">Company Mission</h2>
                             <br />
@@ -67,14 +67,16 @@
                     </div>
                 </div>
 
-                <div class="col-lg-6">
+            </div>
+
+            <div class="row" style="margin-top: 15px">
+                <div class="col-lg-12">
                         <div class="vision">
                                 <h2 style="font-weight: bold" class="text-center">Company Vision</h2>
                                 <br />
                                 <p align="justify">Our vision is to be the embodiment of excellence in providing the right people, for the right job, with the right skill that is in sync with our Client's vision of success. Hunter's Hub Incorporated aims to be nationally recognized in the Headhunting Industry.</p>
                         </div>
                 </div>
-
             </div>
         </div>
     </section>

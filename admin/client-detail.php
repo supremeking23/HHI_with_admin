@@ -58,7 +58,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Client Detail
+        <?php echo h($client['company']);?>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-question-circle"></i> HHI</a></li>
@@ -151,7 +151,14 @@
             <div class="box-body no-padding">
               <div class="mailbox-read-info">
                 <h3>Position : <?php echo h($client['position_in_company'])?></h3>
+                <?php if(empty($client['added_by'])){ ?>
                 <h5>From: <?php echo h($client['email']);?>
+               <?php }else{ ?>
+                Added by : <?php 
+                $user = get_admin_by_admin_compo_id($client['added_by']);
+                      echo h( $user['firstname'].' '. $user['lastname']);
+                      ?>
+               <?php }?>
                   <span class="mailbox-read-time pull-right">
                     <?php 
                       $date =date_create($client['date_send']);
@@ -161,10 +168,11 @@
               </div>
               <!-- /.mailbox-read-info -->
  
-              
+              <?php if(!empty($client['message'])):?>
               <div class="mailbox-read-message">
                <?php echo h($client['message']);?>
               </div>
+            <?php endif;?>
               <!-- /.mailbox-read-message -->
             </div>
             <!-- /.box-body -->
@@ -194,6 +202,10 @@
               <div class="pull-right">
                <!-- <button type="button" class="btn btn-default"><i class="fa fa-trash-o"></i> Delete</button>
                 <button type="button" class="btn btn-default"><i class="fa fa-print"></i> Print</button> -->
+                <form>
+                  <!--<input type="submit" name="archieve" id="archieve" value="Archieve" class="btn btn-danger"> -->
+                  <button type="submit" class="btn btn-danger">Archieve <span class="fa fa-trash-o"></span></button>
+                </form>               
               </div>
               
             </div>

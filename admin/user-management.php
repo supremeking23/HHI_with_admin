@@ -22,6 +22,8 @@
     $admin['confirm_password'] = $_POST['confirm_password'] ?? '';
     $admin['admin_type'] = "ADMIN";
     $admin['admin_status'] = 1;
+    $now = date('Y-m-d H:i:s');
+    $admin['date_added']  = $now;
 
     $result = add_admin($admin);
     if($result ===true){
@@ -30,11 +32,11 @@
         $now = date('Y-m-d H:i:s');
         $log['log_date'] = $now;
         $log['log_userid'] = $_SESSION['admin_compo_id'];
-        $log['log_user'] = $admin['username'];
-        $log['log_usertype'] = $admin['admin_type'];
-        $log['log_action'] = "Add new user ". $admin['admin_compo_id'];
+        $log['log_user'] = $_SESSION['username'];
+        $log['log_usertype'] = $_SESSION['admin_type'];
+        $log['log_action'] = "Add new user. User Id:". $admin['admin_compo_id'];
         insert_log($log);
-      $_SESSION['message'] = "Admin Created";
+        $_SESSION['message'] = "Admin Created";
     }else{
       $errors = $result;
     }

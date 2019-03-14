@@ -205,6 +205,9 @@
               e.preventDefault();
                 $(this).tab('show');
               });*/
+
+
+
             });
 
             $().ready(function() {
@@ -212,6 +215,9 @@
                 client_compo_id = "<?= 'CLIENT'.date("ymdhis") . abs(rand('0','9'));  ?>";
                 $('#client_compo_id').val(client_compo_id);
             });
+
+
+ 
             </script>
   </body>
 </html>

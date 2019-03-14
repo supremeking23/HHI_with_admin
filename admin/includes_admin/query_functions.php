@@ -159,8 +159,8 @@
 		$hashed_password = password_hash($admin['password'], PASSWORD_BCRYPT);
 
 		$sql = "INSERT INTO tbl_admin ";
-		$sql .= "(admin_compo_id,firstname,middlename,lastname,username,hash_password,password,contact,email,admin_status,admin_type) ";
-		$sql .= "VALUES ('".db_escape($db,$admin['admin_compo_id'])."','".db_escape($db,$admin['firstname'])."','".db_escape($db,$admin['middlename'])."','".db_escape($db,$admin['lastname'])."','".db_escape($db,$admin['username'])."','".db_escape($db,$hashed_password)."','".db_escape($db,$admin['password'])."','".db_escape($db,$admin['contact'])."','".db_escape($db,$admin['email'])."','".db_escape($db,$admin['admin_status'])."','".db_escape($db,$admin['admin_type'])."')";	
+		$sql .= "(admin_compo_id,firstname,middlename,lastname,username,hash_password,password,contact,email,admin_status,admin_type,date_added) ";
+		$sql .= "VALUES ('".db_escape($db,$admin['admin_compo_id'])."','".db_escape($db,$admin['firstname'])."','".db_escape($db,$admin['middlename'])."','".db_escape($db,$admin['lastname'])."','".db_escape($db,$admin['username'])."','".db_escape($db,$hashed_password)."','".db_escape($db,$admin['password'])."','".db_escape($db,$admin['contact'])."','".db_escape($db,$admin['email'])."','".db_escape($db,$admin['admin_status'])."','".db_escape($db,$admin['admin_type'])."','".db_escape($db,$admin['date_added'])."')";	
 		
 		$result = mysqli_query($db,$sql);
 		// for insert statement, $result is true/false
@@ -515,10 +515,91 @@
   } 
 
 
+     //validate jobseeker file
+   function validate_client_files_admin($client){
+	 	$errors = [];
+
+		if(is_blank($client['firstname'])){
+			$errors[] = "Firstname cannot be blank";
+		}
+
+		if(is_blank($client['middlename'])){
+			$errors[] = "Middlename cannot be blank";
+		}
+
+		if(is_blank($client['lastname'])){
+			$errors[] = "Lastname cannot be blank";
+		}
+		
+		if(is_blank($client['contact'])){
+			$errors[] = "Contact number cannot be blank";
+		}
+
+
+		if(is_blank($client['email'])){
+			$errors[] = "Email cannot be blank";
+		}else if(!has_valid_email_format($client['email'])){
+			$errors[] = "Invalid email format";
+		}
+		
+
+		
+
+
+		if(is_blank($client['man_power_file'])){
+			$errors[] = "File cannot be blank";
+		}else if(file_upload_man_power_file($client['man_power_file'])){
+			$errors[] = "Upload only excel file";
+		}	
+
+	    return $errors;
+   }
+
+  //admin action
+  function insert_client_files($client){
+	  	global $db;
+
+		$errors = validate_client_files_admin($client);
+		if(!empty($errors)){
+			return $errors;
+		}  	
+
+	  	$sql = "INSERT INTO tbl_clients(client_compo_id,firstname,middlename,lastname,company,position_in_company,industry,email,contact,man_power_file,date_send,data_status,added_by) ";
+	  	$sql .= "VALUES(";
+	  	$sql .= "'".db_escape($db,$client['client_compo_id'])."', ";
+	  	$sql .= "'".db_escape($db,$client['firstname'])."', ";
+	  	$sql .= "'".db_escape($db,$client['middlename'])."', ";
+	  	$sql .= "'".db_escape($db,$client['lastname'])."', ";
+	  	$sql .= "'".db_escape($db,$client['company'])."', ";
+	  	$sql .= "'".db_escape($db,$client['position_in_company'])."', ";
+	  	$sql .= "'".db_escape($db,$client['industry'])."', ";
+	  	$sql .= "'".db_escape($db,$client['email'])."', ";
+	  	$sql .= "'".db_escape($db,$client['contact'])."', ";
+	  	$sql .= "'".db_escape($db,$client['man_power_file'])."', ";
+	  	$sql .= "'".db_escape($db,$client['date_send'])."', ";
+	  	$sql .= "'".db_escape($db,$client['data_status'])."', ";
+	  	$sql .= "'".db_escape($db,$client['added_by'])."' ";
+	  	$sql .=")";
+	  	//$sql .= "";
+
+		$result = mysqli_query($db,$sql);
+		// for insert statement, $result is true/false
+		if($result){
+			//redirect
+			return true;
+		}else{
+			//insert failed
+			echo mysqli_error($db);
+			db_disconnect($db);
+			exit; 
+		}
+  } 
+
+
  //all jobseeker files that has a data_status of 1
   function get_all_client_files(){
 	global $db;
-	$sql = "SELECT * FROM tbl_clients ";
+	$sql = "SELECT * FROM tbl_clients WHERE data_status = '1'";
 	$sql .= "ORDER BY client_id DESC";
 	$result = mysqli_query($db,$sql);
 	confirm_result_set($result);
@@ -610,7 +691,7 @@
   		$sql .= "'".db_escape($db, $event['event_name'])."', ";
   		$sql .= "'".db_escape($db, $event['event_description'])."', ";
   		$sql .= "'".db_escape($db, $event['event_datestart'])."', ";
-  		$sql .= "'".db_escape($db, $event['event_dateend'])."', ";
+  		$sql .= "'".db_escape($db, $event['event_datestart'])."', ";
   		$sql .= "'".db_escape($db, $event['event_timestart'])."', ";
   		$sql .= "'".db_escape($db, $event['event_timeend'])."', ";
   		$sql .= "'".db_escape($db, $event['event_type'])."', ";
@@ -630,6 +711,42 @@
 	      exit;
 	    }
   }
+
+
+	function update_event($event){
+		global $db;
+
+
+		
+ 		$errors = validate_event($event);
+		if(!empty($errors)){
+			return $errors;
+		}  		
+
+		$sql = "UPDATE tbl_events SET ";
+		$sql .= "event_status ='".db_escape($db,$event['event_status'])."', ";
+		$sql .= "event_type ='".db_escape($db,$event['event_type'])."', ";
+		$sql .= "event_name ='".db_escape($db,$event['event_name'])."', ";
+		$sql .= "event_description ='".db_escape($db,$event['event_description'])."', ";
+
+		$sql .= "event_datestart ='".db_escape($db,$event['event_datestart'])."', ";
+		$sql .= "event_dateend ='".db_escape($db,$event['event_dateend'])."', ";
+		$sql .= "event_timestart ='".db_escape($db,$event['event_timestart'])."', ";
+        $sql .= "event_timeend ='".db_escape($db,$event['event_timeend'])."' ";
+		$sql .= "WHERE event_compo_id = '".db_escape($db,$event['event_compo_id'])."' "; //compo_id
+		$sql .= "LIMIT 1";
+
+		$result = mysqli_query($db, $sql);
+		// for insert statement, $result is true/false
+		if($result){
+			//
+			return true;
+		}else{
+			echo mysqli_error($db);
+			db_disconnect($db);
+			exit; 
+		}
+	}
 
   function load_calendar(){
 	global $db;
@@ -655,6 +772,22 @@
 
   }
 
+
+  function get_event_by_event_compo_id($event_compo_id){
+  	//$now = date('Y-m-d');
+
+	global $db;
+	$sql = "SELECT * FROM tbl_events ";
+	$sql .= "WHERE event_compo_id = '".db_escape($db,$event_compo_id)."' ";
+	//$sql .= "LIMIT 1";
+	$result = mysqli_query($db,$sql);
+	confirm_result_set($result);
+	
+	$count_event = mysqli_fetch_assoc($result);
+	mysqli_free_result($result);
+	//return an assoc array not a result set
+	return $count_event;	
+  }
 
 
   function count_event_for_this_day(){

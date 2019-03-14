@@ -7,6 +7,66 @@
   define("SHARED_PATH",dirname(__FILE__).'\includes_admin');
  // echo SHARED_PATH;*/
   require_login();
+
+  if(is_post_request()){
+    $client = [];
+    $client['client_compo_id'] = $_POST['client_compo_id'] ?? '';
+    $client['firstname'] = $_POST['firstname'] ?? '';
+    $client['middlename'] = $_POST['middlename'] ?? '';
+    $client['lastname'] = $_POST['lastname'] ?? '';
+    $client['company'] = $_POST['company'] ?? '';
+    $client['position_in_company'] = $_POST['position_in_company'] ?? '';
+    $client['company_size'] = $_POST['company_size'] ?? '';
+    $client['industry'] = $_POST['industry'] ?? '';
+    $client['email'] = $_POST['email'] ?? '';
+    $client['contact'] = $_POST['contact'] ?? '';
+    //$client['zip_code'] = $_POST['zip_code'] ?? '';
+    //$client['message'] = $_POST['message'] ?? '';
+    $client['data_status'] = 1;
+
+
+    $now = date('Y-m-d H:i:s');
+    $client['date_send'] = $now;
+
+    
+    $man_power_file = $_FILES['man_power_file']['name'];
+    $man_power_file_tmp =$_FILES['man_power_file']['tmp_name'];
+    $client['man_power_file'] = $man_power_file;
+    $client['added_by'] = $_SESSION['admin_compo_id'];
+
+    $result = insert_client_files($client);
+    if($result === true){
+
+      $log = [];
+      $log['log_compo_id'] = 'LOG'.date("ymdhis") . abs(rand('0','9'));
+      $now = date('Y-m-d H:i:s');
+      $log['log_date'] = $now;
+      $log['log_userid'] = $_SESSION['admin_compo_id'];
+      $log['log_user'] = $_SESSION['username'];
+      $log['log_usertype'] = $_SESSION['admin_type'];
+      $log['log_action'] = "Add new client detail Client Id: ". $client['client_compo_id'];
+      insert_log($log);
+      $_SESSION['message'] = "Client data has been added successfuly";
+      move_uploaded_file($man_power_file_tmp, "uploads/client_files/$man_power_file");
+    }else{
+      $errors = $result;
+    }
+  }else{
+
+    $client = [];
+    $client['firstname'] =  '';
+    $client['middlename'] =  '';
+    $client['lastname'] = '';
+    $client['company'] =   '';
+    $client['position_in_company'] =  '';
+    $client['company_size'] =  '';
+    $client['industry'] =  '';
+    $client['email'] =  '';
+    $client['contact'] =  '';
+    //$client['zip_code'] =  '';
+    //$client['message'] =  '';
+    
+  }
 ?>
 
 <!DOCTYPE html>
@@ -74,21 +134,138 @@
 
     <!-- Main content -->
     <section class="content">
+
+      <div class="row">
+       
+        <div class="col-md-12">
+          <?php 
+            echo display_errors($errors);
+            echo display_session_message();
+          ?>
+        </div>
+
+      </div>
       <div class="row">
         <div class="col-md-12">
           <div class="box">
-            <div class="box-header">
-              <h3 class="box-title"></h3>
-            </div>
+
             <!-- /.box-header -->
             <div class="box-body">
+              <div class="row">
+                <div class="col-md-3">
+                   <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#add-user" style="margin-bottom: 10px">Add Client</button>
+                    <div class="modal fade" id="add-user">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">Client Details</h4>
+                          </div>
+                          <div class="modal-body">
+
+                              <table class="table table-striped table-hover"> 
+
+                              <?php 
+
+                                /*
+                                  //admin array
+                                  $admin[];
+
+
+                                  $result = add_admin($admin);
+                                  new_id = mysqli_insert_id($db);
+
+                                  if($result === true){
+                                    //no error
+                                  }else{
+                                    $errors = $result
+                                  }
+
+                                */
+                              ?>
+
+                                <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post" enctype="multipart/form-data">
+
+                                    <tr>
+                                      <td><b>Client ID</b></td>
+                                      <td><input type="text" class="form-control" name="client_compo_id" id="client_compo_id" readonly=""></td>
+                                    </tr>
+                                    <tr>
+                                      <td><b>First Name</b></td>
+                                      <td><input type="text" class="form-control" name="firstname" id="firstname"></td>
+                                    </tr>
+                                    <tr>
+                                      <td><b>Middle Name</b></td>
+                                      <td><input type="text" class="form-control" name="middlename" id="middlename"></td>
+                                    </tr>
+                                    <tr>
+                                      <td><b>Last Number</b></td>
+                                      <td><input type="text" class="form-control" name="lastname" id="lastname"></td>
+                                    </tr>
+
+                                    <tr>
+                                      <td><b>Industry</b></td>
+                                      <td><input type="text" class="form-control" name="industry" id="industry"></td>
+                                    </tr>
+
+                                    <tr>
+                                      <td><b>Contact</b></td>
+                                      <td><input type="text" class="form-control" name="contact" id="contact"></td>
+                                    </tr>
+
+                                    <tr>
+                                      <td><b>Email</b></td>
+                                      <td><input type="text" class="form-control" name="email" id="email"></td>
+                                    </tr>
+
+                                    <tr>
+                                      <td><b>Company</b></td>
+                                      <td><input type="text" class="form-control" name="company" id="company"></td>
+                                    </tr>
+
+                                    <tr>
+                                      <td><b>Position</b></td>
+                                      <td><input type="text" class="form-control" name="position_in_company" id="position_in_company"></td>
+                                    </tr>
+
+                                    <tr>
+                                      <td><b>Manpower Request Form</b></td>
+                                      <td><input type="file" class="" name="man_power_file" id="man_power_file"></td>
+                                    </tr>
+                                    
+                                    <tr>
+                                      <td></td>
+                                      <td><input type="submit" name="submit" value="Save" class="btn btn-success "></td>
+                                    </tr>  
+                                
+                                </form>
+                              </table>
+                            
+                          </div>
+                          <div class="modal-footer">
+                          </div>
+                        </div>
+                        <!-- /.modal-content -->
+                      </div>
+                      <!-- /.modal-dialog -->
+                    </div>
+                    <!-- /.modal -->
+
+                </div>
+              </div>
+              <br />
               <table id="" class="datatables table table-bordered table-striped table-hover">
                 <thead>
                 <tr>
+                  <th>Client ID</th>
+                  <th>Company</th>
                   <th>Full Name</th>
                   <th>Email</th>
                   <th>Phone Number</th>
                   <th>Position in the Company</th>
+                  <th>Date Added</th>
+                  <th>Added By</th>
                   <th>Action</th>
                 </tr>
                 </thead>
@@ -98,10 +275,22 @@
                 $client_list = get_all_client_files();
                 while($clients = mysqli_fetch_assoc($client_list)):?>
                 <tr>
+                  <td><?php echo $clients['client_compo_id'];?></td>
+                  <td><?php echo $clients['company'];?></td>
                   <td><?php echo $clients['firstname'].' '. $clients['middlename'].' '. $clients['lastname'];?></td>
                   <td><?php echo $clients['email'];?></td>
                   <td><?php echo $clients['contact'];?></td>
                   <td><?php echo $clients['position_in_company'];?></td>
+                  <td><?php echo $clients['date_send'];?></td>
+                  <td><?php 
+                    if(empty($clients['added_by'])){
+                      echo "Client submit their data through the HHI web portal";
+                    }else{
+                      $user = get_admin_by_admin_compo_id($clients['added_by']);
+                      echo h( $user['firstname'].' '. $user['lastname']);
+                      //echo $clients['added_by'];
+                    }
+                   ?></td>
                   <td>
                     <a href="<?php echo url_for('admin/client-detail.php?client_id='. h(u($clients['client_compo_id'])));?>" class="btn btn-primary">View Details</a>
                   </td>
@@ -159,7 +348,11 @@
 <script src="dist/js/adminjs.js"></script>
 
 <script>
-
+            $().ready(function() {
+                var client_compo_id = document.getElementById("client_compo_id");
+                client_compo_id = "<?= 'CLIENT'.date("ymdhis") . abs(rand('0','9'));  ?>";
+                $('#client_compo_id').val(client_compo_id);
+            });
 </script>
 </body>
 </html>

@@ -199,6 +199,10 @@
               <div class="pull-right">
                 <!--<button type="button" class="btn btn-default"><i class="fa fa-trash-o"></i> Delete</button>
                 <button type="button" class="btn btn-default"><i class="fa fa-print"></i> Print</button> -->
+                <form>
+                  <!--<input type="submit" name="archieve" id="archieve" value="Archieve" class="btn btn-danger"> -->
+                  <button type="submit" class="btn btn-danger">Archieve <span class="fa fa-trash-o"></span></button>
+                </form>
               </div>
               
             </div>

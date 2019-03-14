@@ -26,8 +26,9 @@
         
        <!-- <li><a href="<?php echo url_for('admin/message.php');?>"><i class="fa fa-inbox"></i> <span>Message</span></a></li> -->
 
+       <?php if($_SESSION['admin_type'] == "SUPERADMIN"):?>
         <li><a href="<?php echo url_for('admin/inquiries.php');?>"><i class="fa fa-question-circle"></i> <span>Inquiries</span></a></li>
-
+       <?php endif; ?>
         <li><a href="<?php echo url_for('admin/jobseeker.php');?>"><i class="fa fa-users"></i> <span>Jobseeker</span></a></li>
 
         <li><a href="<?php echo url_for('admin/client.php');?>"><i class="fa fa-users"></i> <span>Client</span></a></li>

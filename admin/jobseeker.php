@@ -79,11 +79,108 @@
       <div class="row">
         <div class="col-md-12">
           <div class="box">
-            <div class="box-header">
-              <h3 class="box-title"></h3>
-            </div>
+
             <!-- /.box-header -->
             <div class="box-body">
+              <div class="row">
+                <div class="col-md-3">
+                   <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#add-user" style="margin-bottom: 10px">Add Jobseeker</button>
+                    <div class="modal fade" id="add-user">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">Jobseeker Details</h4>
+                          </div>
+                          <div class="modal-body">
+
+                              <table class="table table-striped table-hover"> 
+
+                              <?php 
+
+                                /*
+                                  //admin array
+                                  $admin[];
+
+
+                                  $result = add_admin($admin);
+                                  new_id = mysqli_insert_id($db);
+
+                                  if($result === true){
+                                    //no error
+                                  }else{
+                                    $errors = $result
+                                  }
+
+                                */
+                              ?>
+
+                                <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post" enctype="multipart/form-data">
+
+                                    <tr>
+                                      <td><b>Admin ID</b></td>
+                                      <td><input type="text" class="form-control" name="admin_compo_id" id="admin_compo_id" readonly=""></td>
+                                    </tr>
+                                    <tr>
+                                      <td><b>First Name</b></td>
+                                      <td><input type="text" class="form-control" name="firstname" id="firstname"></td>
+                                    </tr>
+                                    <tr>
+                                      <td><b>Middle Name</b></td>
+                                      <td><input type="text" class="form-control" name="middlename" id="middlename"></td>
+                                    </tr>
+                                    <tr>
+                                      <td><b>Last Number</b></td>
+                                      <td><input type="text" class="form-control" name="lastname" id="lastname"></td>
+                                    </tr>
+
+                                    <tr>
+                                      <td><b>Contact</b></td>
+                                      <td><input type="text" class="form-control" name="contact" id="contact"></td>
+                                    </tr>
+
+                                    <tr>
+                                      <td><b>Email</b></td>
+                                      <td><input type="text" class="form-control" name="email" id="email"></td>
+                                    </tr>
+                                    <tr>
+                                      <td><b>Username</b></td>
+                                      <td><input type="text" class="form-control" name="username" id="password"></td>
+                                    </tr>
+
+                                    <tr>
+                                      <td><b>Password</b></td>
+                                      <td><input type="password" class="form-control"  name="password" id="password"></td>
+                                    </tr> 
+
+
+                                    <tr>
+                                      <td><b>Confirm Password</b></td>
+                                      <td><input type="password" class="form-control"  name="confirm_password" id="confirm_password"></td>
+                                    </tr>   
+
+                                    <tr>
+                                      <td></td>
+                                      <td><input type="submit" name="submit" value="Save" class="btn btn-success "></td>
+                                    </tr>  
+                                
+                                </form>
+                              </table>
+                            
+                          </div>
+                          <div class="modal-footer">
+                          </div>
+                        </div>
+                        <!-- /.modal-content -->
+                      </div>
+                      <!-- /.modal-dialog -->
+                    </div>
+                    <!-- /.modal -->
+
+                </div>
+              </div>
+              <br />
               <table id="" class="datatables table table-bordered table-striped table-hover">
                 <thead>
                 <tr>

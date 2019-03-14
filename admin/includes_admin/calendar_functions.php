@@ -63,6 +63,8 @@
 		if($result){
 			$_SESSION['message'] = "Event has been deleted";
 			redirect_to(url_for('admin/dashboard.php'));
+		}else{
+			echo "may problem";
 		}
 	}
 ?>
