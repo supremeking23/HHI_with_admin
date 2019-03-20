@@ -114,9 +114,9 @@
 <body class="hold-transition skin-blue sidebar-mini" id="client">
 <div class="wrapper">
 
-<?php include('includes_admin/header.php');?>
+<?php include(SHARED_PATH.'/header.php');?>
   <!-- Left side column. contains the logo and sidebar -->
-  <?php include('includes_admin/sidebar.php');?>
+  <?php include(SHARED_PATH.'/sidebar.php');?>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -200,7 +200,7 @@
                                       <td><input type="text" class="form-control" name="middlename" id="middlename"></td>
                                     </tr>
                                     <tr>
-                                      <td><b>Last Number</b></td>
+                                      <td><b>Last Name</b></td>
                                       <td><input type="text" class="form-control" name="lastname" id="lastname"></td>
                                     </tr>
 

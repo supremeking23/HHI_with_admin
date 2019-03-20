@@ -78,10 +78,12 @@
     <section class="content">
 
       <div class="row">
+        <div class="col-md-12">
         <?php 
             echo display_errors($errors);
             echo display_session_message();
         ?>
+        </div>
 
 
       </div>

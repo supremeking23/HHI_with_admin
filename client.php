@@ -80,33 +80,36 @@
         <div class="container" id="client-form">
 
             <div class="row">
+                <div class="offset-md-1">
+                    <p class="alert alert-danger">All fields with (*) are required</p>
+                </div>
                 <div class="offset-lg-2 col-lg-8">
                     <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST" enctype="multipart/form-data">
                         <div class="form-group">
                             <input type="hidden" name="client_compo_id" id="client_compo_id">
-                            <input type="text" class="form-control input-text-color" placeholder="First Name" id="firstname" name="firstname">
+                            <input type="text" class="form-control input-text-color" placeholder="First Name *" id="firstname" name="firstname" >
                         </div>
 
                         <div class="form-group">
                             
-                            <input type="text" class="form-control input-text-color" placeholder="Middle Name" id="middlename" name="middlename">
+                            <input type="text" class="form-control input-text-color" placeholder="Middle Name *" id="middlename" name="middlename">
                         </div>
                         
                         <div class="form-group">
                             
-                                <input type="text" class="form-control input-text-color" placeholder="Last Name" 
+                                <input type="text" class="form-control input-text-color" placeholder="Last Name *" 
                                 id="lastname" name="lastname">
                         </div>
 
                             
                         <div class="form-group">
-                                <input type="text" class="form-control input-text-color" placeholder="Company"
+                                <input type="text" class="form-control input-text-color" placeholder="Company *"
                                 id="company" name="company">
                         </div>
 
                         <div class="form-group">
                             
-                                <input type="text" class="form-control input-text-color" placeholder="Position in the Company" id="position_in_company" name="position_in_company">
+                                <input type="text" class="form-control input-text-color" placeholder="Position in the Company *" id="position_in_company" name="position_in_company">
                         </div>
 
                         <div class="form-group">
@@ -116,16 +119,16 @@
                         </div>
 
                         <div class="form-group">
-                                <input type="text" class="form-control input-text-color" placeholder="Industry" id="industry" name="industry">
+                                <input type="text" class="form-control input-text-color" placeholder="Industry *" id="industry" name="industry">
                         </div>
 
                         <div class="form-group">
                                 
-                                <input type="text" class="form-control input-text-color" placeholder="Email" id="email" name="email">
+                                <input type="text" class="form-control input-text-color" placeholder="Email *" id="email" name="email">
                         </div> 
 
                         <div class="form-group">
-                                <input type="text" class="form-control input-text-color" placeholder="Phone Number" id="contact" name="contact">
+                                <input type="text" class="form-control input-text-color" placeholder="Phone Number *" id="contact" name="contact">
                         </div>
 
                         <div class="form-group">
@@ -134,12 +137,12 @@
 
                         <div class="form-group">
                             
-                           <textarea class="form-control input-text-color" id="message" name="message" placeholder="Enter Message"></textarea>
+                           <textarea class="form-control input-text-color" id="message" name="message" placeholder="Enter Message "></textarea>
                         </div>
 
                         <div class="form-group" style="background:#999;padding:10px">
                             <label style="color:#FFF">
-                                Attach Man Power Request Form Here
+                                Attach Man Power Request Form Here *
                             </label>
                             <input type="file" name="man_power_file" id="man_power_file" >
                         </div>

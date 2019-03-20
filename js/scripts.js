@@ -207,4 +207,9 @@ offset: '100px;'
 	}, {
 	    offset: '50%'
 	});	
+
+
+	$('[data-tooltip="tooltip"]').tooltip();
+	//$('[data-popover="popover"]').popover();
+	//$('[data-toggle="popover"]').popover(); 
 });

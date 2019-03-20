@@ -271,7 +271,7 @@
                 <tr>
                   <th>Event ID</th>
                   <th width="20%">Event Name</th>
-                  <th>Event Description</th>
+                  
                   <th width="20%">Event Date</th>
             
                   <th>Event Status</th>
@@ -291,7 +291,7 @@
                 <tr>
                   <td><?php echo $events['event_compo_id']?></td>
                   <td><?php echo $events['event_name']?></td>
-                  <td><?php echo $events['event_description']?></td>
+                  
                    <td><?php echo $events['event_datestart']?> 
                         <?php if($events['event_dateend'] != '0000-00-00'){
                           echo ' - ' . $events['event_dateend'];
@@ -309,7 +309,7 @@
                       if($events['event_type'] == 'urgent'){ ?>
                         <span class="label label-danger">Urgent</span>
                       <?php }else{ ?>
-                       <span class="label label-success">Normal</span> 
+                       <span class="label label-primary">Normal</span> 
                       <?php } ?></td>
                    <?php if($_SESSION['admin_type'] == 'SUPERADMIN'):?>
                    <td>

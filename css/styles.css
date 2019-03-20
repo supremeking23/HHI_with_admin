@@ -371,6 +371,16 @@ ul.link-footer {
     padding: 0;
 }
 
+ul.event-list{
+    list-style-type: none;
+    margin: 0;
+    padding: 0; 
+}
+
+ul.event-list li {
+    margin-bottom: 10px
+}
+
 ul.link-footer li a {
     display: block;
     text-align: center;/*background-color: #dddddd;*/

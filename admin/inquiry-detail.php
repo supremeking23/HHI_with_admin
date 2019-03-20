@@ -10,6 +10,30 @@
   $inquiry = get_inquiry_by_inquiries_compo_id($_GET['inquiry_id']);
  
 
+  if(is_post_request()){
+    $inquiry = [];
+    $inquiry['inquiry_id'] =   $_POST['inquiry_id'] ?? '';
+  
+
+    $result = archive_inquiry($inquiry);
+    if($result ===true){
+        $log = [];
+        $log['log_compo_id'] = 'LOG'.date("ymdhis") . abs(rand('0','9'));
+        $now = date('Y-m-d H:i:s');
+        $log['log_date'] = $now;
+        $log['log_userid'] = $_SESSION['admin_compo_id'];
+        $log['log_user'] = $_SESSION['username'];
+        $log['log_usertype'] = $_SESSION['admin_type'];
+        $log['log_action'] = "Archive an inquiry data. Inquiry Id:". $_GET['inquiry_id'];
+        insert_log($log);
+        $_SESSION['message'] = "Inquiry Data has been sent to archive section";
+        redirect_to(url_for('admin/inquiries.php'));
+    }else{
+      $errors = $result;
+    }
+  }else{
+
+  }
 ?>
 
 <!DOCTYPE html>
@@ -220,8 +244,9 @@
               <div class="pull-right">
                 <!--<a href="" class="btn btn-default"><i class="fa fa-trash-o"></i> Delete</a>
                 <a href="" class="btn btn-default"><i class="fa fa-print"></i> Print</a> -->
-                <form>
+                <form action="<?php echo $_SERVER['PHP_SELF'];?>?inquiry_id=<?php echo h(u($_GET['inquiry_id']));?>" method="POST">
                   <!--<input type="submit" name="archieve" id="archieve" value="Archieve" class="btn btn-danger"> -->
+                  <input type="hidden" name="inquiry_id" value="<?php echo $inquiry['inquiries_id']?>">
                   <button type="submit" class="btn btn-danger">Archieve <span class="fa fa-trash-o"></span></button>
                 </form>
               </div>

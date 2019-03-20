@@ -187,7 +187,7 @@
                                       <td><input type="text" class="form-control" name="middlename" id="middlename"></td>
                                     </tr>
                                     <tr>
-                                      <td><b>Last Number</b></td>
+                                      <td><b>Last Name</b></td>
                                       <td><input type="text" class="form-control" name="lastname" id="lastname"></td>
                                     </tr>
 

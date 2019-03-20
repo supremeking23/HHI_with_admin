@@ -10,6 +10,7 @@
         $inquiry['name'] = $_POST['name'] ?? '';
         $inquiry['email'] = $_POST['email'] ?? '';
         $inquiry['message'] = $_POST['message'] ?? '';
+        $inquiry['data_status'] = 1;
         $now = date('Y-m-d H:i:s');
         $inquiry['date_send'] = $now;
 

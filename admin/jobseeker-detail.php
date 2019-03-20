@@ -9,7 +9,30 @@
 
   $jobseeker = get_jobseeker_by_jobseeker_compo_id($_GET['jobseeker_id']);
  
+  if(is_post_request()){
+    $jobseeker = [];
+    $jobseeker['jobseeker_id'] =   $_POST['jobseeker_id'] ?? '';
+  
 
+    $result = archive_jobseeker($jobseeker);
+    if($result ===true){
+        $log = [];
+        $log['log_compo_id'] = 'LOG'.date("ymdhis") . abs(rand('0','9'));
+        $now = date('Y-m-d H:i:s');
+        $log['log_date'] = $now;
+        $log['log_userid'] = $_SESSION['admin_compo_id'];
+        $log['log_user'] = $_SESSION['username'];
+        $log['log_usertype'] = $_SESSION['admin_type'];
+        $log['log_action'] = "Archive jobseeker file data. Jobseeker Id:". $_GET['jobseeker_id'];
+        insert_log($log);
+        $_SESSION['message'] = "Jobseeker Data has been sent to archive section";
+        redirect_to(url_for('admin/jobseeker.php'));
+    }else{
+      $errors = $result;
+    }
+  }else{
+
+  }
 ?>
 
 <!DOCTYPE html>
@@ -149,7 +172,15 @@
             <div class="box-body no-padding">
               <div class="mailbox-read-info">
                 <h3><?php echo h($jobseeker['subject'])?></h3>
-                <h5>From: <?php echo h($jobseeker['email']);?>
+                
+                  <?php if(empty($jobseeker['added_by'])){ ?>
+                  <h5>From: <?php echo h($jobseeker['email']);?>
+                 <?php }else{ ?>
+                  Added by : <?php 
+                  $user = get_admin_by_admin_compo_id($jobseeker['added_by']);
+                        echo h( $user['firstname'].' '. $user['lastname']);
+                        ?>
+                 <?php }?>
                   <span class="mailbox-read-time pull-right">
                     <?php 
                       $date =date_create($jobseeker['date_send']);
@@ -160,9 +191,11 @@
               <!-- /.mailbox-read-info -->
  
               
+              <?php if(!empty($jobseeker['message'])):?>
               <div class="mailbox-read-message">
                <?php echo h($jobseeker['message']);?>
               </div>
+            <?php endif;?>
               <!-- /.mailbox-read-message -->
             </div>
             <!-- /.box-body -->
@@ -199,8 +232,9 @@
               <div class="pull-right">
                 <!--<button type="button" class="btn btn-default"><i class="fa fa-trash-o"></i> Delete</button>
                 <button type="button" class="btn btn-default"><i class="fa fa-print"></i> Print</button> -->
-                <form>
+                <form action="<?php echo $_SERVER['PHP_SELF'];?>?jobseeker_id=<?php echo h(u($_GET['jobseeker_id']));?>" method="POST">
                   <!--<input type="submit" name="archieve" id="archieve" value="Archieve" class="btn btn-danger"> -->
+                  <input type="hidden" name="jobseeker_id" value="<?php echo $jobseeker['jobseeker_id']?>">
                   <button type="submit" class="btn btn-danger">Archieve <span class="fa fa-trash-o"></span></button>
                 </form>
               </div>

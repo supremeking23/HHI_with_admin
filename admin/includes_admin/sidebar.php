@@ -35,6 +35,7 @@
 
         <?php if($_SESSION['admin_type'] == "SUPERADMIN"):?>
         <li><a href="<?php echo url_for('admin/user-management.php');?>"><i class="fa fa-user-secret"></i> <span>User Management</span></a></li>
+        <li><a href="<?php echo url_for('admin/archive.php');?>"><i class="fa fa-file-o"></i> <span>Archives</span></a></li>
       <?php endif; ?>
         <!--<li><a href="<?php echo url_for('admin/chatbot.php');?>"><i class="fa fa-user-secret"></i> <span>Chatbot</span></a></li> -->
       </ul>

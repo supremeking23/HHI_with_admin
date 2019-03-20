@@ -5,7 +5,7 @@
         <div class="row ">
                 <div class="col-md-4">
                         <div class="">
-                          <h2 style="border-bottom: 2px solid white;" class="text-center">Hunter's Hub Inc</h2>
+                          <h2 style="border-bottom: 2px solid white;" class="text-center">HHI's upcomming event</h2>
                                 <!--<a href="index.php" class="">Home</a>
                                 <a href="about.php" class="">About</a>
                                 <a href="contact.php" class="">Contact Us</a>
@@ -13,13 +13,49 @@
                                 <a href="client.php" class="">Clients</a>
                                 <a href="jobseeker.php" class="">Jobseekers</a> -->
 
-                          <ul class="link-footer">
-                            <li><a href="index.php" class=""><span class="fa fa-home"></span>&nbsp;Home</a></li>
+                          <ul class="event-list">
+                            <!--<li><a href="index.php" class=""><span class="fa fa-home"></span>&nbsp;Home</a></li>
                             <li><a href="about.php" class=""><span class="fa fa-building"></span>&nbsp;About</a></li>
                             <li><a href="contact.php" class=""><span class="fa fa-book"></span>&nbsp;Contact Us</a></li>
                             <li><a href="services.php" class=""><span class="fa fa-server"></span>&nbsp;Services</a></li>
                             <li> <a href="client.php" class=""><span class="fa fa-users"></span>&nbsp;Clients</a></li>
-                            <li><a href="jobseeker.php" class=""><span class="fa fa-search"></span>&nbsp;Jobseekers</a></li>
+                            <li><a href="jobseeker.php" class=""><span class="fa fa-search"></span>&nbsp;Jobseekers</a></li>-->
+
+                            <?php 
+
+                              $event_list = load_upcoming_event();
+                              while($events = mysqli_fetch_assoc($event_list)):
+                            ?>
+                              <li>
+                                <a role="button" data-toggle="modal" data-target="#eventDetail<?php echo $events['event_id']?>" class="btn btn-primary"><?php echo h($events['event_name'])?></a>
+                                <!-- Modal -->
+                                <div id="eventDetail<?php echo $events['event_id']?>" class="modal fade" role="dialog" style="color:#000000">
+                                  <div class="modal-dialog">
+
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <h4 class="modal-title"><?php echo h($events['event_name'])?></h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        
+                                      </div>
+                                      <div class="modal-body">
+                                        <p><?php echo h($events['event_description'])?></p>
+                                        <p>Event Date: <?php 
+                                            $date =date_create($events['event_datestart']);
+                                            echo  $formated_date= date_format($date,"F d, Y ");
+                    
+                                        ?></p>
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                      </div>
+                                    </div>
+
+                                  </div>
+                                </div>
+                              </li>
+                          <?php endwhile;?>
                         </ul>
                         </div>
 

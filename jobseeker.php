@@ -70,26 +70,30 @@
         <div class="container" id="jobseeker-form">
 
             <div class="row">
+
+                <div class="offset-md-1">
+                    <p class="alert alert-danger">All fields with (*) are required</p>
+                </div>
                 <div class="offset-lg-2 col-lg-8">
                     <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST" enctype="multipart/form-data">
                         <div class="form-group">
                             <input type="hidden" name="jobseeker_compo_id" id="jobseeker_compo_id">
-                            <input type="text" class="form-control input-text-color" placeholder="Firstname" id="firstname" name="firstname">
+                            <input type="text" class="form-control input-text-color" placeholder="Firstname *" id="firstname" name="firstname">
                         </div>
 
                         <div class="form-group">
                             
-                            <input type="text" class="form-control input-text-color" placeholder="Middlename" id="middlename" name="middlename">
+                            <input type="text" class="form-control input-text-color" placeholder="Middlename *" id="middlename" name="middlename">
                         </div>
 
 
                         <div class="form-group">
-                            <input type="text" class="form-control input-text-color" placeholder="Lastname" id="lastname" name="lastname">
+                            <input type="text" class="form-control input-text-color" placeholder="Lastname *" id="lastname" name="lastname">
                         </div>
 
                         <div class="form-group">
                            <select class="form-control" id="gender" name="gender">
-                               <option value="">Gender</option>
+                               <option value="">Gender *</option>
                                <option value="male">Male</option>
                                <option value="female">Female</option>
 
@@ -97,18 +101,18 @@
                         </div>
 
                         <div class="form-group">     
-                            <input type="text" class="form-control input-text-color" placeholder="Contact Number" id="contact" name="contact">
+                            <input type="text" class="form-control input-text-color" placeholder="Contact Number *" id="contact" name="contact">
                         </div> 
 
                         <div class="form-group">     
-                            <input type="text" class="form-control input-text-color" placeholder="Email Address" id="email" name="email">
+                            <input type="text" class="form-control input-text-color" placeholder="Email Address *" id="email" name="email">
                         </div> 
                         
                         
 
                         <div class="form-group" style="background:#999;padding:10px">
                             <label style="color:#FFF">
-                                Attach Resume Here
+                                Attach Resume Here *
                             </label>
                             <input type="file" name="resume_file" id="resume_file" >
                         </div>

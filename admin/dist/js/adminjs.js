@@ -6,7 +6,7 @@ $(function(){
 	$("#client a:contains('Client')").parent().addClass('active');
 	$("#usermanagement a:contains('User Management')").parent().addClass('active');
 	$("#inquiries a:contains('Inquiries')").parent().addClass('active');
-
+  $("#archive a:contains('Archives')").parent().addClass('active');
 
 
 	$('#errormodal').modal('show');

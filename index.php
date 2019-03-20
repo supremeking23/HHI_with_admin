@@ -1,3 +1,4 @@
+<?php require_once('admin/initialize.php');?>
 <!doctype html>
 <html lang="en">
 
@@ -29,6 +30,7 @@
     <div class="carousel-inner">
       <div class="carousel-item active">
         <img src="img/hr-assistant-opacity.jpg">
+
         <div class="carousel-caption">
           <h1 style="font-weight: bold;" class="text-center text-uppercase  animated fadeInLeft">Hunter's Hub </h1>
               <h3 style="font-weight: bold" class="text-center animated fadeInDown">Incorporated</h3>

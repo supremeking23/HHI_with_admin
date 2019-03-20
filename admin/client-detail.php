@@ -8,7 +8,31 @@
 
 
   $client = get_client_by_client_compo_id($_GET['client_id']);
- 
+
+  if(is_post_request()){
+    $client = [];
+    $client['client_id'] =   $_POST['client_id'] ?? '';
+  
+
+    $result = archive_client($client);
+    if($result ===true){
+        $log = [];
+        $log['log_compo_id'] = 'LOG'.date("ymdhis") . abs(rand('0','9'));
+        $now = date('Y-m-d H:i:s');
+        $log['log_date'] = $now;
+        $log['log_userid'] = $_SESSION['admin_compo_id'];
+        $log['log_user'] = $_SESSION['username'];
+        $log['log_usertype'] = $_SESSION['admin_type'];
+        $log['log_action'] = "Archive client file data. Client Id:". $_GET['client_id'];
+        insert_log($log);
+        $_SESSION['message'] = "Client data has been sent to archive section";
+        redirect_to(url_for('admin/client.php'));
+    }else{
+      $errors = $result;
+    }
+  }else{
+
+  } 
 
 ?>
 
@@ -47,10 +71,9 @@
 <body class="hold-transition skin-blue sidebar-mini" id="client">
 <div class="wrapper">
 
-<?php include('includes_admin/header.php');?>
+<?php include(SHARED_PATH.'/header.php');?>
   <!-- Left side column. contains the logo and sidebar -->
-  <?php include('includes_admin/sidebar.php');?>
-  <!-- Left side column. contains the logo and sidebar -->
+  <?php include(SHARED_PATH.'/sidebar.php');?>
 
 
   <!-- Content Wrapper. Contains page content -->
@@ -202,8 +225,9 @@
               <div class="pull-right">
                <!-- <button type="button" class="btn btn-default"><i class="fa fa-trash-o"></i> Delete</button>
                 <button type="button" class="btn btn-default"><i class="fa fa-print"></i> Print</button> -->
-                <form>
+                <form action="<?php echo $_SERVER['PHP_SELF'];?>?client_id=<?php echo h(u($_GET['client_id']));?>" method="POST">
                   <!--<input type="submit" name="archieve" id="archieve" value="Archieve" class="btn btn-danger"> -->
+                  <input type="hidden" name="client_id" value="<?php echo $client['client_id']?>">
                   <button type="submit" class="btn btn-danger">Archieve <span class="fa fa-trash-o"></span></button>
                 </form>               
               </div>

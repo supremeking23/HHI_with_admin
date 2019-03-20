@@ -298,8 +298,8 @@
 		return $errors;
 	}
 
-  	$sql = "INSERT INTO tbl_inquiries(inquiries_compo_id,name,email,message,date_send) ";
-  	$sql .= "VALUES('".db_escape($db,$inquiry['inquiries_compo_id'])."', '".db_escape($db,$inquiry['name'])."', '".db_escape($db,$inquiry['email'])."', '".db_escape($db,$inquiry['message'])."','".db_escape($db,$inquiry['date_send'])."') ";
+  	$sql = "INSERT INTO tbl_inquiries(inquiries_compo_id,name,email,message,date_send,data_status) ";
+  	$sql .= "VALUES('".db_escape($db,$inquiry['inquiries_compo_id'])."', '".db_escape($db,$inquiry['name'])."', '".db_escape($db,$inquiry['email'])."', '".db_escape($db,$inquiry['message'])."','".db_escape($db,$inquiry['date_send'])."','".db_escape($db,$inquiry['data_status'])."') ";
   	//$sql .= "";
 
 	$result = mysqli_query($db,$sql);
@@ -320,7 +320,32 @@
   //get all inquries
   function get_all_inquiries(){
 	global $db;
-	$sql = "SELECT * FROM tbl_inquiries ";
+	$sql = "SELECT * FROM tbl_inquiries WHERE data_status = '1'";
+	$sql .= "ORDER BY inquiries_id DESC";
+	$result = mysqli_query($db,$sql);
+	confirm_result_set($result);
+	return $result;
+  }
+
+  function archive_inquiry($inquiry){
+  	global $db;
+  	$sql = "UPDATE tbl_inquiries SET data_status = '0' WHERE inquiries_id = '".db_escape($db,$inquiry['inquiry_id'])."' ";
+	$result = mysqli_query($db, $sql);
+	// for insert statement, $result is true/false
+	if($result){
+		//
+		return true;
+	}else{
+		echo mysqli_error($db);
+		db_disconnect($db);
+		exit; 
+	}
+  }
+
+
+   function get_all_inquiries_in_archive(){
+	global $db;
+	$sql = "SELECT * FROM tbl_inquiries WHERE data_status = '0'";
 	$sql .= "ORDER BY inquiries_id DESC";
 	$result = mysqli_query($db,$sql);
 	confirm_result_set($result);
@@ -416,10 +441,113 @@
   }
 
 
+     //validate jobseeker file
+  function validate_jobseeker_files_admin($jobseeker){
+ 	$errors = [];
+
+	if(is_blank($jobseeker['firstname'])){
+		$errors[] = "Firstname cannot be blank";
+	}
+
+	if(is_blank($jobseeker['middlename'])){
+		$errors[] = "Middlename cannot be blank";
+	}
+
+	if(is_blank($jobseeker['lastname'])){
+		$errors[] = "Lastname cannot be blank";
+	}
+	
+	if(is_blank($jobseeker['contact'])){
+		$errors[] = "Contact number cannot be blank";
+	}
+
+
+	if(is_blank($jobseeker['email'])){
+		$errors[] = "Email cannot be blank";
+	}else if(!has_valid_email_format($jobseeker['email'])){
+		$errors[] = "Invalid email format";
+	}
+	
+
+	
+
+
+	if(is_blank($jobseeker['file'])){
+		$errors[] = "File cannot be blank";
+	}else if(file_upload_resume($jobseeker['file'])){
+		$errors[] = "Upload only pdf or word file";
+	}	
+
+    return $errors;
+ }
+
+  function insert_jobseeker_files($jobseeker){
+  	global $db;
+
+	$errors = validate_jobseeker_files_admin($jobseeker);
+	if(!empty($errors)){
+		return $errors;
+	} 
+
+	$sql = "INSERT INTO tbl_jobseekers(jobseeker_compo_id,firstname,middlename,lastname,gender,contact,email,subject,file,date_send,data_status,added_by)";
+	$sql .="VALUES (";
+	$sql .= "'".db_escape($db,$jobseeker['jobseeker_compo_id'])."', "; 	
+	$sql .= "'".db_escape($db,$jobseeker['firstname'])."', ";
+	$sql .= "'".db_escape($db,$jobseeker['middlename'])."', ";
+	$sql .= "'".db_escape($db,$jobseeker['lastname'])."', ";
+	$sql .= "'".db_escape($db,$jobseeker['gender'])."', ";
+	$sql .= "'".db_escape($db,$jobseeker['contact'])."', ";
+	$sql .= "'".db_escape($db,$jobseeker['email'])."', ";
+	$sql .= "'".db_escape($db,$jobseeker['subject'])."', ";
+	$sql .= "'".db_escape($db,$jobseeker['file'])."', ";
+	$sql .= "'".db_escape($db,$jobseeker['date_send'])."', ";
+	$sql .= "'".db_escape($db,$jobseeker['data_status'])."', ";
+	$sql .= "'".db_escape($db,$jobseeker['added_by'])."' ";
+	$sql .= ")";
+	$result = mysqli_query($db,$sql);
+	// for insert statement, $result is true/false
+	if($result){
+		//redirect
+		return true;
+	}else{
+		//insert failed
+		echo mysqli_error($db);
+		db_disconnect($db);
+		exit; 
+	}
+  }
+
+
   //all jobseeker files that has a data_status of 1
   function get_all_jobseeker_files(){
 	global $db;
-	$sql = "SELECT * FROM tbl_jobseekers ";
+	$sql = "SELECT * FROM tbl_jobseekers WHERE data_status = '1' ";
+	$sql .= "ORDER BY jobseeker_id DESC";
+	$result = mysqli_query($db,$sql);
+	confirm_result_set($result);
+	return $result;
+  }
+
+
+    function archive_jobseeker($jobseeker){
+  	global $db;
+  	$sql = "UPDATE tbl_jobseekers SET data_status = '0' WHERE jobseeker_id = '".db_escape($db,$jobseeker['jobseeker_id'])."' ";
+	$result = mysqli_query($db, $sql);
+	// for insert statement, $result is true/false
+	if($result){
+		//
+		return true;
+	}else{
+		echo mysqli_error($db);
+		db_disconnect($db);
+		exit; 
+	}
+  }
+
+
+   function get_all_jobseekers_in_archive(){
+	global $db;
+	$sql = "SELECT * FROM tbl_jobseekers WHERE data_status = '0'";
 	$sql .= "ORDER BY jobseeker_id DESC";
 	$result = mysqli_query($db,$sql);
 	confirm_result_set($result);
@@ -475,9 +603,9 @@
 		}
 		
 
-		if(is_blank($client['message'])){
+		/*if(is_blank($client['message'])){
 			$errors[] = "Message cannot be blank";
-		}
+		}*/
 
 
 		if(is_blank($client['man_power_file'])){
@@ -600,6 +728,32 @@
   function get_all_client_files(){
 	global $db;
 	$sql = "SELECT * FROM tbl_clients WHERE data_status = '1'";
+	$sql .= "ORDER BY client_id DESC";
+	$result = mysqli_query($db,$sql);
+	confirm_result_set($result);
+	return $result;
+  }
+
+
+  function archive_client($client){
+  	global $db;
+  	$sql = "UPDATE tbl_clients SET data_status = '0' WHERE client_id = '".db_escape($db,$client['client_id'])."' ";
+	$result = mysqli_query($db, $sql);
+	// for insert statement, $result is true/false
+	if($result){
+		//
+		return true;
+	}else{
+		echo mysqli_error($db);
+		db_disconnect($db);
+		exit; 
+	}
+  }
+
+
+   function get_all_clients_in_archive(){
+	global $db;
+	$sql = "SELECT * FROM tbl_clients WHERE data_status = '0'";
 	$sql .= "ORDER BY client_id DESC";
 	$result = mysqli_query($db,$sql);
 	confirm_result_set($result);
@@ -758,6 +912,19 @@
   }
 
 
+
+
+  function load_upcoming_event(){
+  	$now = date('Y-m-d');
+	global $db;
+	$sql = "SELECT * FROM tbl_events WHERE event_status = 1 AND event_datestart > '".db_escape($db,$now)."'";
+	$sql .= "ORDER BY event_id DESC LIMIT 3";
+	$result = mysqli_query($db,$sql);
+	confirm_result_set($result);
+	return $result;
+  }
+
+
   function get_event_for_this_day(){
   	$now = date('Y-m-d');
 
@@ -825,6 +992,7 @@
 
 
 
+//MESSAGE RELATED FUNCTIONS WERE NOT USED
 
   ///message
   function insert_message_detail($message){

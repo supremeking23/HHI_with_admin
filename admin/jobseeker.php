@@ -7,6 +7,57 @@
   define("SHARED_PATH",dirname(__FILE__).'\includes_admin');
  // echo SHARED_PATH;*/
   require_login();
+
+    if(is_post_request()){
+        $jobseeker = [];
+        $jobseeker['jobseeker_compo_id'] = $_POST['jobseeker_compo_id'] ?? '';
+        $jobseeker['firstname'] = $_POST['firstname'] ?? '';
+        $jobseeker['middlename'] = $_POST['middlename'] ?? '';
+        $jobseeker['lastname'] = $_POST['lastname'] ?? '';
+        $jobseeker['gender'] = $_POST['gender'] ?? '';
+        $jobseeker['contact'] = $_POST['contact'] ?? '';
+        $jobseeker['email'] = $_POST['email'] ?? '';
+        $jobseeker['subject'] = $_POST['subject'] ?? '';
+        //$jobseeker['message'] = $_POST['message'] ?? '';
+        $jobseeker['data_status'] = 1;
+        $jobseeker['added_by'] = $_SESSION['admin_compo_id'];
+
+
+        $now = date('Y-m-d H:i:s');
+        $jobseeker['date_send'] = $now;
+
+        
+        $resume_file = $_FILES['resume_file']['name'];
+        $resume_file_tmp =$_FILES['resume_file']['tmp_name'];
+        $jobseeker['file'] = $resume_file;
+        
+        $result = insert_jobseeker_files($jobseeker);
+        if($result === true){
+          $log = [];
+          $log['log_compo_id'] = 'LOG'.date("ymdhis") . abs(rand('0','9'));
+          $now = date('Y-m-d H:i:s');
+          $log['log_date'] = $now;
+          $log['log_userid'] = $_SESSION['admin_compo_id'];
+          $log['log_user'] = $_SESSION['username'];
+          $log['log_usertype'] = $_SESSION['admin_type'];
+          $log['log_action'] = "Add new jobseeker detail Jobseeker Id: ". $jobseeker['jobseeker_compo_id'];
+          insert_log($log);
+          $_SESSION['message'] = "Jobseeker data has been added successfuly";
+          move_uploaded_file($resume_file_tmp, "uploads/jobseeker_files/$resume_file");
+        }else{
+          $errors = $result;
+        }
+    }else{
+        $jobseeker = [];
+        $jobseeker['firstname'] =  '';
+        $jobseeker['middlename'] =  '';
+        $jobseeker['lastname'] = '';
+        $jobseeker['gender'] =   '';
+        $jobseeker['contact'] =  '';
+        $jobseeker['email'] =  '';
+        $jobseeker['subject'] =  '';
+        //$jobseeker['message'] =  '';
+    }
 ?>
 
 <!DOCTYPE html>
@@ -56,9 +107,9 @@
 <body class="hold-transition skin-blue sidebar-mini" id="jobseeker">
 <div class="wrapper">
 
-  <?php include('includes_admin/header.php');?>
+<?php include(SHARED_PATH.'/header.php');?>
   <!-- Left side column. contains the logo and sidebar -->
-  <?php include('includes_admin/sidebar.php');?>
+  <?php include(SHARED_PATH.'/sidebar.php');?>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -76,6 +127,17 @@
 
     <!-- Main content -->
     <section class="content">
+
+      <div class="row">
+       
+        <div class="col-md-12">
+          <?php 
+            echo display_errors($errors);
+            echo display_session_message();
+          ?>
+        </div>
+
+      </div>
       <div class="row">
         <div class="col-md-12">
           <div class="box">
@@ -119,8 +181,8 @@
                                 <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post" enctype="multipart/form-data">
 
                                     <tr>
-                                      <td><b>Admin ID</b></td>
-                                      <td><input type="text" class="form-control" name="admin_compo_id" id="admin_compo_id" readonly=""></td>
+                                      <td><b>Jobseeker ID</b></td>
+                                      <td><input type="text" class="form-control" name="jobseeker_compo_id" id="jobseeker_compo_id" readonly=""></td>
                                     </tr>
                                     <tr>
                                       <td><b>First Name</b></td>
@@ -131,34 +193,39 @@
                                       <td><input type="text" class="form-control" name="middlename" id="middlename"></td>
                                     </tr>
                                     <tr>
-                                      <td><b>Last Number</b></td>
+                                      <td><b>Last Name</b></td>
                                       <td><input type="text" class="form-control" name="lastname" id="lastname"></td>
                                     </tr>
 
                                     <tr>
-                                      <td><b>Contact</b></td>
-                                      <td><input type="text" class="form-control" name="contact" id="contact"></td>
+                                      <td><b>Gender</b></td>
+                                      <td>
+                                        <select class="form-control" id="gender" name="gender">
+                                           
+                                           <option value="male">Male</option>
+                                           <option value="female">Female</option>
+                                        </select>
+                                      </td>
                                     </tr>
 
+                                    <tr>
+                                      <td><b>Contact</b></td>
+                                      <td> <input type="text" class="form-control input-text-color" placeholder="" id="contact" name="contact"></td>
+                                    </tr>
                                     <tr>
                                       <td><b>Email</b></td>
-                                      <td><input type="text" class="form-control" name="email" id="email"></td>
-                                    </tr>
-                                    <tr>
-                                      <td><b>Username</b></td>
-                                      <td><input type="text" class="form-control" name="username" id="password"></td>
+                                      <td> <input type="text" class="form-control input-text-color" placeholder="" id="email" name="email"></td>
                                     </tr>
 
                                     <tr>
-                                      <td><b>Password</b></td>
-                                      <td><input type="password" class="form-control"  name="password" id="password"></td>
+                                      <td><b>Subject</b></td>
+                                      <td><input type="text" name="subject" id="subject" class="form-control"></td>
                                     </tr> 
 
-
                                     <tr>
-                                      <td><b>Confirm Password</b></td>
-                                      <td><input type="password" class="form-control"  name="confirm_password" id="confirm_password"></td>
-                                    </tr>   
+                                      <td><b>Resume</b></td>
+                                      <td><input type="file" name="resume_file" id="resume_file" ></td>
+                                    </tr> 
 
                                     <tr>
                                       <td></td>
@@ -188,6 +255,8 @@
                   <th>Email</th>
                   <th>Phone Number</th>
                   <th>Subject</th>
+                  <th>Date Added</th>
+                  <th>Added By</th>
                   <th></th>
                 </tr>
                 </thead>
@@ -202,6 +271,16 @@
                   <td><?php echo $jobseekers['email']?></td>
                   <td><?php echo $jobseekers['contact']?></td>
                   <td><?php echo $jobseekers['subject']?></td>
+                  <td><?php echo $jobseekers['date_send']?></td>
+                  <td><?php 
+                    if(empty($jobseekers['added_by'])){
+                      echo "Jobseeker submit their data through the HHI web portal";
+                    }else{
+                      $user = get_admin_by_admin_compo_id($jobseekers['added_by']);
+                      echo h( $user['firstname'].' '. $user['lastname']);
+                      //echo $clients['added_by'];
+                    }
+                   ?></td>
                   <td>
                      <a href="<?php echo url_for('admin/jobseeker-detail.php?jobseeker_id='. h(u($jobseekers['jobseeker_compo_id'])));?>" class="btn btn-primary">View Details</a>
                   </td>
@@ -260,7 +339,11 @@
 <script src="dist/js/adminjs.js"></script>
 
 <script>
-
+        $().ready(function() {
+            var jobseeker_compo_id = document.getElementById("jobseeker_compo_id");
+            jobseeker_compo_id = "<?= 'JOBSEEKER'.date("ymdhis") . abs(rand('0','9'));  ?>";
+            $('#jobseeker_compo_id').val(jobseeker_compo_id);
+        });
 </script>
 </body>
 </html>
