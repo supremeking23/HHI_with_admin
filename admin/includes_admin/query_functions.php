@@ -993,7 +993,7 @@
 
 
   //MESSAGE RELATED FUNCTIONS WERE NOT USED
-
+/*
   ///message
   function insert_message_detail($message){
   	global $db;
@@ -1139,7 +1139,9 @@
 
   /*function find_sender_by_sender_id($sender_id){
 
-  }*/
+  }
+
+  */
 
 
 ?>
