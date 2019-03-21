@@ -310,28 +310,28 @@
               <div class="owl-item">
                 <center>
                 <a href="http://wesupportinc.com/" target="_blank"><img src="img/wesupport.png" alt="WeSupport Incorporated" title="WeSupport Incorporated" class="img img-responsive partners-image" ></a><br><br>
-                <h4>WeSupport Incorporated</h4>
+                <h4></h4>
                 </center>
               </div>
 
               <div class="owl-item">
                 <center>
                 <a href="http://www.tranzend.com.ph/main/" target="_blank"><img src="img/tranzend_2.png" alt="Tranzend Solutions" title="Tranzend Solutions" class="img img-responsive partners-image" ></a><br><br>
-                <h4>Tranzend Solutions</h4>
+                <h4></h4>
                 </center>
               </div>
 
               <div class="owl-item">
                 <center>
                 <a href="http://provisor.com.ph/" target="_blank"><img src="img/provisor.png" alt="Provisor Solutions Incorporated" class="img img-responsive partners-image" title="Provisor Solutions Incorporated" ></a><br><br>
-                <h4>Provisor Solutions Incorporated</h4>
+                <h4></h4>
                 </center>
               </div>
 
               <div class="owl-item">
                 <center>
                 <a href="http://www.ekkremis.com/" target="_blank"><img src="img/ekkremis.png" alt="Ekkremis Solutions Incorporated" title="Ekkremis Solutions Incorporated" class="img img-responsive partners-image" ></a><br><br>
-                <h4>Ekkremis Solutions Incorporated</h4>
+                <h4></h4>
                 </center>
               </div>
             </div>

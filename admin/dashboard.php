@@ -102,8 +102,9 @@
             <div class="box-body">
               <div class="row">
                 <div class="col-md-3">
-                  
+                  <?php if($_SESSION['admin_type'] == "SUPERADMIN"):?>
                   <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#add-event" style="margin-bottom: 10px">Add event</button>
+                   <?php endif;?>
                   
                     <div class="modal fade" id="add-event">
                       <div class="modal-dialog">
@@ -261,6 +262,7 @@
       </div>
 
 
+      <?php if($_SESSION['admin_type'] == "SUPERADMIN"):?>
       <div class="row" id="event-table">
         <div class="col-md-12">
           <div class="box">
@@ -343,6 +345,8 @@
           </div>
         </div>
       </div>
+
+    <?php endif;?>
 
 
       <div class="row">

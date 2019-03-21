@@ -845,7 +845,7 @@
   		$sql .= "'".db_escape($db, $event['event_name'])."', ";
   		$sql .= "'".db_escape($db, $event['event_description'])."', ";
   		$sql .= "'".db_escape($db, $event['event_datestart'])."', ";
-  		$sql .= "'".db_escape($db, $event['event_datestart'])."', ";
+  		$sql .= "'".db_escape($db, $event['event_dateend'])."', ";
   		$sql .= "'".db_escape($db, $event['event_timestart'])."', ";
   		$sql .= "'".db_escape($db, $event['event_timeend'])."', ";
   		$sql .= "'".db_escape($db, $event['event_type'])."', ";
@@ -917,8 +917,8 @@
   function load_upcoming_event(){
   	$now = date('Y-m-d');
 	global $db;
-	$sql = "SELECT * FROM tbl_events WHERE event_status = 1 AND event_datestart > '".db_escape($db,$now)."'";
-	$sql .= "ORDER BY event_id DESC LIMIT 3";
+	$sql = "SELECT * FROM tbl_events WHERE event_status = 1 AND event_type= 'normal'  AND event_datestart > '".db_escape($db,$now)."'";
+	$sql .= "ORDER BY event_id DESC ";
 	$result = mysqli_query($db,$sql);
 	confirm_result_set($result);
 	return $result;
@@ -992,7 +992,7 @@
 
 
 
-//MESSAGE RELATED FUNCTIONS WERE NOT USED
+  //MESSAGE RELATED FUNCTIONS WERE NOT USED
 
   ///message
   function insert_message_detail($message){

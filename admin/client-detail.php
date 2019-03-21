@@ -228,7 +228,9 @@
                 <form action="<?php echo $_SERVER['PHP_SELF'];?>?client_id=<?php echo h(u($_GET['client_id']));?>" method="POST">
                   <!--<input type="submit" name="archieve" id="archieve" value="Archieve" class="btn btn-danger"> -->
                   <input type="hidden" name="client_id" value="<?php echo $client['client_id']?>">
+                  <?php if($_SESSION['admin_type'] == "SUPERADMIN"):?>
                   <button type="submit" class="btn btn-danger">Archieve <span class="fa fa-trash-o"></span></button>
+                <?php endif;?>
                 </form>               
               </div>
               

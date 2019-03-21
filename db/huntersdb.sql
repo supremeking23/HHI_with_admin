@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 16, 2019 at 02:49 PM
+-- Generation Time: Mar 21, 2019 at 05:37 AM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 7.1.7
 
@@ -50,7 +50,7 @@ CREATE TABLE `tbl_admin` (
 --
 
 INSERT INTO `tbl_admin` (`admin_id`, `admin_compo_id`, `firstname`, `middlename`, `lastname`, `username`, `hash_password`, `password`, `photo`, `contact`, `email`, `admin_status`, `admin_type`, `date_added`) VALUES
-(1, 'HHIADMIN1903020950212', 'Ivan Christian Jay', 'E', 'Funcion', 'ivan', '$2y$10$IdByTp0PggFSF0s4DLKb6u2MxJjMuwb3ZIEJwddJW/s1Z3rdW.hNS', '111', 'avatar5.png', '11111', 'ivan@gmail.com', 1, 'SUPERADMIN', '0000-00-00 00:00:00'),
+(1, 'HHIADMIN1903020950212', 'Juan', 'E', 'Dela Cruz', 'juan', '$2y$10$bHVj7.4i4v60.pecsINY2ux1s8xk9oVAj0zfqVm9/0j.UIxta6GjW', 'juan', 'avatar5.png', '11111', 'ivan@gmail.com', 1, 'SUPERADMIN', '0000-00-00 00:00:00'),
 (6, 'HHIADMIN1903130215504', 'Bartholomew Henry', 'S', 'Allen', 'barry', '$2y$10$ubalkAE5QENPCz2hN63DwuUfKP6GDBO.HgAn7shHolNysXtYqEXJS', 'barry', '', '09479888749', 'barryallen@gmail,com', 1, 'ADMIN', '0000-00-00 00:00:00'),
 (7, 'HHIADMIN1903130218540', 'Violet', 'E', 'Evargarden', 'violet', '$2y$10$QChIEUzMyTC1WyZJVCfEje5Cs68Ntv3sw0.pCh1zYa7k493a6/Yei', 'violet', '', '09479888749', 'violet@gmail.com', 1, 'ADMIN', '0000-00-00 00:00:00'),
 (8, 'HHIADMIN1903130219285', 'Kyrieq', 'Drew', 'Irving', 'uncledrew', '$2y$10$SMWKvsbVP/laNgMEq9faq.4e7Fd8yOYA/mjUZuOechQ4qxUZ1kxmm', 'uncledrew', '', '09479888749', 'uncledrew@gmail.com', 1, 'ADMIN', '2019-03-13 14:20:58');
@@ -95,7 +95,8 @@ INSERT INTO `tbl_clients` (`client_id`, `client_compo_id`, `firstname`, `middlen
 (6, 'CLIENT1903131056159', 'Bartholomew Henry', 'English', 'Allen', 'STAR LABS', 'Center', '', 'Stark', 'irishwestallen@gmail.com', '09479888749', 0, '', 'march.xlsx', '', '2019-03-13 22:56:36', 1, 'HHIADMIN1903020950212'),
 (7, 'CLIENT1903131059128', 'Bartholomew Henry', 'English', 'Ingles', 'STAR LABS', 'Forward', '11', 'HEROES', 'irishwestallen@gmail.com', '09479888749', 1234, 'Based on the evaluation results, the following conclusion of evaluation result were drawn by the researchers. Results of four basic operations testing refers the behaviour output conducted on small query process up to huge data process with speed of internet. The results represented the objective of this study to known distinct difference when applied in a mobile environment on the basis of query process speed, accuracy and compatibility which can handle the big data and real-time database. The results have represented that there are many part which Firebase database is suitable for real-time database for its flexibility and is very easy to understand.', 'Ivan Christian Jay Funcion -  DTR(December).xlsx', '', '2019-03-13 22:59:40', 1, ''),
 (8, 'CLIENT1903131108412', 'dsdaddada', 'sdadad', 'dsdsdad', 'STAR LABS', 'Forward', '', 'Stark', 'irishwestallen@gmail.com', '09479888749', 0, '', 'Ivan Christian Jay Funcion -  DTR(January).xlsx', '', '2019-03-13 23:09:00', 1, 'HHIADMIN1903020950212'),
-(9, 'CLIENT1903131126407', 'sdad', 'English', 'Ingles', 'STAR LABS', 'Center', '', 'Stark', 'irishwestallen@gmail.com', '09479888749', 0, '', 'HHI -Ivan Christian Jay Funcion.xls', '', '2019-03-13 23:26:56', 0, 'HHIADMIN1903130215504');
+(9, 'CLIENT1903131126407', 'sdad', 'English', 'Ingles', 'STAR LABS', 'Center', '', 'Stark', 'irishwestallen@gmail.com', '09479888749', 0, '', 'HHI -Ivan Christian Jay Funcion.xls', '', '2019-03-13 23:26:56', 0, 'HHIADMIN1903130215504'),
+(10, 'CLIENT1903211200343', 'dasd', 'dasd', 'sdsd', 'STAR LABS', 'Forward', '', 'sd', 'irishwestallen@gmail.com', '09479888749', 0, '', 'Man-Power-Request-Form.xlsm', '', '2019-03-21 12:01:07', 1, 'HHIADMIN1903130215504');
 
 -- --------------------------------------------------------
 
@@ -128,15 +129,15 @@ INSERT INTO `tbl_events` (`event_id`, `event_compo_id`, `event_name`, `event_des
 (9, 'EVENT1903070253531', 'Event Test 6', 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32. ', '2019-03-07', '0000-00-00', '17:00:00', '19:00:00', 'normal', 1, '', '0000-00-00 00:00:00'),
 (11, 'EVENT1903080728517', 'Half day', 'Hahalf day ako', '2019-03-08', '0000-00-00', '12:00:00', '19:00:00', 'normal', 1, '', '0000-00-00 00:00:00'),
 (12, 'EVENT1903091048585', 'Arcana South Expo', 'Arcana South North', '2019-03-22', '0000-00-00', '12:00:00', '21:00:00', 'normal', 1, '', '0000-00-00 00:00:00'),
-(14, 'EVENT1903120315573', 'Event mo to', 'dasdasd', '2019-03-27', '0000-00-00', '00:00:00', '13:00:00', 'normal', 1, '', '0000-00-00 00:00:00'),
 (15, 'EVENT1903120324223', 'Event mo to part 2', 'dasdasdd', '2019-03-14', '0000-00-00', '18:00:00', '21:00:00', 'normal', 1, '', '0000-00-00 00:00:00'),
-(16, 'EVENT1903120347332', 'Event Test 5.6', 'dsadsdasdsd', '2019-03-27', '0000-00-00', '16:00:00', '20:00:00', 'urgent', 1, '', '0000-00-00 00:00:00'),
 (17, 'EVENT1903130709134', 'Event 10', 'None', '2019-03-13', '0000-00-00', '09:00:00', '17:00:00', 'normal', 1, '', '0000-00-00 00:00:00'),
 (18, 'EVENT1903130740126', 'march 28', 'sdadasdsadas', '2019-03-28', '0000-00-00', '14:00:00', '17:00:00', 'normal', 1, 'HHIADMIN1903020950212', '0000-00-00 00:00:00'),
 (19, 'EVENT1903130743454', 'Expo', 'Expose', '2019-03-13', '0000-00-00', '08:00:00', '18:00:00', 'urgent', 1, 'HHIADMIN1903020950212', '0000-00-00 00:00:00'),
-(20, 'EVENT1903130835422', 'Arcana South Expo part 2', 'dadasds', '2019-03-27', '0000-00-00', '10:00:00', '15:00:00', 'urgent', 1, 'HHIADMIN1903020950212', '0000-00-00 00:00:00'),
-(21, 'EVENT1903130847054', 'Arcana South Expo part 3', '', '2019-03-21', '0000-00-00', '13:00:00', '16:00:00', '1', 0, 'HHIADMIN1903020950212', '2019-03-13 08:53:13'),
-(22, 'EVENT1903141216091', 'Aliez', 'Ivan higga\r\n                   ', '2019-03-25', '2019-03-28', '06:00:00', '20:00:00', '1', 1, 'HHIADMIN1903020950212', '2019-03-14 00:16:45');
+(26, 'EVENT1903211112055', 'long weekend', 'dsasda', '2019-04-01', '2019-04-04', '13:00:00', '17:00:00', '1', 1, 'HHIADMIN1903020950212', '2019-03-21 11:12:39'),
+(28, 'EVENT1903211126031', 'Job Fair part 3', '', '2019-03-27', '0000-00-00', '08:00:00', '17:00:00', 'normal', 1, 'HHIADMIN1903020950212', '2019-03-21 11:26:43'),
+(29, 'EVENT1903211216341', 'sdads', 'sdadasd', '2019-03-22', '0000-00-00', '17:00:00', '20:00:00', 'normal', 1, 'HHIADMIN1903020950212', '2019-03-21 12:20:46'),
+(30, 'EVENT1903211220471', 'weekends', '', '2019-03-23', '2019-03-24', '05:00:00', '10:00:00', 'normal', 1, 'HHIADMIN1903020950212', '2019-03-21 12:21:37'),
+(31, 'EVENT1903211226107', 'Job Fair part 2', '', '2019-03-26', '2019-03-27', '10:00:00', '17:00:00', 'normal', 1, 'HHIADMIN1903020950212', '2019-03-21 12:26:37');
 
 -- --------------------------------------------------------
 
@@ -202,7 +203,9 @@ INSERT INTO `tbl_jobseekers` (`jobseeker_id`, `jobseeker_compo_id`, `firstname`,
 (6, 'JOBSEEKER1903160222329', 'Violet', 'E', 'Evergarden', 'female', '09479888749', 'irishwestallen@gmail.com', 'Applying for Java Developer', '', 'FINAL_CHAPTER5.docx', '2019-03-16 14:22:59', 1, 'HHIADMIN1903020950212'),
 (7, 'JOBSEEKER1903160223307', 'Mika', 'C', 'Kobayashi', 'female', '09479888749', 'irishwestallen@gmail.com', 'sdasdasdasddasds ivan', '', 'FINAL_CHAPTER2.docx', '2019-03-16 14:23:58', 1, 'HHIADMIN1903020950212'),
 (8, 'JOBSEEKER1903160234583', 'Zeref', 'O', 'Endd', 'male', '09479888749', 'irishwestallen@gmail.com', 'Applying for Java Developer', '', 'FINAL_CHAPTER4.docx', '2019-03-16 14:35:23', 1, 'HHIADMIN1903020950212'),
-(9, 'JOBSEEKER1903160236543', 'Hiroyuki', 'S', 'Sawano', 'male', '09479888749', 'irishwestallen@gmail.com', 'Applying for Java Developer', '', 'FINAL_CHAPTER3.docx', '2019-03-16 14:37:31', 0, 'HHIADMIN1903020950212');
+(9, 'JOBSEEKER1903160236543', 'Hiroyuki', 'S', 'Sawano', 'male', '09479888749', 'irishwestallen@gmail.com', 'Applying for Java Developer', '', 'FINAL_CHAPTER3.docx', '2019-03-16 14:37:31', 0, 'HHIADMIN1903020950212'),
+(10, 'JOBSEEKER1903211141127', 'James Carlos', 'L', 'Yab', 'male', '09479888749', 'irishwestallen@gmail.com', 'Applying for Java Developer', 'dsdasdasd', 'FINAL_CHAPTER3.docx', '2019-03-21 11:41:45', 1, ''),
+(11, 'JOBSEEKER1903211157483', 'alsald', 'dasdasd', 'ssssss', 'male', '09479888749', 'irishwestallen@gmail.com', 'Applying for Java Developer', '', 'FINAL_CHAPTER5.docx', '2019-03-21 11:58:13', 1, 'HHIADMIN1903130215504');
 
 -- --------------------------------------------------------
 
@@ -317,7 +320,43 @@ INSERT INTO `tbl_logs` (`log_id`, `log_compo_id`, `log_date`, `log_user`, `log_u
 (90, 'LOG1903160941359', '2019-03-16 21:41:35', 'ivan', 'SUPERADMIN', 'Archive client file data. Client Id:CLIENT1903131126407', 'HHIADMIN1903020950212'),
 (91, 'LOG1903160941594', '2019-03-16 21:41:59', 'ivan', 'SUPERADMIN', 'Archive client file data. Client Id:CLIENT1903131126407', 'HHIADMIN1903020950212'),
 (92, 'LOG1903160943078', '2019-03-16 21:43:07', 'ivan', 'SUPERADMIN', 'Archive client file data. Client Id:CLIENT1903131126407', 'HHIADMIN1903020950212'),
-(93, 'LOG1903160943530', '2019-03-16 21:43:53', 'ivan', 'SUPERADMIN', 'Archive client file data. Client Id:CLIENT1903131126407', 'HHIADMIN1903020950212');
+(93, 'LOG1903160943530', '2019-03-16 21:43:53', 'ivan', 'SUPERADMIN', 'Archive client file data. Client Id:CLIENT1903131126407', 'HHIADMIN1903020950212'),
+(94, 'LOG1903210730046', '2019-03-21 07:30:04', 'ivan', 'SUPERADMIN', 'Login Successful', 'HHIADMIN1903020950212'),
+(95, 'LOG1903210730446', '2019-03-21 07:30:44', 'ivan', 'SUPERADMIN', 'Logout Successful', 'HHIADMIN1903020950212'),
+(96, 'LOG1903210730556', '2019-03-21 07:30:55', 'juan', 'SUPERADMIN', 'Login Successful', 'HHIADMIN1903020950212'),
+(97, 'LOG1903211105409', '2019-03-21 11:05:40', '', '', 'Add new event EVENT1903211058584', 'HHIADMIN1903020950212'),
+(98, 'LOG1903211107513', '2019-03-21 11:07:51', '', '', 'Update Event information for event: EVENT1903211058584', 'HHIADMIN1903020950212'),
+(99, 'LOG1903211109498', '2019-03-21 11:09:49', '', '', 'Add new event EVENT1903211107548', 'HHIADMIN1903020950212'),
+(100, 'LOG1903211110179', '2019-03-21 11:10:17', '', '', 'Update Event information for event: EVENT1903211107548', 'HHIADMIN1903020950212'),
+(101, 'LOG1903211110389', '2019-03-21 11:10:38', '', '', 'Event has been deleted EVENT1903211107548', 'HHIADMIN1903020950212'),
+(102, 'LOG1903211111072', '2019-03-21 11:11:07', '', '', 'Add new event EVENT1903211110386', 'HHIADMIN1903020950212'),
+(103, 'LOG1903211111255', '2019-03-21 11:11:25', '', '', 'Event has been deleted EVENT1903120347332', 'HHIADMIN1903020950212'),
+(104, 'LOG1903211112397', '2019-03-21 11:12:39', '', '', 'Add new event EVENT1903211112055', 'HHIADMIN1903020950212'),
+(105, 'LOG1903211113186', '2019-03-21 11:13:18', '', '', 'Update Event information for event: EVENT1903211112055', 'HHIADMIN1903020950212'),
+(106, 'LOG1903211113407', '2019-03-21 11:13:40', '', '', 'Update Event information for event: EVENT1903211110386', 'HHIADMIN1903020950212'),
+(107, 'LOG1903211114128', '2019-03-21 11:14:12', '', '', 'Event has been deleted EVENT1903211058584', 'HHIADMIN1903020950212'),
+(108, 'LOG1903211115386', '2019-03-21 11:15:38', '', '', 'Event has been deleted EVENT1903211110386', 'HHIADMIN1903020950212'),
+(109, 'LOG1903211115580', '2019-03-21 11:15:58', '', '', 'Add new event EVENT1903211115387', 'HHIADMIN1903020950212'),
+(110, 'LOG1903211116332', '2019-03-21 11:16:33', '', '', 'Event has been deleted EVENT1903141216091', 'HHIADMIN1903020950212'),
+(111, 'LOG1903211116513', '2019-03-21 11:16:51', '', '', 'Event has been deleted EVENT1903130847054', 'HHIADMIN1903020950212'),
+(112, 'LOG1903211116567', '2019-03-21 11:16:56', '', '', 'Event has been deleted EVENT1903130835422', 'HHIADMIN1903020950212'),
+(113, 'LOG1903211117120', '2019-03-21 11:17:12', '', '', 'Event has been deleted EVENT1903120315573', 'HHIADMIN1903020950212'),
+(114, 'LOG1903211117360', '2019-03-21 11:17:36', '', '', 'Update Event information for event: EVENT1903211115387', 'HHIADMIN1903020950212'),
+(115, 'LOG1903211121135', '2019-03-21 11:21:13', 'juan', 'SUPERADMIN', 'Login Successful', 'HHIADMIN1903020950212'),
+(116, 'LOG1903211126014', '2019-03-21 11:26:01', '', '', 'Update Event information for event: EVENT1903211115387', 'HHIADMIN1903020950212'),
+(117, 'LOG1903211126437', '2019-03-21 11:26:43', '', '', 'Add new event EVENT1903211126031', 'HHIADMIN1903020950212'),
+(118, 'LOG1903211155208', '2019-03-21 11:55:20', 'juan', 'SUPERADMIN', 'Login Successful', 'HHIADMIN1903020950212'),
+(119, 'LOG1903211155563', '2019-03-21 11:55:56', 'juan', 'SUPERADMIN', 'Logout Successful', 'HHIADMIN1903020950212'),
+(120, 'LOG1903211155595', '2019-03-21 11:55:59', 'barry', 'ADMIN', 'Login Successful', 'HHIADMIN1903130215504'),
+(121, 'LOG1903211158137', '2019-03-21 11:58:13', 'barry', 'ADMIN', 'Add new jobseeker detail Jobseeker Id: JOBSEEKER1903211157483', 'HHIADMIN1903130215504'),
+(122, 'LOG1903211201074', '2019-03-21 12:01:07', 'barry', 'ADMIN', 'Add new client detail Client Id: CLIENT1903211200343', 'HHIADMIN1903130215504'),
+(123, 'LOG1903211216294', '2019-03-21 12:16:29', 'barry', 'ADMIN', 'Logout Successful', 'HHIADMIN1903130215504'),
+(124, 'LOG1903211216347', '2019-03-21 12:16:34', 'juan', 'SUPERADMIN', 'Login Successful', 'HHIADMIN1903020950212'),
+(125, 'LOG1903211220467', '2019-03-21 12:20:46', '', '', 'Add new event EVENT1903211216341', 'HHIADMIN1903020950212'),
+(126, 'LOG1903211221379', '2019-03-21 12:21:37', '', '', 'Add new event EVENT1903211220471', 'HHIADMIN1903020950212'),
+(127, 'LOG1903211226024', '2019-03-21 12:26:02', '', '', 'Update Event information for event: EVENT1903211115387', 'HHIADMIN1903020950212'),
+(128, 'LOG1903211226100', '2019-03-21 12:26:10', '', '', 'Event has been deleted EVENT1903211115387', 'HHIADMIN1903020950212'),
+(129, 'LOG1903211226375', '2019-03-21 12:26:37', '', '', 'Add new event EVENT1903211226107', 'HHIADMIN1903020950212');
 
 -- --------------------------------------------------------
 
@@ -485,12 +524,12 @@ ALTER TABLE `tbl_admin`
 -- AUTO_INCREMENT for table `tbl_clients`
 --
 ALTER TABLE `tbl_clients`
-  MODIFY `client_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `client_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `tbl_events`
 --
 ALTER TABLE `tbl_events`
-  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 --
 -- AUTO_INCREMENT for table `tbl_inquiries`
 --
@@ -500,12 +539,12 @@ ALTER TABLE `tbl_inquiries`
 -- AUTO_INCREMENT for table `tbl_jobseekers`
 --
 ALTER TABLE `tbl_jobseekers`
-  MODIFY `jobseeker_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `jobseeker_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `tbl_logs`
 --
 ALTER TABLE `tbl_logs`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=130;
 --
 -- AUTO_INCREMENT for table `tbl_messages`
 --

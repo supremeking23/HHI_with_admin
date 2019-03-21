@@ -43,7 +43,15 @@
 		$datas['title'] = h($events["event_name"]);
 		$datas['event_description'] = h($events["event_description"]);
 		$datas['start'] = $events["event_datestart"];
-		$datas['end'] = $events["event_dateend"];
+		
+
+		/*$stop_date = '2019-09-30 20:24:00';
+		$stop_date = date('Y-m-d H:i:s', strtotime($stop_date . ' +1 day'));*/
+
+		$stop_date = $events["event_dateend"];
+		$stop_date = date('Y-m-d H:i:s', strtotime($stop_date . ' +1 day'));
+
+		$datas['end'] = $stop_date;
 		$datas['event_compo_id'] = $events["event_compo_id"];
 
 		$user_id = $events["created_by"];

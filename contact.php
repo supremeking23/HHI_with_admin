@@ -108,6 +108,43 @@ include('includes/header.php');?>
     </section>
 
 
+    <section>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Landmarks</h2>
+                </div>
+            </div>
+            <div class="row">
+                  <div class="col-md-4 landmark">
+                    <a href=""></a><img src="img/building4.jpg" class="" alt="img1" title="img1" style="width:100%">
+
+                    <div class="landmark-text">
+                      <div class="skill-text"><h4 class="text-center"><b></b></h4> </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4 landmark">
+                    <img src="img/building3.jpg" class="" alt="img2" title="img2" style="width:100%">
+
+                    <div class="landmark-text">
+                      <div class="skill-text"><h4 class="text-center"><b></b></h4> </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4 landmark">
+                    <img src="img/citylandtower2.jpg" class="" alt="citylandtower2" title="citylandtower2" style="width:100%">
+
+                    <div class="landmark-text">
+                      <div class="skill-text"><h4 class="text-center"><b></b></h4> </div>
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </section>
+
+
 <?php include('includes/footer.php');?>
 
     <!-- Optional JavaScript -->
@@ -118,10 +155,19 @@ include('includes/header.php');?>
     <script src="js/jquery.waypoints.min.js" ></script>
     <script src="js/scripts.js"></script>
     <script src="admin/dist/js/adminjs.js"></script>
+    <script src="js/jquery.lightbox.js"></script>
     <script>
         var inquiries_compo_id = document.getElementById("inquiries_compo_id");
         inquiries_compo_id = "<?= 'INQ'.date("ymdhis") . abs(rand('0','9'));  ?>";
         $('#inquiries_compo_id').val(inquiries_compo_id);
+
+
+$(function() {
+   
+    $('.gallery2 a').lightbox({ nav : false }); 
+    
+  });
+
     </script>
   </body>
 </html>

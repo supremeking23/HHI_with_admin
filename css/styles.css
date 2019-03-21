@@ -642,6 +642,34 @@ textarea:focus{
 }
 
 
+.landmark{
+        position: relative;
+    text-align: center;
+    color: white;
+    overflow: hidden;
+   margin-bottom: 5px;
+}
+
+
+.landmark-text{
+        font-size: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%,-50%);
+    
+    height: 100%;
+    width: 92.5%;
+    transition: 0.4s;
+}
+
+
+.landmark-text:hover{
+   
+}
+
+
 /*our-clients*/
 
 .our-clients{

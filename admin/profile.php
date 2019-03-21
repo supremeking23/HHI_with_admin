@@ -163,8 +163,9 @@
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
               <li class="active"><a href="#details" data-toggle="tab">Details</a></li>
-              
+              <?php if($_SESSION['admin_type'] == "SUPERADMIN"):?>
               <li><a href="#settings" data-toggle="tab">Update Details</a></li>
+            <?php endif;?>
               <li><a href="#admin_logs" data-toggle="tab">Admin Logs</a></li>
             </ul>
             <div class="tab-content">
@@ -220,7 +221,7 @@
               <div class="tab-pane" id="settings">
                 <form action="<?php echo $_SERVER['PHP_SELF'];?>"  method="POST" class="form-horizontal">
 
-                  <div class="form-group">
+                  <!--<div class="form-group">
                     <label for="admin_status" class="col-sm-2 control-label">Admin Status</label>
 
                     <div class="col-sm-10">
@@ -229,7 +230,7 @@
                         <option value="0" <?php if($admin['admin_status'] == 0) echo "selected";?>>Not Active</option>
                       </select>
                     </div>
-                  </div>
+                  </div> -->
 
                   <div class="form-group">
                     <label for="firstname" class="col-sm-2 control-label">First Name</label>

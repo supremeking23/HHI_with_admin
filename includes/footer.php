@@ -27,7 +27,7 @@
                               while($events = mysqli_fetch_assoc($event_list)):
                             ?>
                               <li>
-                                <a role="button" data-toggle="modal" data-target="#eventDetail<?php echo $events['event_id']?>" class="btn btn-primary"><?php echo h($events['event_name'])?></a>
+                                <a role="button" data-toggle="modal" data-target="#eventDetail<?php echo $events['event_id']?>" href=""><?php echo h($events['event_name'])?></a>
                                 <!-- Modal -->
                                 <div id="eventDetail<?php echo $events['event_id']?>" class="modal fade" role="dialog" style="color:#000000">
                                   <div class="modal-dialog">
@@ -44,6 +44,13 @@
                                         <p>Event Date: <?php 
                                             $date =date_create($events['event_datestart']);
                                             echo  $formated_date= date_format($date,"F d, Y ");
+
+
+                                            if($events['event_dateend'] != "0000-00-00"){
+                                               $date =date_create($events['event_dateend']);
+                                              $formated_date= date_format($date,"F d, Y ");
+                                              echo " - " . $formated_date; 
+                                            }
                     
                                         ?></p>
                                       </div>
